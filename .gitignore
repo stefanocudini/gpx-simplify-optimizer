@@ -1,0 +1,7 @@
+node_modules/*
+bootstrap-slider/*
+FileSaver.js/*
+Font-Awesome/*
+Leaflet.FileLayer/*
+simplify-geometry/*
+togeojson/*
