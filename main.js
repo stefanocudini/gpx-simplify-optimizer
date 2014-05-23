@@ -42,7 +42,7 @@ function updateGeoJSON(tolerance) {
 	{
 		sourceLayer.eachLayer(function(layer)  {
 			var modified = layer.toGeoJSON();
-			console.log('eachLayer',modified);
+			//console.log('eachLayer',modified);
 			modified.geometry.coordinates = simplifyGeometry(modified.geometry.coordinates, tolerance);
 			simplifyLayer.addData(modified);
 			simplifyLayerData = modified;
@@ -54,7 +54,8 @@ function saveToFile() {
 	try {
    		if(!!new Blob())
    		{
-			var blob = new Blob([JSON.stringify(simplifyLayerData)], {type: "text/plain;charset=utf-8"});
+   			var gpx = togpx(simplifyLayerData);
+			var blob = new Blob([gpx], {type: "text/plain;charset=utf-8"});
 			saveAs(blob, simplifyLayerName);
    		}
 	} catch (e) {

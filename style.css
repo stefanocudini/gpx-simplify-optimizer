@@ -12,6 +12,9 @@ h4 {
 	left: 0;
 	right: 0;	
 }
+.leaflet-control-zoom.leaflet-bar a {
+	color: #4D5B69;
+}
 .leaflet-control-filelayer.leaflet-bar a:first-child,
 .leaflet-control-down.leaflet-bar a:first-child {
 	background: #fff;
