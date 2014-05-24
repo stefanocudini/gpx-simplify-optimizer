@@ -10,7 +10,7 @@ h4 {
 	top: 30px;
 	bottom: 0;
 	left: 0;
-	right: 300px;	
+	right: 320px;	
 }
 .leaflet-control-zoom.leaflet-bar a {
 	color: #4D5B69;
@@ -27,7 +27,7 @@ h4 {
 	margin: 0;
 }
 .leaflet-control-slider {
-	background: rgba(255,255,255,0.8);
+	background: rgba(220,230,240,0.8);
 	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	
 	width: 100%;
 	padding: 10px 20px;
@@ -42,9 +42,10 @@ h4 {
 	right: 0;
 	top: 30px;
 	bottom: 0;
-	width: 300px;
+	width: 320px;
 	overflow-y:scroll;
-	background:#ccc;
+	background: rgba(220,230,240,1);
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	
 }
 #copy {
 	position:fixed;
