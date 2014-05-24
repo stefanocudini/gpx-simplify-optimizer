@@ -21,6 +21,7 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 var filename$,
 	nodes$,
 	sourceLayer = null,
+	simplifyNodes = 0,
 	simplifyLayerName = 'simplified.gpx',
 	simplifyLayerData = null,
 	simplifyLayer = L.geoJson(simplifyLayerData, { style: style2 }).addTo(map);
@@ -28,8 +29,8 @@ var filename$,
 L.Control.FileLayerLoad.LABEL = '<i class="fa fa-folder-open"></i>';
 var controlLoader = L.Control.fileLayerLoad({
 	addToMap: true,
-	fitBounds: true,
-	fileSizeLimit: 4096,
+	fitBounds: false,
+	fileSizeLimit: 8096,
 	layerOptions: {
 		style: style1,
 		pointToLayer: function (data, latlng) {
@@ -39,21 +40,24 @@ var controlLoader = L.Control.fileLayerLoad({
 }).addTo(map);
 
 function updateGeoJSON(tolerance) {
-	console.log('updateGeoJSON', tolerance);
-	simplifyLayer.clearLayers();
+	//console.log('updateGeoJSON', tolerance);
 	if(sourceLayer)
 	{
-		var nodes = 0;
-		sourceLayer.eachLayer(function(layer)  {
+		simplifyLayer.clearLayers();
+		simplifyNodes = 0;
+		//sourceLayer.eachLayer(function(layer)  {
+		layer = sourceLayer.getLayers()[0];
+
+		//FIXME support multi tracks
+
 			var modified = layer.toGeoJSON();
 			//console.log('eachLayer',modified);
 			modified.geometry.coordinates = simplifyGeometry(modified.geometry.coordinates, tolerance);
 			simplifyLayer.addData(modified);
 			simplifyLayerData = modified;
-			nodes += modified.geometry.coordinates.length; 
-		});
-		filename$.html(simplifyLayerName);
-		nodes$.html(nodes+' nodes');
+			simplifyNodes += modified.geometry.coordinates.length; 
+		//});
+		nodes$.text(simplifyNodes);
 	}
 }
 
@@ -63,7 +67,7 @@ function saveToFile() {
    		{
    			var gpx = togpx(simplifyLayerData);
 			var blob = new Blob([gpx], {type: "text/plain;charset=utf-8"});
-			saveAs(blob, simplifyLayerName);
+			saveAs(blob, simplifyLayerName+'_'+simplifyNodes+'nodes.gpx');
    		}
 	} catch (e) {
 		alert('For download gpx file using Chrome or Firefox');
@@ -73,8 +77,12 @@ function saveToFile() {
 
 controlLoader.loader.on('data:loaded', function (e) {
 	sourceLayer = e.layer;
-	simplifyLayerName = e.filename.replace('.gpx','.min.gpx');
+	map.fitBounds( sourceLayer.getBounds() );
+	simplifyLayerName = e.filename;
 	updateGeoJSON(0);
+	filename$.html(simplifyLayerName);
+	$('.grumble, .grumble-text, .grumble-button').remove();
+	$(document).unbind('keyup.crumble');
 })
 .on('data:error', function (e) {
 	console.log('ERROR',e);
@@ -108,7 +116,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 				value: 0,
 				min: 0,
 				max: 0.002,
-				step: 0.00001,
+				step: 0.0001,
 				precision: 8,
 				tooltip: 'hide'
 			})
@@ -142,7 +150,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 			var ctrl = L.DomUtil.create('div','leaflet-control-stats');
 			ctrl.id = 'stats';
 			ctrl.innerHTML = 
-				'<span id="nodes"></span><br />'+
+				'<span id="nodes"></span> nodes<br />'+
 				'<span id="filename"></span>';
 			filename$ = $('#filename',ctrl);
 			nodes$ = $('#nodes',ctrl);
@@ -151,6 +159,20 @@ controlLoader.loader.on('data:loaded', function (e) {
 	return control;
 }()).addTo(map);
 
+L.control.sidebar('comments',{position:'right', autoPan:false}).addTo(map).show();
+
+if(!$.cookie('tour'))
+{
+	$('#tour').crumble({
+		grumble: {
+			showAfter: 200,
+			distance: 20
+		},
+		onStep: function() {
+			$.cookie('tour', '1', { expires: 120 });
+		}
+	});	
+}
 	//facebook
 	(function(d, s, id) {
 	var js, fjs = d.getElementsByTagName(s)[0];
@@ -169,13 +191,6 @@ controlLoader.loader.on('data:loaded', function (e) {
 	!function(d,s,id){
 	var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}
 	}(document, 'script', 'twitter-wjs');
-
-	$('#tour').crumble({
-		grumble: {
-			showAfter: 200,
-			distance: 20
-		}
-	});
 
 });
 

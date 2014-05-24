@@ -10,7 +10,7 @@ h4 {
 	top: 30px;
 	bottom: 0;
 	left: 0;
-	right: 320px;
+	right: 0;
 	background: rgba(220,230,240,1);	
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -58,14 +58,16 @@ h4 {
 	font-weight: bold;
 	text-transform: capitalize;
 }
+.grumble-text .fa {
+	font-size: 1.5em;
+	line-height: 1.5em;
+}
+.leaflet-sidebar {
+	height: 88%;
+}
 #comments {
-	padding:0 8px;
-	position: absolute;
-	right: 0;
-	top: 30px;
-	bottom: 0;
-	width: 320px;
-	overflow-y:scroll;
+	padding: 8px;
+	overflow-y:auto;
 	background: rgba(220,230,240,1);
 	color: #4D5B69;
 	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	

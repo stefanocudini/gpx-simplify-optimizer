@@ -3,7 +3,9 @@ bootstrap-slider/*
 crumble/*
 FileSaver.js/*
 Font-Awesome/*
+jquery-cookie/*
 Leaflet.FileLayer/*
+leaflet-sidebar/*
 simplify-geometry/*
 togeojson/*
 togpx/*

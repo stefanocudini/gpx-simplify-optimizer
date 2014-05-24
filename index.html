@@ -10,14 +10,15 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css" />
 <link rel="stylesheet" href="bootstrap-slider/dist/css/bootstrap-slider.min.css" />
+<link rel="stylesheet" href="leaflet-sidebar/src/L.Control.Sidebar.css" />
 <link rel="stylesheet" href="crumble/css/grumble.min.css" />
 <link rel="stylesheet" href="crumble/css/crumble.css" />
 <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-<h4>GPX Optimizer online</h4>
-<p>Online Simplifier and Optimizer for GPX tracks.</p>
+<h4>Tracks Optimizer online</h4>
+<p>Online Simplifier and Optimizer for GPX/KML/GeoJSON tracks.</p>
 
 <div id="map"></div>
 <div id="comments">
@@ -35,16 +36,17 @@
 
 <ol id="tour" style="display: none;">
 	<li data-target=".leaflet-control-filelayer" data-angle="100">
-		Upload GPX track file
+		Upload Track file<br />
+		<small>GPX / KML / GeoJSON</small>
+		<br /><i class="fa fa-arrow-circle-right"></i>
 	</li>
 	<li data-target=".slider-handle" data-angle="40">
-		Change quality scrolling the slider
+		Change quality by scrolling the slider
+		<br /><i class="fa fa-arrow-circle-right"></i>		
 	</li>
 	<li data-target=".leaflet-control-down" data-angle="120">
 		Download GPX track optimized
-	</li>
-	<li data-target="#social" data-angle="200">
-		Share this App!
+		<br /><i class="fa fa-arrow-circle-right"></i>		
 	</li>
 </ol>
 
@@ -53,12 +55,14 @@
 <script src="http://d3js.org/d3.v2.js?2.9.1"></script>
 <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
 
+<script src="jquery-cookie/jquery.cookie.js"></script>
 <script src="togeojson/togeojson.js"></script>
 <script src='togpx/togpx.js'></script>
 <script src="Leaflet.FileLayer/leaflet.filelayer.js"></script>
 <script src="simplify-geometry/simplifygeometry-0.0.1.min.js"></script>
 <script src="bootstrap-slider/dist/bootstrap-slider.min.js"></script>
 <script src="FileSaver.js/FileSaver.js"></script>
+<script src="leaflet-sidebar/src/L.Control.Sidebar.js"></script>
 <script src="crumble/js/jquery.grumble.min.js"></script>
 <script src="crumble/js/jquery.crumble.min.js"></script>
 
