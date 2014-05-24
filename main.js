@@ -1,4 +1,4 @@
-(function() {
+$(function() {
 
 var map = new L.Map('map',{attributionControl: false}).setView(L.latLng(36,-30),3),
 	style1 = {
@@ -18,7 +18,8 @@ var map = new L.Map('map',{attributionControl: false}).setView(L.latLng(36,-30),
 
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-var sourceLayer = null,
+var stats$,
+	sourceLayer = null,
 	simplifyLayerName = 'simplified.gpx',
 	simplifyLayerData = null,
 	simplifyLayer = L.geoJson(simplifyLayerData, { style: style2 }).addTo(map);
@@ -41,13 +42,16 @@ function updateGeoJSON(tolerance) {
 	simplifyLayer.clearLayers();
 	if(sourceLayer)
 	{
+		var nodes = 0;
 		sourceLayer.eachLayer(function(layer)  {
 			var modified = layer.toGeoJSON();
 			//console.log('eachLayer',modified);
 			modified.geometry.coordinates = simplifyGeometry(modified.geometry.coordinates, tolerance);
 			simplifyLayer.addData(modified);
 			simplifyLayerData = modified;
+			nodes += modified.geometry.coordinates.length; 
 		});
+		stats$.html(nodes+' nodes');
 	}
 }
 
@@ -129,4 +133,16 @@ controlLoader.loader.on('data:loaded', function (e) {
 	return control;
 }()).addTo(map);
 
-}());
+
+(function() {
+	var control = new L.Control({position:'bottomleft'});
+	control.onAdd = function(map) {
+			var ctrl = L.DomUtil.create('div','leaflet-control-stats');
+			ctrl.id = 'stats';
+			stats$ = $(ctrl);
+			return ctrl;
+		};
+	return control;
+}()).addTo(map);
+
+});

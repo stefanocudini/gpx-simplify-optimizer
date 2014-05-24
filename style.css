@@ -23,6 +23,14 @@ h4 {
 	font-size: 18px;
 	color: #4D5B69;
 }
+
+.leaflet-control-stats {
+	color: #4D5B69;
+	font-size: 20px;
+	text-shadow: 1px 1px 2px #fff;
+}
+
+
 .leaflet-left.leaflet-bottom .leaflet-control-slider {
 	margin: 0;
 }
