@@ -164,7 +164,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 }()).addTo(map);
 
 //CONTROL SIDEBAR
-L.control.sidebar('comments',{position:'right', autoPan:false}).addTo(map).show();
+L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
 
 L.control.attribution({
 	position: 'topright',
