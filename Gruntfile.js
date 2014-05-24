@@ -85,22 +85,13 @@ grunt.initConfig({
 			flatten: true,
 			src: 'crumble/images/*',
 			dest: 'images/'
-		}
-		// i18n: {
-		// 	nonull: true,
-		// 	expand: true,
-		// 	cwd: 'i18n/',
-		// 	src: 'mix.*',
-		// 	dest: 'dist/',
-		// 	flatten: true,
-		// 	filter: 'isFile',
-		// }		
+		}		
 	},	
 	watch: {
 		dist: {
 			options: { livereload: true },
 			files: ['main.js','index.html','style.css'],
-			tasks: ['clean','concat','cssmin','jshint']
+			tasks: ['clean','jshint','uglify','concat','cssmin']
 		}
 	}
 });

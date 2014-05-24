@@ -26,6 +26,7 @@ var filename$,
 	simplifyLayerData = null,
 	simplifyLayer = L.geoJson(simplifyLayerData, { style: style2 }).addTo(map);
 
+//CONTROL UPLOAD
 L.Control.FileLayerLoad.LABEL = '<i class="fa fa-folder-open"></i>';
 var controlLoader = L.Control.fileLayerLoad({
 	addToMap: true,
@@ -88,6 +89,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 	console.log('ERROR',e);
 });
 
+//CONTROL DOWNLOAD
 (function() {
 	var control = new L.Control({position:'topleft'});
 	control.onAdd = function(map) {
@@ -105,6 +107,8 @@ controlLoader.loader.on('data:loaded', function (e) {
 	return control;
 }()).addTo(map);
 
+
+//CONTROL SLIDER
 (function() {
 	var control = new L.Control({position:'bottomleft'});
 	control.onAdd = function(map) {
@@ -143,7 +147,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 	return control;
 }()).addTo(map);
 
-
+//CONTROL NODES
 (function() {
 	var control = new L.Control({position:'bottomleft'});
 	control.onAdd = function(map) {
@@ -159,8 +163,15 @@ controlLoader.loader.on('data:loaded', function (e) {
 	return control;
 }()).addTo(map);
 
+//CONTROL SIDEBAR
 L.control.sidebar('comments',{position:'right', autoPan:false}).addTo(map).show();
 
+L.control.attribution({
+	position: 'topright',
+	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank">OpenStreetMap contributors</a>',
+}).addTo(map);
+
+//TOUR POPUPS
 if(!$.cookie('tour'))
 {
 	$('#tour').crumble({

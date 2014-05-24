@@ -3,7 +3,8 @@ body {
 	background: #4D5B69;
 }
 h4 {
-	margin: 5px;
+	float: left;
+	margin: 5px 20px 5px 10px;
 }
 #map {
 	position: absolute;
