@@ -6,7 +6,7 @@ grunt.initConfig({
 	pkg: grunt.file.readJSON('package.json'),
 	clean: {
 		dist: {
-			src: ['dist/*','main.min.js']
+			src: ['dist/*','images/*']
 		}
 	},
 	jshint: {
@@ -24,6 +24,8 @@ grunt.initConfig({
 	uglify: {
 		dist: {
 			files: {
+				'dist/jquery.cookie.min.js': ['jquery-cookie/jquery.cookie.js'],
+				'dist/L.Control.Sidebar.min.js': ['leaflet-sidebar/src/L.Control.Sidebar.js'],
 				'dist/togeojson.min.js': ['togeojson/togeojson.js'],
 				'dist/togpx.min.js': ['togpx/togpx.js'],
 				'dist/leaflet.filelayer.min.js': ['Leaflet.FileLayer/leaflet.filelayer.js'],
@@ -42,13 +44,18 @@ grunt.initConfig({
 		},
 		dist: {
 			src: [
+				'dist/jquery.cookie.min.js',
+				'dist/L.Control.Sidebar.min.js',		
 				'dist/togeojson.min.js',
 				'dist/togpx.min.js',
 				'dist/leaflet.filelayer.min.js',
-				'dist/FileSaver.min.js',				
+				'dist/FileSaver.min.js',
 				'simplify-geometry/simplifygeometry-0.0.1.min.js',
 				'bootstrap-slider/dist/bootstrap-slider.min.js',
-				'dist/main.min.js'
+				'crumble/js/jquery.grumble.min.js',
+				'crumble/js/jquery.crumble.min.js',				
+				'social.js',
+				'dist/main.min.js'			
 			],
 			dest: 'dist/app.min.js'
 		}
@@ -57,6 +64,8 @@ grunt.initConfig({
 		combine: {
 			src: [
 				'bootstrap-slider/dist/css/bootstrap-slider.min.css',
+				'crumble/css/grumble.min.css',
+				'crumble/css/crumble.css',				
 				'style.css'
 			],
 			dest: 'dist/style.min.css'
@@ -68,6 +77,24 @@ grunt.initConfig({
 			//,dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.min.css'
 		}
 	},
+	copy: {
+		crumble: {
+			expand: true,
+			nonull: true,
+			flatten: true,
+			src: 'crumble/images/*',
+			dest: 'images/'
+		}
+		// i18n: {
+		// 	nonull: true,
+		// 	expand: true,
+		// 	cwd: 'i18n/',
+		// 	src: 'mix.*',
+		// 	dest: 'dist/',
+		// 	flatten: true,
+		// 	filter: 'isFile',
+		// }		
+	},	
 	watch: {
 		dist: {
 			options: { livereload: true },
@@ -79,10 +106,11 @@ grunt.initConfig({
 
 grunt.registerTask('default', [
 	'clean',
+	'jshint',	
 	'uglify',	
-	'concat',	
-	'cssmin',
-	'jshint'
+	'concat',
+	'cssmin',	
+	'copy'
 ]);
 
 
@@ -92,5 +120,5 @@ grunt.loadNpmTasks('grunt-contrib-clean');
 grunt.loadNpmTasks('grunt-contrib-cssmin');
 grunt.loadNpmTasks('grunt-contrib-jshint');
 grunt.loadNpmTasks('grunt-contrib-watch');
-
+grunt.loadNpmTasks('grunt-contrib-copy');
 };
