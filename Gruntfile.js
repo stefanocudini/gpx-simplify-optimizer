@@ -56,7 +56,6 @@ grunt.initConfig({
 	cssmin: {
 		combine: {
 			src: [
-				//'Font-Awesome/css/font-awesome.min.css',
 				'bootstrap-slider/dist/css/bootstrap-slider.min.css',
 				'style.css'
 			],
@@ -69,15 +68,6 @@ grunt.initConfig({
 			//,dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.min.css'
 		}
 	},
-	// copy: {
-	// 	css: {
-	// 		expand: true,
-	// 		flatten: true,
-	// 		filter: 'isFile',			
-	// 		src: ['Font-Awesome/fonts/*'],
-	// 		dest: 'dist/fonts/'
-	// 	}
-	// },
 	watch: {
 		dist: {
 			options: { livereload: true },
@@ -92,8 +82,7 @@ grunt.registerTask('default', [
 	'uglify',	
 	'concat',	
 	'cssmin',
-	'jshint',
-	//'copy'
+	'jshint'
 ]);
 
 
@@ -102,7 +91,6 @@ grunt.loadNpmTasks('grunt-contrib-concat');
 grunt.loadNpmTasks('grunt-contrib-clean');
 grunt.loadNpmTasks('grunt-contrib-cssmin');
 grunt.loadNpmTasks('grunt-contrib-jshint');
-grunt.loadNpmTasks('grunt-contrib-copy');
 grunt.loadNpmTasks('grunt-contrib-watch');
 
 };
