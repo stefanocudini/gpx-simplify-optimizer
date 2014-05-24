@@ -1,3 +1,4 @@
+(function() {
 
 var map = new L.Map('map',{attributionControl: false}).setView(L.latLng(36,-30),3),
 	style1 = {
@@ -127,3 +128,5 @@ controlLoader.loader.on('data:loaded', function (e) {
 		};
 	return control;
 }()).addTo(map);
+
+}());
