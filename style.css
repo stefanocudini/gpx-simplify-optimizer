@@ -38,6 +38,7 @@ h4 {
 }
 
 #comments {
+	padding:0 8px;
 	position: absolute;
 	right: 0;
 	top: 30px;
@@ -51,7 +52,7 @@ h4 {
 #copy {
 	position:fixed;
 	z-index:1000;
-	right:15px;
+	right:350px;
 	top:-8px;
 	padding:8px 8px 2px 8px;
 	background: #424b54;
