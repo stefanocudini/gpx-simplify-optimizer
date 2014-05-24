@@ -44,7 +44,7 @@ h4 {
 	bottom: 0;
 	width: 320px;
 	overflow-y:scroll;
-	background: rgba(220,230,240,1);
+	background: #eef;
 	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	
 }
 #copy {
