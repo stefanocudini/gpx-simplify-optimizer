@@ -1,5 +1,6 @@
 node_modules/*
 bootstrap-slider/*
+crumble/*
 FileSaver.js/*
 Font-Awesome/*
 Leaflet.FileLayer/*

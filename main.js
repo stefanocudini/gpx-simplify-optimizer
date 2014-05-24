@@ -18,7 +18,8 @@ var map = new L.Map('map',{attributionControl: false}).setView(L.latLng(36,-30),
 
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-var stats$,
+var filename$,
+	nodes$,
 	sourceLayer = null,
 	simplifyLayerName = 'simplified.gpx',
 	simplifyLayerData = null,
@@ -51,7 +52,8 @@ function updateGeoJSON(tolerance) {
 			simplifyLayerData = modified;
 			nodes += modified.geometry.coordinates.length; 
 		});
-		stats$.html(nodes+' nodes');
+		filename$.html(simplifyLayerName);
+		nodes$.html(nodes+' nodes');
 	}
 }
 
@@ -71,7 +73,7 @@ function saveToFile() {
 
 controlLoader.loader.on('data:loaded', function (e) {
 	sourceLayer = e.layer;
-	simplifyLayerName = e.filename.replace('.gpx','_SIMPLIFIED.gpx');
+	simplifyLayerName = e.filename.replace('.gpx','.min.gpx');
 	updateGeoJSON(0);
 })
 .on('data:error', function (e) {
@@ -139,10 +141,41 @@ controlLoader.loader.on('data:loaded', function (e) {
 	control.onAdd = function(map) {
 			var ctrl = L.DomUtil.create('div','leaflet-control-stats');
 			ctrl.id = 'stats';
-			stats$ = $(ctrl);
+			ctrl.innerHTML = 
+				'<span id="nodes"></span><br />'+
+				'<span id="filename"></span>';
+			filename$ = $('#filename',ctrl);
+			nodes$ = $('#nodes',ctrl);
 			return ctrl;
 		};
 	return control;
 }()).addTo(map);
 
+	//facebook
+	(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/it_IT/sdk.js#xfbml=1&appId=455565641219872&version=v2.0";
+	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	//google+1
+	(function() {
+	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	po.src = 'https://apis.google.com/js/plusone.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	})();
+	//twitter
+	!function(d,s,id){
+	var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}
+	}(document, 'script', 'twitter-wjs');
+
+	$('#tour').crumble({
+		grumble: {
+			showAfter: 200,
+			distance: 20
+		}
+	});
+
 });
+

@@ -10,7 +10,14 @@ h4 {
 	top: 30px;
 	bottom: 0;
 	left: 0;
-	right: 320px;	
+	right: 320px;
+	background: rgba(220,230,240,1);	
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;	
 }
 .leaflet-control-zoom.leaflet-bar a {
 	color: #4D5B69;
@@ -25,7 +32,7 @@ h4 {
 }
 
 .leaflet-control-stats {
-	color: #4D5B69;
+	color: #323C45;
 	font-size: 20px;
 	text-shadow: 1px 1px 2px #fff;
 }
@@ -44,7 +51,13 @@ h4 {
 	opacity: 1;
 	background: #4D5B69;
 }
-
+.grumble-text .outer {
+	color: #fff;
+	font-size: 1em;
+	line-height: 1.5em;
+	font-weight: bold;
+	text-transform: capitalize;
+}
 #comments {
 	padding:0 8px;
 	position: absolute;
@@ -57,10 +70,20 @@ h4 {
 	color: #4D5B69;
 	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	
 }
+#social {
+	position:fixed;
+	z-index:800;
+	right:220px;
+	top:0;
+	padding: 4px;
+}
+#social .fb-like {
+	line-height: 12px
+}
 #copy {
 	position:fixed;
 	z-index:1000;
-	right:350px;
+	right:30px;
 	top:-8px;
 	padding:8px 8px 2px 8px;
 	background: #424b54;
