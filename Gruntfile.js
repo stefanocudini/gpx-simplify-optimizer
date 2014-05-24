@@ -64,6 +64,7 @@ grunt.initConfig({
 		combine: {
 			src: [
 				'bootstrap-slider/dist/css/bootstrap-slider.min.css',
+				'leaflet-sidebar/src/L.Control.Sidebar.css',
 				'crumble/css/grumble.min.css',
 				'crumble/css/crumble.css',				
 				'style.css'
