@@ -40,6 +40,18 @@ var controlLoader = L.Control.fileLayerLoad({
 	}
 }).addTo(map);
 
+function filesizeHuman(bytes, decimal) {
+	if (bytes === 0) return bytes;		
+	decimal = decimal || 1;
+	var sizes = ['Bytes','KB','MB','GB','TB'],
+		i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+	return Math.round(bytes / Math.pow(1024, i), decimal) + ' ' + sizes[i];
+}
+
+function nodes2Bytes(nodes) {
+	return filesizeHuman(400 + (nodes * 56));
+}
+
 function updateGeoJSON(tolerance) {
 	//console.log('updateGeoJSON', tolerance);
 	if(sourceLayer)
@@ -58,7 +70,7 @@ function updateGeoJSON(tolerance) {
 			simplifyLayerData = modified;
 			simplifyNodes += modified.geometry.coordinates.length; 
 		//});
-		nodes$.text(simplifyNodes);
+		nodes$.text(simplifyNodes+' nodes ~'+nodes2Bytes(simplifyNodes));
 	}
 }
 
@@ -154,7 +166,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 			var ctrl = L.DomUtil.create('div','leaflet-control-stats');
 			ctrl.id = 'stats';
 			ctrl.innerHTML = 
-				'<span id="nodes"></span> nodes<br />'+
+				'<span id="nodes"></span><br />'+
 				'<span id="filename"></span>';
 			filename$ = $('#filename',ctrl);
 			nodes$ = $('#nodes',ctrl);
