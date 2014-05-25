@@ -14,7 +14,7 @@ h4 {
 #map {
 	position: absolute;
 	top: 40px;
-	bottom: 0;
+	bottom: 40px;
 	left: 0;
 	right: 0;
 	background: rgba(220,230,240,1);	
@@ -42,37 +42,6 @@ h4 {
 	font-size: 20px;
 	text-shadow: 1px 1px 2px #fff;
 }
-
-
-.leaflet-left.leaflet-bottom .leaflet-control-slider {
-	margin: 0;
-}
-.leaflet-control-slider {
-	background: #4D5B69;
-	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	
-	width: 100%;
-	padding: 10px 20px;
-}
-.slider-handle {
-	opacity: 1;
-	background: #7D8B99;
-}
-/*.grumble-text .outer {
-	color: #fff;
-	font-size: 1em;
-	line-height: 1.5em;
-	font-weight: bold;
-	text-transform: capitalize;
-}
-.grumble-text .fa {
-	font-size: 1.5em;
-	line-height: 1.5em;
-}*/
-.leaflet-sidebar {
-	height: auto;
-	bottom: 40px;
-	top:5px;
-}
 .leaflet-sidebar a.close {
 	opacity: 1;
 	top:1px;
@@ -92,6 +61,18 @@ h4 {
 	background: rgba(220,230,240,1);
 	color: #4D5B69;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.6);	
+}
+#slider_wrap {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 40px;
+	padding: 10px 20px;
+}
+.slider-handle {
+	opacity: 1;
+	background: #7D8B99;
 }
 
 #modal {

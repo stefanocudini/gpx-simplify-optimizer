@@ -119,46 +119,6 @@ controlLoader.loader.on('data:loaded', function (e) {
 	return control;
 }()).addTo(map);
 
-
-//CONTROL SLIDER
-(function() {
-	var control = new L.Control({position:'bottomleft'});
-	control.onAdd = function(map) {
-			var ctrl = L.DomUtil.create('div','leaflet-control-slider'),
-				input = L.DomUtil.create('input','input-slider', ctrl);
-			input.type = 'text';
-
-			var slider$ = $(input).slider({
-				value: 0,
-				min: 0,
-				max: 0.002,
-				step: 0.00005,
-				precision: 8,
-				tooltip: 'hide'
-			})
-			.on('slide', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				updateGeoJSON(e.value);
-			})
-			.on('slideStart', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-			});
-
-			L.DomEvent.disableClickPropagation(ctrl);
-
-			slider$.parent().width(map.getSize().x-40);
-
-			map.on('resize', function(e) {
-				slider$.parent().width(e.newSize.x-40);
-			})
-
-			return ctrl;
-		};
-	return control;
-}()).addTo(map);
-
 //CONTROL NODES
 (function() {
 	var control = new L.Control({position:'bottomleft'});
@@ -183,6 +143,18 @@ L.control.attribution({
 	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank">OpenStreetMap contributors</a>',
 }).addTo(map);
 
+$('#slider').slider({
+	value: 0,
+	min: 0,
+	max: 0.002,
+	step: 0.00005,
+	precision: 8,
+	tooltip: 'hide'
+})
+.on('slide', function(e) {
+	updateGeoJSON(e.value);
+}).parent().width('100%');
+
 $('#helpbtn').on('click',function(e) {
 	$('#modal').modal('show');
 });
@@ -194,15 +166,6 @@ if(!helpCount || parseInt(helpCount) < 3 )
 	$('#modal').modal('show');
 	helpCount = (parseInt(helpCount) || 0)+1;
 	$.cookie('tour', helpCount, { expires: 120 });
-	// $('#tour').crumble({
-	// 	grumble: {
-	// 		showAfter: 200,
-	// 		distance: 20
-	// 	},
-	// 	onStep: function() {
-	// 		$.cookie('tour', '1', { expires: 120 });
-	// 	}
-	// });	
 }
 
 });
