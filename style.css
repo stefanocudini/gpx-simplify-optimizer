@@ -4,11 +4,16 @@ body {
 }
 h4 {
 	float: left;
+	padding: 5px;
 	margin: 5px 20px 5px 10px;
+	text-shadow:1px 1px 3px #333;
+}
+#helpbtn {
+	color: #eee;
 }
 #map {
 	position: absolute;
-	top: 30px;
+	top: 40px;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -43,14 +48,14 @@ h4 {
 	margin: 0;
 }
 .leaflet-control-slider {
-	background: rgba(220,230,240,0.8);
+	background: #4D5B69;
 	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	
 	width: 100%;
 	padding: 10px 20px;
 }
 .slider-handle {
 	opacity: 1;
-	background: #4D5B69;
+	background: #7D8B99;
 }
 /*.grumble-text .outer {
 	color: #fff;

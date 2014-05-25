@@ -171,9 +171,12 @@ L.control.attribution({
 	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank">OpenStreetMap contributors</a>',
 }).addTo(map);
 
+$('#helpbtn').on('click',function(e) {
+	$('#modal').modal('show');
+});
+
 //HELP POPUP
 var helpCount = $.cookie('tour');
-
 if(!helpCount || parseInt(helpCount) < 3 )
 {
 	$('#modal').modal('show');
