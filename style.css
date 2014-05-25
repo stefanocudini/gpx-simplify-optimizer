@@ -70,6 +70,9 @@ h4 {
 	height: 40px;
 	padding: 10px 20px;
 }
+#slider {
+	visibility: hidden;
+}
 .slider-handle {
 	opacity: 1;
 	background: #7D8B99;
