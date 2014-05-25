@@ -6,7 +6,7 @@ grunt.initConfig({
 	pkg: grunt.file.readJSON('package.json'),
 	clean: {
 		dist: {
-			src: ['dist/*','images/*']
+			src: ['dist/*']
 		}
 	},
 	jshint: {
@@ -52,8 +52,8 @@ grunt.initConfig({
 				'dist/FileSaver.min.js',
 				'simplify-geometry/simplifygeometry-0.0.1.min.js',
 				'bootstrap-slider/dist/bootstrap-slider.min.js',
-				'crumble/js/jquery.grumble.min.js',
-				'crumble/js/jquery.crumble.min.js',				
+				//'crumble/js/jquery.grumble.min.js',
+				//'crumble/js/jquery.crumble.min.js',				
 				'social.js',
 				'dist/main.min.js'			
 			],
@@ -65,8 +65,8 @@ grunt.initConfig({
 			src: [
 				'bootstrap-slider/dist/css/bootstrap-slider.min.css',
 				'leaflet-sidebar/src/L.Control.Sidebar.css',
-				'crumble/css/grumble.min.css',
-				'crumble/css/crumble.css',				
+				//'crumble/css/grumble.min.css',
+				//'crumble/css/crumble.css',				
 				'style.css'
 			],
 			dest: 'dist/style.min.css'
@@ -78,15 +78,15 @@ grunt.initConfig({
 			//,dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.min.css'
 		}
 	},
-	copy: {
-		crumble: {
-			expand: true,
-			nonull: true,
-			flatten: true,
-			src: 'crumble/images/*',
-			dest: 'images/'
-		}		
-	},	
+	// copy: {
+	// 	crumble: {
+	// 		expand: true,
+	// 		nonull: true,
+	// 		flatten: true,
+	// 		src: 'crumble/images/*',
+	// 		dest: 'images/'
+	// 	}		
+	// },	
 	watch: {
 		dist: {
 			options: { livereload: true },
@@ -102,7 +102,7 @@ grunt.registerTask('default', [
 	'uglify',	
 	'concat',
 	'cssmin',	
-	'copy'
+	//'copy'
 ]);
 
 
@@ -112,5 +112,5 @@ grunt.loadNpmTasks('grunt-contrib-clean');
 grunt.loadNpmTasks('grunt-contrib-cssmin');
 grunt.loadNpmTasks('grunt-contrib-jshint');
 grunt.loadNpmTasks('grunt-contrib-watch');
-grunt.loadNpmTasks('grunt-contrib-copy');
+//grunt.loadNpmTasks('grunt-contrib-copy');
 };

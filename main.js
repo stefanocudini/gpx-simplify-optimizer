@@ -5,7 +5,7 @@ var map = new L.Map('map',{attributionControl: false}).setView(L.latLng(36,-30),
 		color: 'red',
 		opacity: 0.7,
 		fillOpacity: 0.7,
-		weight: 6,
+		weight: 5,
 		clickable: false
 	},
 	style2 = {
@@ -120,7 +120,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 				value: 0,
 				min: 0,
 				max: 0.002,
-				step: 0.0001,
+				step: 0.00005,
 				precision: 8,
 				tooltip: 'hide'
 			})
@@ -171,18 +171,23 @@ L.control.attribution({
 	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank">OpenStreetMap contributors</a>',
 }).addTo(map);
 
-//TOUR POPUPS
-if(!$.cookie('tour'))
+//HELP POPUP
+var helpCount = $.cookie('tour');
+
+if(!helpCount || parseInt(helpCount) < 3 )
 {
-	$('#tour').crumble({
-		grumble: {
-			showAfter: 200,
-			distance: 20
-		},
-		onStep: function() {
-			$.cookie('tour', '1', { expires: 120 });
-		}
-	});	
+	$('#modal').modal('show');
+	helpCount = (parseInt(helpCount) || 0)+1;
+	$.cookie('tour', helpCount, { expires: 120 });
+	// $('#tour').crumble({
+	// 	grumble: {
+	// 		showAfter: 200,
+	// 		distance: 20
+	// 	},
+	// 	onStep: function() {
+	// 		$.cookie('tour', '1', { expires: 120 });
+	// 	}
+	// });	
 }
 
 });
