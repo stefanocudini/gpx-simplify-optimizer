@@ -19,3 +19,6 @@
 [submodule "simplify-geometry"]
 	path = simplify-geometry
 	url = https://github.com/seabre/simplify-geometry.git
+[submodule "togpx"]
+	path = togpx
+	url = https://github.com/tyrasd/togpx.git
