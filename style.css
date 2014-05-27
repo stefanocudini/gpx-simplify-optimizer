@@ -7,9 +7,13 @@ h4 {
 	padding: 5px;
 	margin: 5px 20px 5px 10px;
 	text-shadow:1px 1px 3px #333;
+	letter-spacing:0.065em;
 }
-#helpbtn {
+h4 a {
 	color: #eee;
+}
+h4 a:hover {
+	color: #fff;
 }
 #map {
 	position: absolute;
@@ -112,7 +116,7 @@ h4 {
 	z-index:800;
 	right:220px;
 	top:0;
-	padding: 4px;
+	padding: 8px;
 }
 #social .fb-like {
 	line-height: 12px
