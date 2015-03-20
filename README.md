@@ -11,15 +11,18 @@ Copyright 2014 [Stefano Cudini](http://labs.easyblog.it/stefano-cudini/)
 ![Image](https://raw.githubusercontent.com/stefanocudini/gpx-simplify-optimizer/master/images/gpx-optimizer.png)
 
 
-Build
+Install 
+-------
 
-**compress files:**
-```
+git clone https://github.com/stefanocudini/gpx-simplify-optimizer.git
+git submodule init
+git submodule update
+
+
+Build
+-----
+
 npm install
 grunt
-```
 
-**update libs:**
-```
-git submodule foreach git pull
-```
+
