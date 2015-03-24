@@ -10,3 +10,4 @@ leaflet-sidebar/*
 simplify-geometry/*
 togeojson/*
 togpx/*
+geojson-to-path/*

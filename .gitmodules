@@ -22,3 +22,6 @@
 [submodule "togpx"]
 	path = togpx
 	url = https://github.com/tyrasd/togpx.git
+[submodule "geojson-to-path"]
+	path = geojson-to-path
+	url = https://github.com/Wilkins/geojson-to-path.git

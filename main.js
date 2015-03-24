@@ -74,19 +74,96 @@ function updateGeoJSON(tolerance) {
 	}
 }
 
-function saveToFile() {
+
+$('.download-geojson').on('click', saveToFileGeoJSON);
+$('.download-gpx').on('click', saveToFileGPX);
+$('.download-path').on('click', saveToFilePath);
+$('.view-geojson').on('click', viewGeoJSON);
+$('.view-gpx').on('click', viewGPX);
+$('.view-path').on('click', viewPath);
+$('#export-close').on('click', function () {
+	$('#export-format').hide();
+});
+
+function chooseDownloadFormat() {
+	$('#download-formats').show();
+	$('#view-formats').hide();
+}
+function chooseViewFormat() {
+	$('#view-formats').show();
+	$('#download-formats').hide();
+}
+function hideFormats() {
+	$('#download-formats').hide();
+	$('#view-formats').hide();
+}
+
+function exportToGPX() {
+	return togpx(simplifyLayerData);
+}
+
+function exportToGeoJSON() {
+	return JSON.stringify(simplifyLayerData);
+}
+
+function exportToPath() {
+	return geojsonToPath(simplifyLayerData);
+}
+
+function saveToFile(content, type, extension) {
 	try {
    		if(!!new Blob())
    		{
-   			var gpx = togpx(simplifyLayerData);
-			var blob = new Blob([gpx], {type: "text/plain;charset=utf-8"});
-			saveAs(blob, simplifyLayerName+'_'+simplifyNodes+'nodes.gpx');
+   			var gpx = exportToGPX();
+			var blob = new Blob([content], {type: type+";charset=utf-8"});
+			name = simplifyLayerName.replace(/\..*/, "");
+			saveAs(blob, name+'_'+simplifyNodes+'nodes.'+extension);
    		}
 	} catch (e) {
-		alert('For download gpx file using Chrome or Firefox');
+		alert('Please upload GPX/GeoJSON/KML file first, using Chrome or Firefox');
 		return false;
 	}
+	hideFormats();
 }
+
+function saveToFileGeoJSON() {
+	saveToFile(exportToGeoJSON(), "application/json", "json");
+}
+
+function saveToFileGPX() {
+	saveToFile(exportToGPX(), "text/plain", "gpx");
+}
+
+function saveToFilePath() {
+	saveToFile(exportToPath(), "text/plain", "txt");
+}
+
+function viewFile(content) {
+	try {
+   		if(!!new Blob())
+   		{
+			$('#export-content').val(content);
+			$('#export-format').show();
+   		}
+	} catch (e) {
+		alert('Please upload GPX/GeoJSON/KML file first, using Chrome or Firefox');
+		return false;
+	}
+	hideFormats();
+}
+
+function viewPath() {
+	viewFile(exportToPath());
+}
+
+function viewGPX() {
+	viewFile(exportToGPX());
+}
+
+function viewGeoJSON() {
+	viewFile(exportToGeoJSON());
+}
+
 
 controlLoader.loader.on('data:loaded', function (e) {
 	sourceLayer = e.layer;
@@ -109,11 +186,30 @@ controlLoader.loader.on('data:loaded', function (e) {
 				a = L.DomUtil.create('a','', ctrl);
 			a.href = '#';
 			a.target = '_blank';
-			a.title = "Download simplified GPX file";
+			a.title = "Download simplified file";
 			a.innerHTML = '<i class="fa fa-download"></i>';
 			L.DomEvent
 				.on(a, 'click', L.DomEvent.stop)
-				.on(a, 'click', saveToFile);			
+				//.on(a, 'click', saveToFile);			
+				.on(a, 'click', chooseDownloadFormat);			
+			return ctrl;
+		};
+	return control;
+}()).addTo(map);
+
+//CONTROL PATH
+(function() {
+	var control = new L.Control({position:'topleft'});
+	control.onAdd = function(map) {
+			var ctrl = L.DomUtil.create('div','leaflet-control-path leaflet-bar'),
+				a = L.DomUtil.create('a','', ctrl);
+			a.href = '#';
+			a.target = '_blank';
+			a.title = "View simplified file";
+			a.innerHTML = '<i class="fa fa-eye"></i>';
+			L.DomEvent
+				.on(a, 'click', L.DomEvent.stop)
+				.on(a, 'click', chooseViewFormat);			
 			return ctrl;
 		};
 	return control;
@@ -136,7 +232,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 }()).addTo(map);
 
 //CONTROL SIDEBAR
-L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
+//L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
 
 L.control.attribution({
 	position: 'topright',
@@ -146,7 +242,7 @@ L.control.attribution({
 $('#slider').slider({
 	value: 0,
 	min: 0,
-	max: 0.002,
+	max: 0.1,
 	step: 0.00005,
 	precision: 8,
 	tooltip: 'hide'
@@ -160,6 +256,7 @@ $('#helpbtn').on('click',function(e) {
 });
 
 //HELP POPUP
+/*
 var helpCount = $.cookie('tour');
 if(!helpCount || parseInt(helpCount) < 3 )
 {
@@ -167,6 +264,6 @@ if(!helpCount || parseInt(helpCount) < 3 )
 	helpCount = (parseInt(helpCount) || 0)+1;
 	$.cookie('tour', helpCount, { expires: 120 });
 }
-
+*/
 });
 

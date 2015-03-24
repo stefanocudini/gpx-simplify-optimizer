@@ -33,6 +33,7 @@ h4 a:hover {
 	color: #4D5B69;
 }
 .leaflet-control-filelayer.leaflet-bar a:first-child,
+.leaflet-control-path.leaflet-bar a:first-child,
 .leaflet-control-down.leaflet-bar a:first-child {
 	background: #fff;
 	border-radius: 4px;
@@ -40,6 +41,7 @@ h4 a:hover {
 	font-size: 18px;
 	color: #4D5B69;
 }
+
 
 .leaflet-control-stats {
 	color: #323C45;
@@ -146,4 +148,64 @@ h4 a:hover {
 	right: 0;
 	border: 0;
 	opacity: .8;		
+}
+
+.formats {
+	background-color: white;
+	border: 2px solid rgba(77,91,105,0.5);
+	border-radius: 4px;
+	display: none;
+	margin: 0px 0px 0px 45px;
+	position: absolute;
+	width: 200px;
+
+}
+.formats a {
+	color: rgb(77,91,105);
+	cursor: pointer;
+	display: block;
+	font-weight: bold;
+	height: 30px;
+	padding: 3px;
+}
+.formats a:hover {
+	background-color: rgb(77,91,105);
+	color: white;
+	text-decoration: none;
+}
+#download-formats {
+	top: 168px;
+}
+#view-formats {
+	top: 212px;
+}
+#export-format {
+	background-color: rgb(77,91,105);
+	height: 400px;
+	margin: auto;
+	overflow: hidden;
+	padding: 5px;
+	position: absolute;
+	width: 720px;
+}
+#export-format .actions {
+	padding: 10px;
+	text-align: center;
+}
+#export-format input {
+	background-color: rgb(77,91,105);
+	border: 1px solid white;
+	color: white;
+	font-weight: bold;
+}
+#export-format textarea {
+	color: #333333;
+	display: block;
+	height: 300px;
+	width: 700px;
+}
+#export-format h5 {
+	color: white;
+	font-size: 20px;
+	text-align: center;
 }
