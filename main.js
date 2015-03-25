@@ -100,7 +100,6 @@ controlLoader.loader.on('data:loaded', function (e) {
 			a.innerHTML = '<i class="fa fa-download"></i>';
 			L.DomEvent
 				.on(a, 'click', L.DomEvent.stop)
-				//.on(a, 'click', saveFile);			
 				.on(a, 'click', chooseDownloadFormat);			
 			return ctrl;
 		};
@@ -175,8 +174,8 @@ if(!helpCount || parseInt(helpCount) < 3 )
 	$.cookie('tour', helpCount, { expires: 120 });
 }
 */
+var f = new Format();
+f.loadAll(['GeoJSONFormat', 'GPXFormat', 'PathFormat']);
 });
 
-var f = new Format();
-f.loadAll();
 

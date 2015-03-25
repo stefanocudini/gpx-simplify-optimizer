@@ -193,9 +193,9 @@ h4 a:hover {
 	text-align: center;
 }
 #export-format input {
-	background-color: rgb(77,91,105);
+	color: rgb(77,91,105);
 	border: 1px solid white;
-	color: white;
+	background-color: white;
 	font-weight: bold;
 }
 #export-format textarea {

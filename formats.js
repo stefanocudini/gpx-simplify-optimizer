@@ -17,24 +17,25 @@ $('#export-close').on('click', function () {
 // Root Format
 var Format = function() {
     this.param = {'key':'format', 'name':'RootFormat'};
+    /*
     this.formats = [
         'GeoJSONFormat',
         'GPXFormat',
         'PathFormat'
     ];
+    */
 }
 
 Format.prototype = {
 
-    loadAll: function(data) {
-        var f;
-        this.formats.forEach(function(formatName) {
+    loadAll: function(formats) {
+        formats.forEach(function(formatName) {
             eval("f = new "+formatName+"();");
             f.load();
         });
     },
     
-    load: function(data) {
+    load: function() {
         // View links
         var a = document.createElement('a');
         var linkText = document.createTextNode("View in "+this.param.name);
