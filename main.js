@@ -20,11 +20,11 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 var filename$,
 	nodes$,
-	sourceLayer = null,
-	simplifyNodes = 0,
-	simplifyLayerName = 'simplified.gpx',
-	simplifyLayerData = null,
-	simplifyLayer = L.geoJson(simplifyLayerData, { style: style2 }).addTo(map);
+	sourceLayer = null;
+	window.simplifyNodes = 0;
+	window.simplifyLayerName = 'simplified.gpx';
+	window.simplifyLayerData = null;
+	window.simplifyLayer = L.geoJson(window.simplifyLayerData, { style: style2 }).addTo(map);
 
 //CONTROL UPLOAD
 L.Control.FileLayerLoad.LABEL = '<i class="fa fa-folder-open"></i>';
@@ -56,8 +56,8 @@ function updateGeoJSON(tolerance) {
 	//console.log('updateGeoJSON', tolerance);
 	if(sourceLayer)
 	{
-		simplifyLayer.clearLayers();
-		simplifyNodes = 0;
+		window.simplifyLayer.clearLayers();
+		window.simplifyNodes = 0;
 		//sourceLayer.eachLayer(function(layer)  {
 		layer = sourceLayer.getLayers()[0];
 
@@ -66,111 +66,21 @@ function updateGeoJSON(tolerance) {
 			var modified = layer.toGeoJSON();
 			//console.log('eachLayer',modified);
 			modified.geometry.coordinates = simplifyGeometry(modified.geometry.coordinates, tolerance);
-			simplifyLayer.addData(modified);
-			simplifyLayerData = modified;
-			simplifyNodes += modified.geometry.coordinates.length; 
+			window.simplifyLayer.addData(modified);
+			window.simplifyLayerData = modified;
+			window.simplifyNodes += modified.geometry.coordinates.length; 
 		//});
-		nodes$.text(simplifyNodes+' nodes ~'+nodes2Bytes(simplifyNodes));
+		nodes$.text(window.simplifyNodes+' nodes ~'+nodes2Bytes(window.simplifyNodes));
 	}
-}
-
-
-$('.download-geojson').on('click', saveToFileGeoJSON);
-$('.download-gpx').on('click', saveToFileGPX);
-$('.download-path').on('click', saveToFilePath);
-$('.view-geojson').on('click', viewGeoJSON);
-$('.view-gpx').on('click', viewGPX);
-$('.view-path').on('click', viewPath);
-$('#export-close').on('click', function () {
-	$('#export-format').hide();
-});
-
-function chooseDownloadFormat() {
-	$('#download-formats').show();
-	$('#view-formats').hide();
-}
-function chooseViewFormat() {
-	$('#view-formats').show();
-	$('#download-formats').hide();
-}
-function hideFormats() {
-	$('#download-formats').hide();
-	$('#view-formats').hide();
-}
-
-function exportToGPX() {
-	return togpx(simplifyLayerData);
-}
-
-function exportToGeoJSON() {
-	return JSON.stringify(simplifyLayerData);
-}
-
-function exportToPath() {
-	return geojsonToPath(simplifyLayerData);
-}
-
-function saveToFile(content, type, extension) {
-	try {
-   		if(!!new Blob())
-   		{
-   			var gpx = exportToGPX();
-			var blob = new Blob([content], {type: type+";charset=utf-8"});
-			name = simplifyLayerName.replace(/\..*/, "");
-			saveAs(blob, name+'_'+simplifyNodes+'nodes.'+extension);
-   		}
-	} catch (e) {
-		alert('Please upload GPX/GeoJSON/KML file first, using Chrome or Firefox');
-		return false;
-	}
-	hideFormats();
-}
-
-function saveToFileGeoJSON() {
-	saveToFile(exportToGeoJSON(), "application/json", "json");
-}
-
-function saveToFileGPX() {
-	saveToFile(exportToGPX(), "text/plain", "gpx");
-}
-
-function saveToFilePath() {
-	saveToFile(exportToPath(), "text/plain", "txt");
-}
-
-function viewFile(content) {
-	try {
-   		if(!!new Blob())
-   		{
-			$('#export-content').val(content);
-			$('#export-format').show();
-   		}
-	} catch (e) {
-		alert('Please upload GPX/GeoJSON/KML file first, using Chrome or Firefox');
-		return false;
-	}
-	hideFormats();
-}
-
-function viewPath() {
-	viewFile(exportToPath());
-}
-
-function viewGPX() {
-	viewFile(exportToGPX());
-}
-
-function viewGeoJSON() {
-	viewFile(exportToGeoJSON());
 }
 
 
 controlLoader.loader.on('data:loaded', function (e) {
 	sourceLayer = e.layer;
 	map.fitBounds( sourceLayer.getBounds() );
-	simplifyLayerName = e.filename;
+	window.simplifyLayerName = e.filename;
 	updateGeoJSON(0);
-	filename$.html(simplifyLayerName);
+	filename$.html(window.simplifyLayerName);
 	$('.grumble, .grumble-text, .grumble-button').remove();
 	$(document).unbind('keyup.crumble');
 })
@@ -190,7 +100,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 			a.innerHTML = '<i class="fa fa-download"></i>';
 			L.DomEvent
 				.on(a, 'click', L.DomEvent.stop)
-				//.on(a, 'click', saveToFile);			
+				//.on(a, 'click', saveFile);			
 				.on(a, 'click', chooseDownloadFormat);			
 			return ctrl;
 		};
@@ -266,4 +176,7 @@ if(!helpCount || parseInt(helpCount) < 3 )
 }
 */
 });
+
+var f = new Format();
+f.loadAll();
 

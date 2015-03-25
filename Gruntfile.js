@@ -31,6 +31,7 @@ grunt.initConfig({
 				'dist/geojson-to-path.min.js': ['geojson-to-path/geojson-to-path.js'],
 				'dist/leaflet.filelayer.min.js': ['Leaflet.FileLayer/leaflet.filelayer.js'],
 				'dist/FileSaver.min.js': ['FileSaver.js/FileSaver.js'],
+				'dist/formats.min.js': ['formats.js', 'formats/geojson.js', 'formats/gpx.js', 'formats/path.js'],
 				'dist/main.min.js': ['main.js']
 			}
 		}
@@ -57,6 +58,7 @@ grunt.initConfig({
 				//'crumble/js/jquery.grumble.min.js',
 				//'crumble/js/jquery.crumble.min.js',				
 				'social.js',
+				'dist/formats.min.js'			
 				//'dist/main.min.js'			
 			],
 			dest: 'dist/app.min.js'
