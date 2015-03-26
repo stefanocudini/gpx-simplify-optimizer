@@ -1,4 +1,9 @@
-// Format Path
+/**
+ * Class PathFormat
+ *
+ * @require geojsonToPath method from https://github.com/Wilkins/geojson-to-path
+ * @inherit Format
+ */
 function PathFormat() {
 	this.param = {
 		'key': 'path',

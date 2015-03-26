@@ -1,4 +1,9 @@
-// Format GeoJSON
+/**
+ * Class GeoJSONFormat
+ *
+ * @require JSON native object (ok in modern browsers)
+ * @inherit Format
+ */
 function GeoJSONFormat() {
 	this.param = {
 		'key': 'geojson',

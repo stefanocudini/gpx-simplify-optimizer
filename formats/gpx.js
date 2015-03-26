@@ -1,4 +1,9 @@
-//Format GPX
+/**
+ * Class GPXFormat
+ *
+ * @require togpx method from https://github.com/tyrasd/togpx
+ * @inherit Format
+ */
 function GPXFormat() {
     this.param = {
 		'key': 'gpx',
