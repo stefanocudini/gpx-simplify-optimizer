@@ -9,10 +9,13 @@ function GPXFormat() {
         'key': 'gpx',
         'name': 'GPX',
         'extension': 'gpx',
-        'contenttype': 'text/xml'
+        'contenttype': 'application/gpx+xml'
     }
     this.exportData = function(data) {
         return togpx(data);
+    }
+    this.display = function(data) {
+        return prettyData.xml(data);
     }
 }
 GPXFormat.prototype = new Format();

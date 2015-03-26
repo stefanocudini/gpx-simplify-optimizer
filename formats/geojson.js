@@ -14,6 +14,9 @@ function GeoJSONFormat() {
     this.exportData = function(data) {
         return JSON.stringify(data);
     }
+    this.display = function(data) {
+        return prettyData.json(data);
+    }
 };
 GeoJSONFormat.prototype = new Format();
 

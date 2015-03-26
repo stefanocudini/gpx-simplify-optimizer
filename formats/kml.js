@@ -14,6 +14,9 @@ function KMLFormat() {
     this.exportData = function(data) {
         return tokml(data);
     }
+    this.display = function(data) {
+        return prettyData.xml(data);
+    }
 }
 KMLFormat.prototype = new Format();
 

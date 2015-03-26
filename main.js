@@ -38,6 +38,7 @@ var controlLoader = L.Control.fileLayerLoad({
 			return L.circle(latlng, 10, {style: style1});
 		}
 	}
+    
 }).addTo(map);
 
 function updateGeoJSON(tolerance) {
@@ -80,7 +81,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 (function() {
 	var control = new L.Control({position:'topleft'});
 	control.onAdd = function(map) {
-			var ctrl = L.DomUtil.create('div','leaflet-control-down leaflet-bar'),
+			var ctrl = L.DomUtil.create('div','leaflet-control-download leaflet-bar'),
 				a = L.DomUtil.create('a','', ctrl);
 			a.href = '#';
 			a.target = '_blank';
@@ -98,7 +99,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 (function() {
 	var control = new L.Control({position:'topleft'});
 	control.onAdd = function(map) {
-			var ctrl = L.DomUtil.create('div','leaflet-control-path leaflet-bar'),
+			var ctrl = L.DomUtil.create('div','leaflet-control-view leaflet-bar'),
 				a = L.DomUtil.create('a','', ctrl);
 			a.href = '#';
 			a.target = '_blank';
@@ -111,6 +112,31 @@ controlLoader.loader.on('data:loaded', function (e) {
 		};
 	return control;
 }()).addTo(map);
+
+//CONTROL ERASER
+(function() {
+	var control = new L.Control({position:'topleft'});
+	control.onAdd = function(map) {
+			var ctrl = L.DomUtil.create('div','leaflet-control-erase leaflet-bar'),
+				a = L.DomUtil.create('a','', ctrl);
+			a.href = '#';
+			a.target = '_blank';
+			a.title = "Clear the map";
+			a.innerHTML = '<i class="fa fa-eraser"></i>';
+			L.DomEvent
+				.on(a, 'click', L.DomEvent.stop)
+				.on(a, 'click', function(){
+                    // FIXME Doesn't work if 2 files are uploaded in a row.
+                    sourceLayer.eachLayer(function(layer)  {
+                        map.removeLayer(layer);
+                    });
+                    simplifyLayer.clearLayers();
+                });
+			return ctrl;
+		};
+	return control;
+}()).addTo(map);
+
 
 //CONTROL NODES
 (function() {
@@ -164,6 +190,7 @@ if(!helpCount || parseInt(helpCount) < 3 )
 */
 var f = new Format();
 f.loadAll(['GeoJSONFormat', 'GPXFormat', 'KMLFormat', 'PathFormat']);
+
 });
 
 

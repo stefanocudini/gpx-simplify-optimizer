@@ -33,8 +33,9 @@ h4 a:hover {
 	color: #4D5B69;
 }
 .leaflet-control-filelayer.leaflet-bar a:first-child,
-.leaflet-control-path.leaflet-bar a:first-child,
-.leaflet-control-down.leaflet-bar a:first-child {
+.leaflet-control-erase.leaflet-bar a:first-child,
+.leaflet-control-view.leaflet-bar a:first-child,
+.leaflet-control-download.leaflet-bar a:first-child {
 	background: #fff;
 	border-radius: 4px;
 	border-radius: 4px;

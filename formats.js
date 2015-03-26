@@ -140,6 +140,17 @@ Format.prototype = {
     },
 
     /**
+     * Display the data nicely
+     *
+     * @param string data the data to display
+     *
+     * @return the pretty data
+     */
+    display: function(data) {
+        return data;
+    },
+
+    /**
      * Save the data in the current format
      *
      * @param blob    data  the geojson data
@@ -189,6 +200,7 @@ Format.prototype = {
             if(!!new Blob())
             {
                 var content = this.exportData(data);
+                content = this.display(content);
                 $('#export-content').val(content);
                 $('#export-format h5').html('Simplified geometry in '+this.param.name+' format');
                 $('#export-format').show();
