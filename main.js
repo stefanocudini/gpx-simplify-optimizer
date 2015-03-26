@@ -175,7 +175,7 @@ if(!helpCount || parseInt(helpCount) < 3 )
 }
 */
 var f = new Format();
-f.loadAll(['GeoJSONFormat', 'GPXFormat', 'PathFormat']);
+f.loadAll(['GeoJSONFormat', 'GPXFormat', 'KMLFormat', 'PathFormat']);
 });
 
 

@@ -28,6 +28,7 @@ grunt.initConfig({
 				'dist/L.Control.Sidebar.min.js': ['leaflet-sidebar/src/L.Control.Sidebar.js'],
 				'dist/togeojson.min.js': ['togeojson/togeojson.js'],
 				'dist/togpx.min.js': ['togpx/togpx.js'],
+				'dist/tokml.min.js': ['tokml/tokml.js'],
 				'dist/geojson-to-path.min.js': ['geojson-to-path/geojson-to-path.js'],
 				'dist/leaflet.filelayer.min.js': ['Leaflet.FileLayer/leaflet.filelayer.js'],
 				'dist/FileSaver.min.js': ['FileSaver.js/FileSaver.js'],
@@ -50,6 +51,7 @@ grunt.initConfig({
 				'dist/L.Control.Sidebar.min.js',		
 				'dist/togeojson.min.js',
 				'dist/togpx.min.js',
+				'dist/tokml.min.js',
 				'dist/geojson-to-path.min.js',
 				'dist/leaflet.filelayer.min.js',
 				'dist/FileSaver.min.js',
@@ -58,7 +60,7 @@ grunt.initConfig({
 				//'crumble/js/jquery.grumble.min.js',
 				//'crumble/js/jquery.crumble.min.js',				
 				'social.js',
-				//'dist/formats.min.js'			
+				'dist/formats.min.js'			
 				//'dist/main.min.js'			
 			],
 			dest: 'dist/app.min.js'
