@@ -1,4 +1,31 @@
 /**
+ * Convert a byte number in human readable format
+ * 
+ * @param integer bytes   the number of bytes
+ * @param integer decimal the precision wanted
+ *
+ * @return the human readable size
+ */
+function filesizeHuman(bytes, decimal) {
+	if (bytes === 0) return bytes;		
+	decimal = decimal || 1;
+	var sizes = ['Bytes','KB','MB','GB','TB'],
+		i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+	return (bytes / Math.pow(1024, i)).toFixed(decimal) + ' ' + sizes[i];
+}
+
+/**
+ * Convert the number of nodes in a path in estimated export file size
+ *
+ * @param integer nodes the number of nodes
+ *
+ * @return the human readable file size
+ */
+function nodes2Bytes(nodes) {
+	return filesizeHuman(400 + (nodes * 56));
+}
+
+/**
  * Get the absolute position of the given element
  *
  * @param Node element the element for which we want the position
@@ -24,8 +51,8 @@ function getPosition(element) {
  * @return void
  */
 function hideFormats() {
-	$('#download-formats').hide();
-	$('#view-formats').hide();
+    $('#download-formats').hide();
+    $('#view-formats').hide();
 }
 
 /**
@@ -39,8 +66,8 @@ function chooseDownloadFormat(e) {
     var position = getPosition(e.currentTarget);
     $('#download-formats').css('top', position.y-4);
 
-	$('#download-formats').show();
-	$('#view-formats').hide();
+    $('#download-formats').show();
+    $('#view-formats').hide();
 }
 
 /**
@@ -53,11 +80,11 @@ function chooseDownloadFormat(e) {
 function chooseViewFormat(e) {
     var position = getPosition(e.currentTarget);
     $('#view-formats').css('top', position.y-4);
-	$('#view-formats').show();
-	$('#download-formats').hide();
+    $('#view-formats').show();
+    $('#download-formats').hide();
 }
 $('#export-close').on('click', function () {
-	$('#export-format').hide();
+    $('#export-format').hide();
 });
 
 

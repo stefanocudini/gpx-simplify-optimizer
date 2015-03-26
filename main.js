@@ -40,18 +40,6 @@ var controlLoader = L.Control.fileLayerLoad({
 	}
 }).addTo(map);
 
-function filesizeHuman(bytes, decimal) {
-	if (bytes === 0) return bytes;		
-	decimal = decimal || 1;
-	var sizes = ['Bytes','KB','MB','GB','TB'],
-		i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-	return Math.round(bytes / Math.pow(1024, i), decimal) + ' ' + sizes[i];
-}
-
-function nodes2Bytes(nodes) {
-	return filesizeHuman(400 + (nodes * 56));
-}
-
 function updateGeoJSON(tolerance) {
 	//console.log('updateGeoJSON', tolerance);
 	if(sourceLayer)
@@ -145,7 +133,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 
 L.control.attribution({
 	position: 'topright',
-	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank">OpenStreetMap contributors</a>',
+	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank">OpenStreetMap contributors</a>'
 }).addTo(map);
 
 $('#slider').slider({

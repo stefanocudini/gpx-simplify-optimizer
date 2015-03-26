@@ -5,12 +5,12 @@
  * @inherit Format
  */
 function PathFormat() {
-	this.param = {
-		'key': 'path',
-		'name': 'Path',
-		'extension': 'txt',
-		'contenttype': 'text/plain'
-	}
+    this.param = {
+        'key': 'path',
+        'name': 'Path',
+        'extension': 'txt',
+        'contenttype': 'text/plain'
+    }
     this.exportData = function(data) {
         return geojsonToPath(data);
     };
