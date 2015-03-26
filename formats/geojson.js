@@ -8,7 +8,7 @@ function GeoJSONFormat() {
     this.param = {
         'key': 'geojson',
         'name': 'GeoJSON',
-        'extension': 'json',
+        'extension': 'geojson',
         'contenttype': 'appplication/json'
     }
     this.exportData = function(data) {
