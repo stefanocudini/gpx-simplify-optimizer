@@ -25,3 +25,6 @@
 [submodule "geojson-to-path"]
 	path = geojson-to-path
 	url = https://github.com/Wilkins/geojson-to-path.git
+[submodule "tokml"]
+	path = tokml
+	url = https://github.com/mapbox/tokml.git
