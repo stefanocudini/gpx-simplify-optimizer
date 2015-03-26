@@ -28,3 +28,6 @@
 [submodule "tokml"]
 	path = tokml
 	url = https://github.com/mapbox/tokml.git
+[submodule "pretty-data"]
+	path = pretty-data
+	url = https://github.com/Wilkins/pretty-data.git
