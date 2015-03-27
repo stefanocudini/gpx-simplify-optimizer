@@ -7,6 +7,7 @@
 function GPXFormat() {
     this.param = {
         'key': 'gpx',
+        'syntax': 'xml',
         'name': 'GPX',
         'extension': 'gpx',
         'contenttype': 'application/gpx+xml'

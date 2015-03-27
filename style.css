@@ -182,31 +182,38 @@ h4 a:hover {
 }
 #export-format {
 	background-color: rgb(77,91,105);
-	height: 400px;
+	height: 500px;
 	margin: auto;
 	overflow: hidden;
 	padding: 5px;
 	position: absolute;
-	width: 720px;
+	width: 750px;
+	border-radius: 2px;
 }
 #export-format .actions {
 	padding: 10px;
 	text-align: center;
 }
-#export-format input {
-	color: rgb(77,91,105);
-	border: 1px solid white;
-	background-color: white;
-	font-weight: bold;
+#export-format pre {
+	padding: 0;
+	margin: auto;
 }
-#export-format textarea {
-	color: #333333;
+#export-format code {
+	overflow: auto;
 	display: block;
-	height: 300px;
-	width: 700px;
+	height: 400px;
+	width: 730px;
+	margin: 2px;
 }
 #export-format h5 {
 	color: white;
 	font-size: 20px;
 	text-align: center;
+}
+#export-format a {
+	color: rgb(77,91,105);
+	border: 1px solid white;
+	background-color: white;
+	font-weight: bold;
+	padding: 2px 4px;
 }

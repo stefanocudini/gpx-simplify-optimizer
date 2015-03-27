@@ -7,6 +7,7 @@
 function KMLFormat() {
     this.param = {
         'key': 'kml',
+        'syntax': 'xml',
         'name': 'KML',
         'extension': 'kml',
         'contenttype': 'application/vnd.google-earth.kml+xml'

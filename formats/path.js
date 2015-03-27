@@ -7,6 +7,7 @@
 function PathFormat() {
     this.param = {
         'key': 'path',
+        'syntax': 'nohighlight',
         'name': 'Path',
         'extension': 'txt',
         'contenttype': 'text/plain'

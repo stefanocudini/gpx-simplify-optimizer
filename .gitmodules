@@ -31,3 +31,6 @@
 [submodule "pretty-data"]
 	path = pretty-data
 	url = https://github.com/Wilkins/pretty-data.git
+[submodule "highlight.js"]
+	path = highlight.js
+	url = https://github.com/isagalaev/highlight.js

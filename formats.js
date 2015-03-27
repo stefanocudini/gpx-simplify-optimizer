@@ -1,4 +1,28 @@
 /**
+ * Allow to select all text from the element
+ * 
+ * @see http://stackoverflow.com/questions/12243898/how-to-select-all-text-in-contenteditable-div
+ */
+/*
+Replaced with contenteditable="true" for now
+jQuery.fn.selectText = function(){
+   var doc = document;
+   var element = this[0];
+   console.log(this, element);
+   if (doc.body.createTextRange) {
+       var range = document.body.createTextRange();
+       range.moveToElementText(element);
+       range.select();
+   } else if (window.getSelection) {
+       var selection = window.getSelection();        
+       var range = document.createRange();
+       range.selectNodeContents(element);
+       selection.removeAllRanges();
+       selection.addRange(range);
+   }
+};
+*/
+/**
  * Convert a byte number in human readable format
  * 
  * @param integer bytes   the number of bytes
@@ -83,11 +107,18 @@ function chooseViewFormat(e) {
     $('#view-formats').show();
     $('#download-formats').hide();
 }
+
+// Closing button
 $('#export-close').on('click', function () {
     $('#export-format').hide();
 });
 
-
+/*
+// When clicking the view div, select all text to be able to copy it
+$("#export-content").click(function() {
+//    $("#export-content").selectText();
+});
+*/
 
 /**
  * Class Format
@@ -201,7 +232,12 @@ Format.prototype = {
             {
                 var content = this.exportData(data);
                 content = this.display(content);
-                $('#export-content').val(content);
+
+                $('code').attr('class', this.param.syntax);
+                $('#export-content').text(content);
+                $('code').each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
                 $('#export-format h5').html('Simplified geometry in '+this.param.name+' format');
                 $('#export-format').show();
             }
