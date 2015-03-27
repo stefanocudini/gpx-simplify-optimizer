@@ -64,6 +64,7 @@ function updateGeoJSON(tolerance) {
 }
 
 
+// UPLOAD ACTION
 controlLoader.loader.on('data:loaded', function (e) {
 	sourceLayer = e.layer;
 	map.fitBounds( sourceLayer.getBounds() );
@@ -95,7 +96,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 	return control;
 }()).addTo(map);
 
-//CONTROL PATH
+//CONTROL VIEW
 (function() {
 	var control = new L.Control({position:'topleft'});
 	control.onAdd = function(map) {
@@ -155,13 +156,14 @@ controlLoader.loader.on('data:loaded', function (e) {
 }()).addTo(map);
 
 //CONTROL SIDEBAR
-//L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
+L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
 
 L.control.attribution({
 	position: 'topright',
 	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank">OpenStreetMap contributors</a>'
 }).addTo(map);
 
+// PRECISION SLIDER
 $('#slider').slider({
 	value: 0,
 	min: 0,
@@ -179,7 +181,6 @@ $('#helpbtn').on('click',function(e) {
 });
 
 //HELP POPUP
-/*
 var helpCount = $.cookie('tour');
 if(!helpCount || parseInt(helpCount) < 3 )
 {
@@ -187,11 +188,14 @@ if(!helpCount || parseInt(helpCount) < 3 )
 	helpCount = (parseInt(helpCount) || 0)+1;
 	$.cookie('tour', helpCount, { expires: 120 });
 }
-*/
+
+// LOADING FORMATS
 var f = new Format();
 f.loadAll(['GeoJSONFormat', 'GPXFormat', 'KMLFormat', 'PathFormat']);
 
+// LOADING SYNTAX HIGHLIGHTING
 hljs.initHighlightingOnLoad();
+
 });
 
 

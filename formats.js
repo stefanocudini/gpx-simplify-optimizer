@@ -140,7 +140,7 @@ Format.prototype = {
      */
     loadAll: function(formats) {
         formats.forEach(function(formatName) {
-            eval("f = new "+formatName+"();");
+            f = new window[formatName]();
             f.load();
         });
     },
@@ -161,8 +161,8 @@ Format.prototype = {
         $('#view-formats').append(a);
 
         // Download links
-        var a = document.createElement('a');
-        var linkText = document.createTextNode("Download in "+this.param.name);
+        a = document.createElement('a');
+        linkText = document.createTextNode("Download in "+this.param.name);
         a.appendChild(linkText);
         a.title = "Download the simplified data in "+this.param.name;
         a.className = "download";
@@ -235,9 +235,13 @@ Format.prototype = {
 
                 $('code').attr('class', this.param.syntax);
                 $('#export-content').text(content);
-                $('code').each(function(i, block) {
-                    hljs.highlightBlock(block);
-                });
+                // Fixing an arbitrary limit
+                // If there is too many points, do not highlight, it's too heavy for the browser.
+                if (window.simplifyNodes < 1000) {
+                    $('code').each(function(i, block) {
+                        hljs.highlightBlock(block);
+                    });
+                }
                 $('#export-format h5').html('Simplified geometry in '+this.param.name+' format');
                 $('#export-format').show();
             }

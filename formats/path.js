@@ -14,8 +14,8 @@ function PathFormat() {
     }
     this.exportData = function(data) {
         return geojsonToPath(data);
-    };
-};
+    }
+}
 PathFormat.prototype = new Format();
 
 
