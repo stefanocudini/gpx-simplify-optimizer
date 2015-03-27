@@ -37,7 +37,7 @@ grunt.initConfig({
 				'dist/main.min.js': ['main.js']
 			}
 		}
-	},	
+	},
 	concat: {
 		//TODO cut out SearchMarker
 		options: {
@@ -49,7 +49,7 @@ grunt.initConfig({
 		dist: {
 			src: [
 				'dist/jquery.cookie.min.js',
-				'dist/L.Control.Sidebar.min.js',		
+				'dist/L.Control.Sidebar.min.js',
 				'dist/togeojson.min.js',
 				'dist/togpx.min.js',
 				'dist/pretty-data.min.js',
@@ -60,10 +60,10 @@ grunt.initConfig({
 				'vendor/simplify-geometry/simplifygeometry-0.0.1.min.js',
 				'vendor/bootstrap-slider/dist/bootstrap-slider.min.js',
 				//'crumble/js/jquery.grumble.min.js',
-				//'crumble/js/jquery.crumble.min.js',				
+				//'crumble/js/jquery.crumble.min.js',
 				'social.js',
-				'dist/formats.min.js'			
-				//'dist/main.min.js'			
+				'dist/formats.min.js',
+				'dist/main.min.js'
 			],
 			dest: 'dist/app.min.js'
 		}
@@ -74,7 +74,7 @@ grunt.initConfig({
 				'vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css',
 				'vendor/leaflet-sidebar/src/L.Control.Sidebar.css',
 				//'crumble/css/grumble.min.css',
-				//'crumble/css/crumble.css',				
+				//'crumble/css/crumble.css',
 				'style.css'
 			],
 			dest: 'dist/style.min.css'
@@ -93,8 +93,8 @@ grunt.initConfig({
 	// 		flatten: true,
 	// 		src: 'crumble/images/*',
 	// 		dest: 'images/'
-	// 	}		
-	// },	
+	// 	}
+	// },
 	watch: {
 		dist: {
 			options: { livereload: true },
@@ -106,10 +106,10 @@ grunt.initConfig({
 
 grunt.registerTask('default', [
 	'clean',
-	'jshint',	
-	'uglify',	
+	'jshint',
+	'uglify',
 	'concat',
-	'cssmin',	
+	'cssmin',
 	//'copy'
 ]);
 
