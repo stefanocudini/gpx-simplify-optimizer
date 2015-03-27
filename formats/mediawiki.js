@@ -1,14 +1,15 @@
 /**
- * Class PathFormat
+ * Class MediawikiFormat
  *
+ * @see http://www.mediawiki.org/wiki/Extension:Maps
  * @require geojsonToPath method from https://github.com/Wilkins/geojson-to-path
  * @inherit Format
  */
-function PathFormat() {
+function MediawikiFormat() {
     this.param = {
-        'key': 'path',
+        'key': 'mediawiki',
         'syntax': 'nohighlight',
-        'name': 'Path',
+        'name': 'Mediawiki',
         'extension': 'txt',
         'contenttype': 'text/plain'
     }
@@ -16,6 +17,6 @@ function PathFormat() {
         return geojsonToPath(data);
     }
 }
-PathFormat.prototype = new Format();
+MediawikiFormat.prototype = new Format();
 
 

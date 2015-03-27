@@ -191,7 +191,7 @@ if(!helpCount || parseInt(helpCount) < 3 )
 
 // LOADING FORMATS
 var f = new Format();
-f.loadAll(['GeoJSONFormat', 'GPXFormat', 'KMLFormat', 'PathFormat']);
+f.loadAll(['GeoJSONFormat', 'GPXFormat', 'KMLFormat', 'MediawikiFormat']);
 
 // LOADING SYNTAX HIGHLIGHTING
 hljs.initHighlightingOnLoad();
