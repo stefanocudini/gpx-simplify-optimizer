@@ -59,9 +59,11 @@ grunt.initConfig({
 				'dist/FileSaver.min.js',
 				'vendor/simplify-geometry/simplifygeometry-0.0.1.min.js',
 				'vendor/bootstrap-slider/dist/bootstrap-slider.min.js',
+                'vendor/jquery-autocomplete/dist/jquery.autocomplete.min.js',
 				//'crumble/js/jquery.grumble.min.js',
 				//'crumble/js/jquery.crumble.min.js',
 				'social.js',
+				'planes.js',
 				'dist/formats.min.js',
 				'dist/main.min.js'
 			],
@@ -98,8 +100,8 @@ grunt.initConfig({
 	watch: {
 		dist: {
 			options: { livereload: true },
-			files: ['main.js','index.html','style.css'],
-			tasks: ['clean','jshint','uglify','concat','cssmin']
+			files: ['main.js', 'formats.js', 'formats/*.js', 'planes.js', 'index.html', 'style.css'],
+			tasks: ['clean', 'jshint', 'uglify', 'concat', 'cssmin']
 		}
 	}
 });

@@ -32,10 +32,15 @@ h4 a:hover {
 .leaflet-control-zoom.leaflet-bar a {
 	color: #4D5B69;
 }
+.leaflet-bar a:first-child
+/*
+,
 .leaflet-control-filelayer.leaflet-bar a:first-child,
 .leaflet-control-erase.leaflet-bar a:first-child,
 .leaflet-control-view.leaflet-bar a:first-child,
-.leaflet-control-download.leaflet-bar a:first-child {
+.leaflet-control-download.leaflet-bar a:first-child 
+*/
+    {
 	background: #fff;
 	border-radius: 4px;
 	border-radius: 4px;
@@ -216,4 +221,20 @@ h4 a:hover {
 	background-color: white;
 	font-weight: bold;
 	padding: 2px 4px;
+}
+
+.planes {
+	background-color: rgb(77,91,105);
+    color: white;
+    font-weight: bold;
+    display: block;
+    position: absolute;
+    margin-left: 50px;
+    
+}
+.planes label {
+    width: 50px;
+}
+.planes input {
+    color: #333333;
 }

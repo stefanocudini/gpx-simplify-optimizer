@@ -15,7 +15,8 @@ var map = new L.Map('map',{attributionControl: false}).setView(L.latLng(36,-30),
 		weight: 2,
 		clickable: false
 	};
-
+window.map = map;
+window.style2 = style2;
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 var filename$,
@@ -63,6 +64,23 @@ function updateGeoJSON(tolerance) {
 	}
 }
 
+// Airport From
+(function() {
+	var control = new L.Control({position:'topleft'});
+	control.onAdd = function(map) {
+			var ctrl = L.DomUtil.create('div','leaflet-control-planes leaflet-bar'),
+				a = L.DomUtil.create('a','', ctrl);
+			a.href = '#';
+			a.target = '_blank';
+			a.title = "Download simplified file";
+			a.innerHTML = '<i class="fa icon-plane"></i>';
+			L.DomEvent
+				.on(a, 'click', L.DomEvent.stop)
+				.on(a, 'click', chooseAirports);			
+			return ctrl;
+		};
+	return control;
+}()).addTo(map);
 
 // UPLOAD ACTION
 controlLoader.loader.on('data:loaded', function (e) {
@@ -156,7 +174,7 @@ controlLoader.loader.on('data:loaded', function (e) {
 }()).addTo(map);
 
 //CONTROL SIDEBAR
-L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
+//L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
 
 L.control.attribution({
 	position: 'topright',
@@ -181,6 +199,7 @@ $('#helpbtn').on('click',function(e) {
 });
 
 //HELP POPUP
+/*
 var helpCount = $.cookie('tour');
 if(!helpCount || parseInt(helpCount) < 3 )
 {
@@ -188,7 +207,7 @@ if(!helpCount || parseInt(helpCount) < 3 )
 	helpCount = (parseInt(helpCount) || 0)+1;
 	$.cookie('tour', helpCount, { expires: 120 });
 }
-
+*/
 // LOADING FORMATS
 var f = new Format();
 f.loadAll(['GeoJSONFormat', 'GPXFormat', 'KMLFormat', 'MediawikiFormat']);
