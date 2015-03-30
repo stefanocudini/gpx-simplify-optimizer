@@ -22,7 +22,7 @@ grunt.initConfig({
 			"-W033": true,
 			"-W044": true	//ignore regexp
 		},
-		files: ['main.js', 'formats.js', 'formats/*.js', 'optimizer.js',]
+		files: ['js/main.js', 'js/formats.js', 'js/formats/*.js', 'js/optimizer.js',]
 	},
 	uglify: {
 		dist: {
@@ -36,9 +36,10 @@ grunt.initConfig({
 				'dist/geojson-to-path.min.js': ['vendor/geojson-to-path/geojson-to-path.js'],
 				'dist/leaflet.filelayer.min.js': ['vendor/Leaflet.FileLayer/leaflet.filelayer.js'],
 				'dist/FileSaver.min.js': ['vendor/FileSaver.js/FileSaver.js'],
-				'dist/formats.min.js': ['formats.js', 'formats/*'],
-				'dist/planes.min.js': ['planes.js'],
-				'dist/main.min.js': ['main.js']
+				'dist/formats.min.js': ['js/formats.js', 'js/formats/*'],
+				'dist/optimizer.min.js': ['js/optimizer.js'],
+				'dist/planes.min.js': ['js/planes.js'],
+				'dist/main.min.js': ['js/main.js']
 			}
 		}
 	},
@@ -69,7 +70,7 @@ grunt.initConfig({
 				'social.js',
 				'dist/formats.min.js',
 				//'dist/planes.min.js',
-				'optimizer.js',
+				'dist/optimizer.min.js',
 				'dist/main.min.js'
 			],
 			dest: 'dist/app.min.js'
@@ -123,7 +124,7 @@ grunt.initConfig({
 		},
 		js: {
 			options: { livereload: true },
-			files: ['main.js', 'formats.js', 'formats/*.js', 'planes.js', 'optimizer.js', 'index.html'],
+			files: ['js/*'],
 			tasks: ['clean:js', 'jshint', 'uglify', 'concat']
 		}
 	}
