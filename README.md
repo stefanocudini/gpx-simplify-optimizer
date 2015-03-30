@@ -1,25 +1,35 @@
-GPX Simplifier / Optimizer online
+Track Simplifier / Optimizer online
 ============
 
-Online Simplifier and Optimizer for GPX tracks.
+Online Simplifier and Optimizer for GPX / GeoJSON / KML tracks.
 
 Copyright 2014 [Stefano Cudini](http://labs.easyblog.it/stefano-cudini/)
 
-**Demo:**  
+Demo
+----
 [labs.easyblog.it/maps/gpx-simplify-optimizer](http://labs.easyblog.it/maps/gpx-simplify-optimizer/)
 
 ![Image](https://raw.githubusercontent.com/stefanocudini/gpx-simplify-optimizer/master/images/gpx-optimizer.png)
 
+Usage
+-----
+1. Upload GPX / KML / GeoJSON file
+2. Simplify the track on the map by reducing the number of nodes
+3. Save or view the simplified track in different formats : GPX / KML / GeoJSON / Mediawiki Maps
+
+Install 
+-------
+```bash
+git clone https://github.com/stefanocudini/gpx-simplify-optimizer.git
+cd gpx-simplify-optimizer
+git submodule init
+git submodule update
+```
 
 Build
-
-**compress files:**
-```
+-----
+```bash
 npm install
 grunt
 ```
 
-**update libs:**
-```
-git submodule foreach git pull
-```
