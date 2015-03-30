@@ -5,8 +5,11 @@ module.exports = function(grunt) {
 grunt.initConfig({
 	pkg: grunt.file.readJSON('package.json'),
 	clean: {
-		dist: {
-			src: ['dist/*']
+		css: {
+			src: ['dist/*.css']
+		},
+		js: {
+			src: ['dist/*.js']
 		}
 	},
 	jshint: {
@@ -70,6 +73,19 @@ grunt.initConfig({
 			dest: 'dist/app.min.js'
 		}
 	},
+    sass: {
+        dist: {
+            options: {
+                style: 'nested',
+                sourcemap: 'none',
+                cacheLocation: 'css/.sass-cache'
+            },
+            files: {
+                'dist/style.css': 'css/style.scss'
+            }
+        }
+    },
+
 	cssmin: {
 		combine: {
 			src: [
@@ -77,7 +93,7 @@ grunt.initConfig({
 				'vendor/leaflet-sidebar/src/L.Control.Sidebar.css',
 				//'crumble/css/grumble.min.css',
 				//'crumble/css/crumble.css',
-				'style.css'
+				'dist/style.css'
 			],
 			dest: 'dist/style.min.css'
 		},
@@ -98,10 +114,15 @@ grunt.initConfig({
 	// 	}
 	// },
 	watch: {
-		dist: {
+		css: {
 			options: { livereload: true },
-			files: ['main.js', 'formats.js', 'formats/*.js', 'planes.js', 'index.html', 'style.css'],
-			tasks: ['clean', 'jshint', 'uglify', 'concat', 'cssmin']
+			files: ['css/style.scss'],
+			tasks: ['clean:css', 'sass', 'cssmin']
+		},
+		js: {
+			options: { livereload: true },
+			files: ['main.js', 'formats.js', 'formats/*.js', 'planes.js', 'index.html'],
+			tasks: ['clean:js', 'jshint', 'uglify', 'concat']
 		}
 	}
 });
@@ -111,6 +132,7 @@ grunt.registerTask('default', [
 	'jshint',
 	'uglify',
 	'concat',
+    'sass',
 	'cssmin',
 	//'copy'
 ]);
@@ -119,6 +141,7 @@ grunt.registerTask('default', [
 grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-concat');
 grunt.loadNpmTasks('grunt-contrib-clean');
+grunt.loadNpmTasks('grunt-contrib-sass');
 grunt.loadNpmTasks('grunt-contrib-cssmin');
 grunt.loadNpmTasks('grunt-contrib-jshint');
 grunt.loadNpmTasks('grunt-contrib-watch');

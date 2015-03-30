@@ -17,6 +17,7 @@ var map = new L.Map('map',{attributionControl: false}).setView(L.latLng(36,-30),
 	};
 window.map = map;
 window.style2 = style2;
+
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
 var filename$,
@@ -26,6 +27,7 @@ var filename$,
 	window.simplifyLayerName = 'simplified.gpx';
 	window.simplifyLayerData = null;
 	window.simplifyLayer = L.geoJson(window.simplifyLayerData, { style: style2 }).addTo(map);
+    window.layers = {};
 
 //CONTROL UPLOAD
 L.Control.FileLayerLoad.LABEL = '<i class="fa fa-folder-open"></i>';
@@ -46,6 +48,7 @@ function updateGeoJSON(tolerance) {
 	//console.log('updateGeoJSON', tolerance);
 	if(sourceLayer)
 	{
+        window.layers['Source layer'] = sourceLayer;
 		window.simplifyLayer.clearLayers();
 		window.simplifyNodes = 0;
 		//sourceLayer.eachLayer(function(layer)  {
@@ -59,28 +62,13 @@ function updateGeoJSON(tolerance) {
 			window.simplifyLayer.addData(modified);
 			window.simplifyLayerData = modified;
 			window.simplifyNodes += modified.geometry.coordinates.length; 
+            window.layers.simplified = window.simplifyLayer;
+            L.control.layers(null, window.layers).addTo(map);
 		//});
 		nodes$.text(window.simplifyNodes+' nodes ~'+nodes2Bytes(window.simplifyNodes));
 	}
 }
 
-// Airport From
-(function() {
-	var control = new L.Control({position:'topleft'});
-	control.onAdd = function(map) {
-			var ctrl = L.DomUtil.create('div','leaflet-control-planes leaflet-bar'),
-				a = L.DomUtil.create('a','', ctrl);
-			a.href = '#';
-			a.target = '_blank';
-			a.title = "Download simplified file";
-			a.innerHTML = '<i class="fa icon-plane"></i>';
-			L.DomEvent
-				.on(a, 'click', L.DomEvent.stop)
-				.on(a, 'click', chooseAirports);			
-			return ctrl;
-		};
-	return control;
-}()).addTo(map);
 
 // UPLOAD ACTION
 controlLoader.loader.on('data:loaded', function (e) {
@@ -96,6 +84,23 @@ controlLoader.loader.on('data:loaded', function (e) {
 	console.log('ERROR',e);
 });
 
+// Airport From
+(function() {
+    var control = new L.Control({position:'topleft'});
+    control.onAdd = function(map) {
+            var ctrl = L.DomUtil.create('div','leaflet-control-planes leaflet-bar'),
+                a = L.DomUtil.create('a','', ctrl);
+            a.href = '#';
+            a.target = '_blank';
+            a.title = "Trace plane track";
+            a.innerHTML = '<i class="fa icon-plane"></i>';
+            L.DomEvent
+                .on(a, 'click', L.DomEvent.stop)
+                .on(a, 'click', chooseAirports);			
+            return ctrl;
+        };
+    return control;
+}()).addTo(window.map);
 //CONTROL DOWNLOAD
 (function() {
 	var control = new L.Control({position:'topleft'});

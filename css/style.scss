@@ -1,0 +1,274 @@
+
+$main-color : rgb(77,91,105);
+$text-color: #eee;
+$side-color: rgba(220,230,240,1);
+$map-margin: 40px;
+
+body {
+	color: $text-color;
+	background: $main-color;
+}
+
+h4 {
+	float: left;
+	padding: 5px;
+	margin: 5px 20px 5px 10px;
+	text-shadow: 1px 1px 3px #333;
+	letter-spacing: 0.065em;
+
+    a {
+        color: $text-color;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+}
+
+#map {
+	position: absolute;
+	top: $map-margin;
+	bottom: $map-margin;
+	left: 0;
+	right: 0;
+	background: $side-color;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.leaflet-bar {
+    a {
+        color: $main-color;
+
+        &:first-child {
+            background: #fff;
+            font-size: 18px;
+        }
+
+        &:last-of-type {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+    }
+}
+
+.leaflet-control-stats {
+	color: $main-color;
+	font-size: 20px;
+	text-shadow: 1px 1px 2px #fff;
+}
+/*
+*/
+.leaflet-sidebar a.close {
+	opacity: 1;
+	top: 1px;
+	right: auto;
+	left: -10px;
+	font-size: 20pt;
+	height: 23px;
+	width: 23px;
+	/*border: 1px solid #ccc;*/
+	background: $side-color;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.65);
+	color: $main-color;
+}
+#sidebar {
+	padding: 8px;
+	overflow-y: auto;
+	background: $side-color;
+	color: $main-color;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+
+#slider_wrap {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: $map-margin;
+	padding: 10px 20px;
+
+    #slider {
+        visibility: hidden;
+
+    }
+    .slider-handle {
+        opacity: 1;
+        background: #7D8B99;
+    }
+}
+
+#modal {
+	z-index: 2000;
+
+    .modal-content {
+        border: 2px solid $text-color;
+        border-radius: 0;
+    }
+    .modal-header {
+        background: $main-color;
+        color: #fff;
+        font-weight: bold;
+
+        .close {
+            font-size: 2.5em;
+            line-height: 1.2em;
+            text-shadow: none;
+            color: #fff;
+            opacity: 1;
+        }
+    }
+    .modal-body {
+        padding: 12px;
+        text-align: center;
+    }
+}
+
+#credits .list-group-item.active {
+	color: #fff;
+	background: $main-color;
+}
+
+#social {
+	position: fixed;
+	z-index: 800;
+	right: 220px;
+	top: 0;
+	padding: 8px;
+
+    .fb-like {
+        line-height: 12px;
+    }
+}
+#copy {
+	position: fixed;
+	z-index: 1000;
+	right: 30px;
+	top: -8px;
+	padding: 8px 8px 2px 8px;
+	background: #424b54;
+	border-radius: .7em;
+	opacity: 0.8;
+	box-shadow: 0 0 8px $text-color;
+	color: $text-color;
+
+    a {
+        color: #ccc;
+        text-decoration: none;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+}
+/*
+#ribbon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 0;
+	opacity: .8;
+}
+*/
+
+@mixin popup {
+	background-color: $text-color;
+	border: 2px solid transparentize($main-color, 0.5);
+	border-radius: 4px;
+	display: none;
+	position: absolute;
+	margin-left: 45px;
+}
+
+.formats {
+    @include popup;
+	width: 200px;
+
+    a {
+        color: $main-color;
+        cursor: pointer;
+        display: block;
+        font-weight: bold;
+        height: 30px;
+        padding: 3px;
+
+        &:hover {
+            background-color: $main-color;
+            color: $text-color;
+            text-decoration: none;
+        }
+    }
+}
+
+#export-format {
+	background-color: $main-color;
+	height: 500px;
+	margin: auto;
+	overflow: hidden;
+	padding: 5px;
+	position: absolute;
+	width: 750px;
+	border-radius: 2px;
+
+    .actions {
+        padding: 10px;
+        text-align: center;
+    }
+    pre {
+        padding: 0;
+        margin: auto;
+    }
+    code {
+        overflow: auto;
+        display: block;
+        height: 400px;
+        width: 730px;
+        margin: 2px;
+    }
+    h5 {
+        color: $text-color;
+        font-size: 20px;
+        text-align: center;
+    }
+    a {
+        color: $main-color;
+        border: 1px solid $text-color;
+        background-color: $text-color;
+        font-weight: bold;
+        padding: 2px 4px;
+    }
+
+}
+
+.planes {
+    @include popup;
+    font-weight: bold;
+	width: 320px;
+	padding: 5px;
+    color: $main-color;
+
+    
+    label {
+        width: 50px;
+        float: left;
+        clear: both;
+    }
+    input {
+        padding: 2px;
+        border: 1px solid $main-color;
+        width: 240px;
+    }
+}
+.autocomplete-suggestion {
+	background-color: $text-color;
+	color: $main-color;
+	border-bottom: 1px solid $main-color;
+	cursor: pointer;
+}
+
+
+

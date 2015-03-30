@@ -10,37 +10,19 @@ Math.degrees = function(radians) {
   return radians * 180 / Math.PI;
 };
 
-function chooseAirports() {
+function chooseAirports(e) {
 
+    hideAll();
+    var position = getPosition(e.currentTarget);
+    $('.planes').css('top', position.y-4);
     $('.planes').show();
 
 
 }
 
 
-/*
-    f=0.5 // mi-chemin
-    A=sin((1-f)*d)/sin(d)
-    B=sin(f*d)/sin(d)
-    x = A*cos(lat1)*cos(lon1) +  B*cos(lat2)*cos(lon2)
-    y = A*cos(lat1)*sin(lon1) +  B*cos(lat2)*sin(lon2)
-    z = A*sin(lat1)           +  B*sin(lat2)
-    lat=atan2(z,sqrt(x^2+y^2))
-    lon=atan2(y,x)
-*/
-
-/*
- d=2*asin(sqrt((sin((lat1-lat2)/2))^2 +  cos(lat1)*cos(lat2)*(sin((lon1-lon2)/2))^2))
- */
 function distance(lat1, lon1, lat2, lon2) {
-    /*
-    lat1 = Math.radians(lat1);
-    lon1 = Math.radians(lon1);
-    lat2 = Math.radians(lat2);
-    lon2 = Math.radians(lon2);
-    */
     return 2*Math.asin(Math.sqrt(Math.pow(Math.sin((lat1-lat2)/2), 2) + Math.cos(lat1)*Math.cos(lat2)*Math.pow(Math.sin((lon1-lon2)/2),2)));
-    //return Math.acos(Math.sin(lat1)*Math.sin(lat2)+Math.cos(lat1)*Math.cos(lat2)*Math.cos(lon1-lon2))
 
 }
 
@@ -82,6 +64,7 @@ function traceFlight() {
 
         window.simplifyLayerData = traceFlightPrecision($('#fromval').val(), $('#toval').val(), 100);
     	window.simplifyLayer = L.geoJson(window.simplifyLayerData, { style : window.style2 }).addTo(window.map);
+        window.layers[$('#from').val()+' -> '+$('#to').val()] = window.simplifyLayerData;
 
     }
 

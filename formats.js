@@ -74,10 +74,14 @@ function getPosition(element) {
  *
  * @return void
  */
-function hideFormats() {
-    $('#download-formats').hide();
-    $('#view-formats').hide();
+function hideAll() {
+    $('.popup').each(function() {
+        $(this).hide();
+    });
+    //$('#download-formats').hide();
+    //$('#view-formats').hide();
 }
+
 
 /**
  * Show popup for choosing download format
@@ -87,11 +91,12 @@ function hideFormats() {
  * @return void
  */
 function chooseDownloadFormat(e) {
+    hideAll();
     var position = getPosition(e.currentTarget);
     $('#download-formats').css('top', position.y-4);
 
     $('#download-formats').show();
-    $('#view-formats').hide();
+//    $('#view-formats').hide();
 }
 
 /**
@@ -102,6 +107,7 @@ function chooseDownloadFormat(e) {
  * @return void
  */
 function chooseViewFormat(e) {
+    hideAll();
     var position = getPosition(e.currentTarget);
     $('#view-formats').css('top', position.y-4);
     $('#view-formats').show();
@@ -112,6 +118,7 @@ function chooseViewFormat(e) {
 $('#export-close').on('click', function () {
     $('#export-format').hide();
 });
+
 
 /*
 // When clicking the view div, select all text to be able to copy it
@@ -203,9 +210,9 @@ Format.prototype = {
         } catch (e) {
             alert('Please upload GPX/GeoJSON/KML file first, using Chrome or Firefox: ' + e.message);
             console.log(e.message);
-            return false;
+            //return false;
         }
-        hideFormats();
+        hideAll();
     },
 
     /**
@@ -248,9 +255,9 @@ Format.prototype = {
         } catch (e) {
             alert('Please upload GPX/GeoJSON/KML file first, using Chrome or Firefox: ' + e.message);
             console.log(e.message);
-            return false;
+            //return false;
         }
-        hideFormats();
+        hideAll();
     },
 
     /**

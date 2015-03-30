@@ -14,3 +14,4 @@ vendor/tokml/*
 vendor/geojson-to-path/*
 vendor/pretty-data/*
 vendor/jquery-autocomplete/*
+css/.sass-cache
