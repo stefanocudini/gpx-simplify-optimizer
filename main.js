@@ -1,33 +1,9 @@
 $(function() {
 
-var map = new L.Map('map',{attributionControl: false}).setView(L.latLng(36,-30),3),
-	style1 = {
-		color: 'red',
-		opacity: 0.7,
-		fillOpacity: 0.7,
-		weight: 5,
-		clickable: false
-	},
-	style2 = {
-		color: 'blue',
-		opacity: 1.0,
-		fillOpacity: 1.0,
-		weight: 2,
-		clickable: false
-	};
+var map = new L.Map('map',{attributionControl: false}).setView(L.latLng(36,-30),3);
 window.map = map;
-window.style2 = style2;
 
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-var filename$,
-	nodes$,
-	sourceLayer = null;
-	window.simplifyNodes = 0;
-	window.simplifyLayerName = 'simplified.gpx';
-	window.simplifyLayerData = null;
-	window.simplifyLayer = L.geoJson(window.simplifyLayerData, { style: style2 }).addTo(map);
-    window.layers = {};
 
 //CONTROL UPLOAD
 L.Control.FileLayerLoad.LABEL = '<i class="fa fa-folder-open"></i>';
@@ -44,46 +20,31 @@ var controlLoader = L.Control.fileLayerLoad({
     
 }).addTo(map);
 
-function updateGeoJSON(tolerance) {
-	//console.log('updateGeoJSON', tolerance);
-	if(sourceLayer)
-	{
-        window.layers['Source layer'] = sourceLayer;
-		window.simplifyLayer.clearLayers();
-		window.simplifyNodes = 0;
-		//sourceLayer.eachLayer(function(layer)  {
-		layer = sourceLayer.getLayers()[0];
 
-		//FIXME support multi tracks
-
-			var modified = layer.toGeoJSON();
-			//console.log('eachLayer',modified);
-			modified.geometry.coordinates = simplifyGeometry(modified.geometry.coordinates, tolerance);
-			window.simplifyLayer.addData(modified);
-			window.simplifyLayerData = modified;
-			window.simplifyNodes += modified.geometry.coordinates.length; 
-            window.layers.simplified = window.simplifyLayer;
-            L.control.layers(null, window.layers).addTo(map);
-		//});
-		nodes$.text(window.simplifyNodes+' nodes ~'+nodes2Bytes(window.simplifyNodes));
-	}
-}
-
+window.Layers = [];
+window.currentLayer = null;
 
 // UPLOAD ACTION
-controlLoader.loader.on('data:loaded', function (e) {
-	sourceLayer = e.layer;
-	map.fitBounds( sourceLayer.getBounds() );
-	window.simplifyLayerName = e.filename;
-	updateGeoJSON(0);
-	filename$.html(window.simplifyLayerName);
+controlLoader.loader.on('data:loaded', function (layerObject) {
+    var layer = new LayerOptimizer(layerObject);
+	//sourceLayer = e.layer;
+	map.fitBounds( layer.getBounds() );
+    layer.optimize(0);
+    layer.createLayerGroup();
+    layer.display();
+    window.Layers.push(layer);
+    window.currentLayer = layer;
+
+    /*
 	$('.grumble, .grumble-text, .grumble-button').remove();
 	$(document).unbind('keyup.crumble');
+    */
 })
 .on('data:error', function (e) {
 	console.log('ERROR',e);
 });
 
+/*
 // Airport From
 (function() {
     var control = new L.Control({position:'topleft'});
@@ -101,6 +62,8 @@ controlLoader.loader.on('data:loaded', function (e) {
         };
     return control;
 }()).addTo(window.map);
+*/
+
 //CONTROL DOWNLOAD
 (function() {
 	var control = new L.Control({position:'topleft'});
@@ -196,12 +159,15 @@ $('#slider').slider({
 	tooltip: 'hide'
 })
 .on('slide', function(e) {
-	updateGeoJSON(e.value);
+    window.currentLayer.optimize(e.value);
+    window.currentLayer.display();
+	//updateGeoJSON(e.value);
 }).parent().width('100%');
 
 $('#helpbtn').on('click',function(e) {
 	$('#modal').modal('show');
 });
+
 
 //HELP POPUP
 /*

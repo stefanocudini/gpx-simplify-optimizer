@@ -191,19 +191,17 @@ Format.prototype = {
     /**
      * Save the data in the current format
      *
-     * @param blob    data  the geojson data
-     * @param string  name  the name of the file
-     * @param integer nodes the number of nodes in the data
+     * @param layer a LayerOptimizer object
      *
      * @return void
      */
-    save: function(data, name, nodes) {
-        name = name.replace(/\..*/, "");
-        name = name+'_'+nodes+'nodes.'+this.param.extension;
+    save: function(layer) {
+        name = layer.sourceLayerName.replace(/\..*/, "");
+        name = name+'_'+layer.simplifiedLayerNodes+'nodes.'+this.param.extension;
         try {
             if(!!new Blob())
             {
-                var content = this.exportData(data);
+                var content = this.exportData(layer.simplifiedLayerData);
                 var blob = new Blob([content], {type: this.param.contenttype+";charset=utf-8"});
                 saveAs(blob, name);
             }
@@ -223,28 +221,28 @@ Format.prototype = {
      * @return void
      */
     saveClick: function() {
-        this.save(window.simplifyLayerData, window.simplifyLayerName, window.simplifyNodes);
+        this.save(window.currentLayer);
     },
 
     /**
      * View the data in a popup
      *
-     * @param blob    data  the geojson data
+     * @param layer a LayerOptimizer object
      *
      * @return void
      */
-    view: function(data) {
+    view: function(layer) {
         try {
             if(!!new Blob())
             {
-                var content = this.exportData(data);
+                var content = this.exportData(layer.simplifiedLayerData);
                 content = this.display(content);
 
                 $('code').attr('class', this.param.syntax);
                 $('#export-content').text(content);
                 // Fixing an arbitrary limit
                 // If there is too many points, do not highlight, it's too heavy for the browser.
-                if (window.simplifyNodes < 1000) {
+                if (layer.simplifiedLayerNodes < 1000) {
                     $('code').each(function(i, block) {
                         hljs.highlightBlock(block);
                     });
@@ -268,7 +266,8 @@ Format.prototype = {
      * @return void
      */
     viewClick: function() {
-        this.view(window.simplifyLayerData);
+        this.view(window.currentLayer);
+        //simplifyLayerData);
     }
 };
 
