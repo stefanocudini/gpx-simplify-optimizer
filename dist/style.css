@@ -36,6 +36,17 @@ h4 {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px; }
 
+.leaflet-control-switcher-box {
+  color: #4d5b69;
+  background-color: #eee;
+  padding: 5px;
+  text-align: center;
+  display: none; }
+  .leaflet-control-switcher-box select {
+    display: block;
+    width: 200px;
+    border: 1px solid #4d5b69; }
+
 .leaflet-control-stats {
   color: #4d5b69;
   font-size: 20px;

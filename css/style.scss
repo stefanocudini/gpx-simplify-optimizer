@@ -56,6 +56,18 @@ h4 {
     }
 }
 
+.leaflet-control-switcher-box {
+    color: $main-color;
+    background-color: $text-color;
+    padding: 5px;
+    text-align: center;
+    display: none;
+    select {
+        display:block;
+        width: 200px;
+        border: 1px solid $main-color;
+    }
+}
 .leaflet-control-stats {
 	color: $main-color;
 	font-size: 20px;

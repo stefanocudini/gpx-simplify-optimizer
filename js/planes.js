@@ -4,7 +4,7 @@
 Math.radians = function(degrees) {
   return degrees * Math.PI / 180;
 };
- 
+
 // Converts from radians to degrees.
 Math.degrees = function(radians) {
   return radians * 180 / Math.PI;
@@ -32,7 +32,7 @@ function pathFraction(pos1, pos2, fraction) {
     var lon1 = Math.radians(pos1.split(',')[1]);
     var lat2 = Math.radians(pos2.split(',')[0]);
     var lon2 = Math.radians(pos2.split(',')[1]);
-    
+
     var d = distance(lat1, lon1, lat2, lon2);
     var A = Math.sin((1-fraction)*d)/Math.sin(d);
     var B = Math.sin(fraction*d)/Math.sin(d);

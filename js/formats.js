@@ -196,7 +196,7 @@ Format.prototype = {
      * @return void
      */
     save: function(layer) {
-        name = layer.sourceLayerName.replace(/\..*/, "");
+        name = layer.name.replace(/\..*/, "");
         name = name+'_'+layer.simplifiedLayerNodes+'nodes.'+this.param.extension;
         try {
             if(!!new Blob())
@@ -208,7 +208,6 @@ Format.prototype = {
         } catch (e) {
             alert('Please upload GPX/GeoJSON/KML file first, using Chrome or Firefox: ' + e.message);
             console.log(e.message);
-            //return false;
         }
         hideAll();
     },
@@ -253,7 +252,6 @@ Format.prototype = {
         } catch (e) {
             alert('Please upload GPX/GeoJSON/KML file first, using Chrome or Firefox: ' + e.message);
             console.log(e.message);
-            //return false;
         }
         hideAll();
     },
@@ -267,7 +265,6 @@ Format.prototype = {
      */
     viewClick: function() {
         this.view(window.currentLayer);
-        //simplifyLayerData);
     }
 };
 

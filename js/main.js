@@ -5,6 +5,13 @@ window.map = map;
 
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+
+// List of LayerOptimizer objects
+window.Layers = {};
+
+// The current LayerOptimizer object
+window.currentLayer = null;
+
 //CONTROL UPLOAD
 L.Control.FileLayerLoad.LABEL = '<i class="fa fa-folder-open"></i>';
 var controlLoader = L.Control.fileLayerLoad({
@@ -17,23 +24,18 @@ var controlLoader = L.Control.fileLayerLoad({
 			return L.circle(latlng, 10, {style: style1});
 		}
 	}
-    
 }).addTo(map);
-
-
-window.Layers = [];
-window.currentLayer = null;
 
 // UPLOAD ACTION
 controlLoader.loader.on('data:loaded', function (layerObject) {
     var layer = new LayerOptimizer(layerObject);
-	//sourceLayer = e.layer;
-	map.fitBounds( layer.getBounds() );
+    layer.zoom();
     layer.optimize(0);
     layer.createLayerGroup();
     layer.display();
-    window.Layers.push(layer);
+    window.Layers[layer.id] = layer;
     window.currentLayer = layer;
+    updateLayers();
 
     /*
 	$('.grumble, .grumble-text, .grumble-button').remove();
@@ -44,41 +46,21 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 	console.log('ERROR',e);
 });
 
-/*
-// Airport From
-(function() {
-    var control = new L.Control({position:'topleft'});
-    control.onAdd = function(map) {
-            var ctrl = L.DomUtil.create('div','leaflet-control-planes leaflet-bar'),
-                a = L.DomUtil.create('a','', ctrl);
-            a.href = '#';
-            a.target = '_blank';
-            a.title = "Trace plane track";
-            a.innerHTML = '<i class="fa icon-plane"></i>';
-            L.DomEvent
-                .on(a, 'click', L.DomEvent.stop)
-                .on(a, 'click', chooseAirports);			
-            return ctrl;
-        };
-    return control;
-}()).addTo(window.map);
-*/
-
 //CONTROL DOWNLOAD
 (function() {
 	var control = new L.Control({position:'topleft'});
-	control.onAdd = function(map) {
-			var ctrl = L.DomUtil.create('div','leaflet-control-download leaflet-bar'),
-				a = L.DomUtil.create('a','', ctrl);
-			a.href = '#';
-			a.target = '_blank';
-			a.title = "Download simplified file";
-			a.innerHTML = '<i class="fa fa-download"></i>';
-			L.DomEvent
-				.on(a, 'click', L.DomEvent.stop)
-				.on(a, 'click', chooseDownloadFormat);			
-			return ctrl;
-		};
+    control.onAdd = function(map) {
+        var ctrl = L.DomUtil.create('div','leaflet-control-download leaflet-bar'),
+            a = L.DomUtil.create('a','', ctrl);
+        a.href = '#';
+        a.target = '_blank';
+        a.title = "Download simplified file";
+        a.innerHTML = '<i class="fa fa-download"></i>';
+        L.DomEvent
+            .on(a, 'click', L.DomEvent.stop)
+            .on(a, 'click', chooseDownloadFormat);
+        return ctrl;
+    };
 	return control;
 }()).addTo(map);
 
@@ -86,17 +68,17 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 (function() {
 	var control = new L.Control({position:'topleft'});
 	control.onAdd = function(map) {
-			var ctrl = L.DomUtil.create('div','leaflet-control-view leaflet-bar'),
-				a = L.DomUtil.create('a','', ctrl);
-			a.href = '#';
-			a.target = '_blank';
-			a.title = "View simplified file";
-			a.innerHTML = '<i class="fa fa-eye"></i>';
-			L.DomEvent
-				.on(a, 'click', L.DomEvent.stop)
-				.on(a, 'click', chooseViewFormat);			
-			return ctrl;
-		};
+        var ctrl = L.DomUtil.create('div','leaflet-control-view leaflet-bar'),
+            a = L.DomUtil.create('a','', ctrl);
+        a.href = '#';
+        a.target = '_blank';
+        a.title = "View simplified file";
+        a.innerHTML = '<i class="fa fa-eye"></i>';
+        L.DomEvent
+            .on(a, 'click', L.DomEvent.stop)
+            .on(a, 'click', chooseViewFormat);			
+        return ctrl;
+    };
 	return control;
 }()).addTo(map);
 
@@ -104,25 +86,20 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 (function() {
 	var control = new L.Control({position:'topleft'});
 	control.onAdd = function(map) {
-			var ctrl = L.DomUtil.create('div','leaflet-control-erase leaflet-bar'),
-				a = L.DomUtil.create('a','', ctrl);
-			a.href = '#';
-			a.target = '_blank';
-			a.title = "Clear the map";
-			a.innerHTML = '<i class="fa fa-eraser"></i>';
-			L.DomEvent
-				.on(a, 'click', L.DomEvent.stop)
-				.on(a, 'click', function(){
-                    // FIXME Doesn't work if 2 files are uploaded in a row.
-                    sourceLayer.eachLayer(function(layer)  {
-                        map.removeLayer(layer);
-                    });
-                    simplifyLayer.clearLayers();
-                });
-			return ctrl;
-		};
+        var ctrl = L.DomUtil.create('div','leaflet-control-erase leaflet-bar'),
+            a = L.DomUtil.create('a','', ctrl);
+        a.href = '#';
+        a.target = '_blank';
+        a.title = "Clear the map";
+        a.innerHTML = '<i class="fa fa-eraser"></i>';
+        L.DomEvent
+            .on(a, 'click', L.DomEvent.stop)
+            .on(a, 'click', clearMap);
+        return ctrl;
+    };
 	return control;
 }()).addTo(map);
+
 
 
 //CONTROL NODES
@@ -131,7 +108,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 	control.onAdd = function(map) {
 			var ctrl = L.DomUtil.create('div','leaflet-control-stats');
 			ctrl.id = 'stats';
-			ctrl.innerHTML = 
+			ctrl.innerHTML =
 				'<span id="nodes"></span><br />'+
 				'<span id="filename"></span>';
 			filename$ = $('#filename',ctrl);
@@ -148,6 +125,31 @@ L.control.attribution({
 	position: 'topright',
 	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank">OpenStreetMap contributors</a>'
 }).addTo(map);
+
+
+//CONTROL LAYER SWITCHER
+(function() {
+	var control = new L.Control({position:'topright'});
+	control.onAdd = function(map) {
+        var ctrl = L.DomUtil.create('div','leaflet-control-switcher-box leaflet-bar'),
+        
+            a = L.DomUtil.create('label','', ctrl);
+        a.href = '#';
+        a.title = "Choose the active layer";
+        a.innerHTML = 'Layer switcher';
+        var select = L.DomUtil.create('select','leaflet-control-switcher leaflet-bar', ctrl);
+        L.DomEvent.on(select, 'change', function() {
+            window.currentLayer = window.Layers[$(this).val()];
+            window.currentLayer.zoom();
+            window.currentLayer.display();
+            
+        });
+        return ctrl;
+    };
+	return control;
+}()).addTo(map);
+
+
 
 // PRECISION SLIDER
 $('#slider').slider({
