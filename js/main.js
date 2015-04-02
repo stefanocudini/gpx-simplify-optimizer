@@ -29,10 +29,8 @@ var controlLoader = L.Control.fileLayerLoad({
 // UPLOAD ACTION
 controlLoader.loader.on('data:loaded', function (layerObject) {
     var layer = new LayerOptimizer(layerObject);
-    layer.zoom();
     layer.optimize(0);
-    layer.createLayerGroup();
-    layer.display();
+    layer.choose();
     window.Layers[layer.id] = layer;
     window.currentLayer = layer;
     updateLayers();
@@ -139,9 +137,9 @@ L.control.attribution({
         a.innerHTML = 'Layer switcher';
         var select = L.DomUtil.create('select','leaflet-control-switcher leaflet-bar', ctrl);
         L.DomEvent.on(select, 'change', function() {
+            window.currentLayer.removeController();
             window.currentLayer = window.Layers[$(this).val()];
-            window.currentLayer.zoom();
-            window.currentLayer.display();
+            window.currentLayer.choose();
             
         });
         return ctrl;
@@ -162,7 +160,7 @@ $('#slider').slider({
 })
 .on('slide', function(e) {
     window.currentLayer.optimize(e.value);
-    window.currentLayer.display();
+    window.currentLayer.displayInfos();
 	//updateGeoJSON(e.value);
 }).parent().width('100%');
 

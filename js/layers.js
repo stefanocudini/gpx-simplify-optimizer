@@ -20,6 +20,11 @@ window.style2 = {
     clickable: false
 };
 
+/**
+ * Update the layer switcher with the window.layers array
+ *
+ * @return void
+ */
 function updateLayers() {
     $('.leaflet-control-switcher').html('');
     for (var layerId in window.Layers) {
@@ -35,6 +40,11 @@ function updateLayers() {
     }
 }
 
+/**
+ * Remove all the layers from the map.
+ *
+ * @return void
+ */
 function clearMap() {
     for (var layerId in window.Layers) {
         window.Layers[layerId].remove();
@@ -72,6 +82,17 @@ LayerOptimizer.prototype = {
      */
     getSourceData: function() {
         return this.sourceLayer.getLayers()[0].toGeoJSON();
+    },
+
+    /**
+     * Choose this layer, and display everything for it
+     *
+     * @return void
+     */
+    choose: function() {
+        this.zoom();
+        this.createLayerGroup();
+        this.displayInfos();
     },
 
     /**
@@ -126,7 +147,7 @@ LayerOptimizer.prototype = {
      *
      * @return void
      */
-    display: function() {
+    displayInfos: function() {
         var title = "Optimize : "+this.name;
         var nodes = "From "+this.sourceLayerNodes+" nodes to "+this.simplifiedLayerNodes+" nodes";
         $('#filename').html(title);
@@ -134,13 +155,31 @@ LayerOptimizer.prototype = {
     },
 
     /**
-     * Remove the current layer optimizer from the control layer
+     * Remove all the data from the layer optimizer
      *
      * @return void
      */
     remove: function() {
+        this.removeLayers();
+        this.removeController();
+    },
+
+    /**
+     * Remove the simplified and source layers
+     *
+     * @return void
+     */
+    removeLayers: function() {
         window.map.removeLayer(this.simplifiedLayer);
         window.map.removeLayer(this.sourceLayer);
+    },
+
+    /**
+     * Remove the layer controller
+     *
+     * @return void
+     */
+    removeController: function() {
         this.controller.removeFrom(window.map);
     },
 
