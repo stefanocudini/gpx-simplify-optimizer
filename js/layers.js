@@ -71,6 +71,7 @@ var LayerOptimizer = function(source) {
     this.simplifiedLayerStyle = window.style2;
     this.simplifiedLayer = L.geoJson(null, { style : this.simplifiedLayerStyle}).addTo(window.map);
     this.simplifiedLayerNodes = 0;
+    this.controller = null;
 }
 
 LayerOptimizer.prototype = {
@@ -139,7 +140,9 @@ LayerOptimizer.prototype = {
         var layers = {};
         layers[this.name+' (simplified)'] = this.simplifiedLayer;
         layers[this.name+' (source)'] = this.sourceLayer;
-        this.controller = L.control.layers(null, layers).addTo(window.map);
+        this.controller = L.control.layers(null, layers);
+        console.log(this.controller);
+        this.controller.addTo(window.map);
     },
 
     /**
@@ -170,6 +173,8 @@ LayerOptimizer.prototype = {
      * @return void
      */
     removeLayers: function() {
+        //this.simplifiedLayer.removeFrom(window.map);
+        //this.sourceLayer.removeFrom(window.map);
         window.map.removeLayer(this.simplifiedLayer);
         window.map.removeLayer(this.sourceLayer);
     },
@@ -180,7 +185,18 @@ LayerOptimizer.prototype = {
      * @return void
      */
     removeController: function() {
-        this.controller.removeFrom(window.map);
+        console.log("removeController");
+        console.log(this.controller._map);
+        return false;
+        /*
+        if (this.controller._map) {
+            this.controller.removeFrom(window.map);
+        }
+        try {
+        } catch (e) {
+            console.log("Controller not found, probably already removed");
+        }
+        */
     },
 
     /**

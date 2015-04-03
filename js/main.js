@@ -28,6 +28,9 @@ var controlLoader = L.Control.fileLayerLoad({
 
 // UPLOAD ACTION
 controlLoader.loader.on('data:loaded', function (layerObject) {
+    if (window.currentLayer) {
+        window.currentLayer.removeController();
+    }
     var layer = new LayerOptimizer(layerObject);
     layer.optimize(0);
     layer.choose();
