@@ -173,10 +173,12 @@ LayerOptimizer.prototype = {
      * @return void
      */
     removeLayers: function() {
-        //this.simplifiedLayer.removeFrom(window.map);
-        //this.sourceLayer.removeFrom(window.map);
-        window.map.removeLayer(this.simplifiedLayer);
-        window.map.removeLayer(this.sourceLayer);
+        try {
+            window.map.removeLayer(this.simplifiedLayer);
+            window.map.removeLayer(this.sourceLayer);
+        } catch (e) {
+            console.log("Layers not found, probably already removed");
+        }
     },
 
     /**
@@ -185,18 +187,13 @@ LayerOptimizer.prototype = {
      * @return void
      */
     removeController: function() {
-        console.log("removeController");
-        console.log(this.controller._map);
-        return false;
-        /*
-        if (this.controller._map) {
-            this.controller.removeFrom(window.map);
-        }
         try {
+            if (this.controller._map !== undefined) {
+                this.controller.removeFrom(window.map);
+            }
         } catch (e) {
             console.log("Controller not found, probably already removed");
         }
-        */
     },
 
     /**
