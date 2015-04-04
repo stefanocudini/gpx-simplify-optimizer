@@ -141,7 +141,6 @@ LayerOptimizer.prototype = {
         layers[this.name+' (simplified)'] = this.simplifiedLayer;
         layers[this.name+' (source)'] = this.sourceLayer;
         this.controller = L.control.layers(null, layers);
-        console.log(this.controller);
         this.controller.addTo(window.map);
     },
 
