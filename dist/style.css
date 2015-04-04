@@ -1,25 +1,25 @@
 body {
-  color: #eee;
-  background: #4d5b69; }
+  background: #4d5b69;
+  color: #eee; }
 
 h4 {
   float: left;
-  padding: 5px;
+  letter-spacing: .065em;
   margin: 5px 20px 5px 10px;
-  text-shadow: 1px 1px 3px #333;
-  letter-spacing: 0.065em; }
+  padding: 5px;
+  text-shadow: 1px 1px 3px #333; }
   h4 a {
     color: #eee; }
     h4 a:hover {
       color: #fff; }
 
 #map {
-  position: absolute;
-  top: 40px;
+  background: #dce6f0;
   bottom: 40px;
   left: 0;
+  position: absolute;
   right: 0;
-  background: #dce6f0;
+  top: 40px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -37,55 +37,52 @@ h4 {
     border-bottom-right-radius: 4px; }
 
 .leaflet-control-switcher-box {
-  color: #4d5b69;
   background-color: #eee;
+  color: #4d5b69;
+  display: none;
   padding: 5px;
-  text-align: center;
-  display: none; }
+  text-align: center; }
   .leaflet-control-switcher-box select {
+    border: 1px solid #4d5b69;
     display: block;
-    width: 200px;
-    border: 1px solid #4d5b69; }
+    width: 200px; }
 
 .leaflet-control-stats {
   color: #4d5b69;
   font-size: 20px;
   text-shadow: 1px 1px 2px #fff; }
 
-/*
-*/
 .leaflet-sidebar a.close {
-  opacity: 1;
-  top: 1px;
-  right: auto;
-  left: -10px;
-  font-size: 20pt;
-  height: 23px;
-  width: 23px;
-  /*border: 1px solid #ccc;*/
   background: #dce6f0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
-  color: #4d5b69; }
+  color: #4d5b69;
+  font-size: 20pt;
+  height: 23px;
+  left: -10px;
+  opacity: 1;
+  right: auto;
+  top: 1px;
+  width: 23px; }
 
 #sidebar {
-  padding: 8px;
-  overflow-y: auto;
   background: #dce6f0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
   color: #4d5b69;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6); }
+  overflow-y: auto;
+  padding: 8px; }
 
 #slider_wrap {
-  position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
   height: 40px;
-  padding: 10px 20px; }
+  left: 0;
+  padding: 10px 20px;
+  position: absolute;
+  right: 0; }
   #slider_wrap #slider {
     visibility: hidden; }
   #slider_wrap .slider-handle {
-    opacity: 1;
-    background: #7D8B99; }
+    background: #7d8b99;
+    opacity: 1; }
 
 #modal {
   z-index: 2000; }
@@ -97,61 +94,59 @@ h4 {
     color: #fff;
     font-weight: bold; }
     #modal .modal-header .close {
+      color: #fff;
       font-size: 2.5em;
       line-height: 1.2em;
-      text-shadow: none;
-      color: #fff;
-      opacity: 1; }
+      opacity: 1;
+      text-shadow: none; }
   #modal .modal-body {
     padding: 12px;
     text-align: center; }
 
 #credits .list-group-item.active {
-  color: #fff;
-  background: #4d5b69; }
+  background: #4d5b69;
+  color: #fff; }
 
 #social {
+  padding: 8px;
   position: fixed;
-  z-index: 800;
   right: 220px;
   top: 0;
-  padding: 8px; }
+  z-index: 800; }
   #social .fb-like {
     line-height: 12px; }
 
 #copy {
-  position: fixed;
-  z-index: 1000;
-  right: 30px;
-  top: -8px;
-  padding: 8px 8px 2px 8px;
   background: #424b54;
   border-radius: .7em;
-  opacity: 0.8;
   box-shadow: 0 0 8px #eee;
-  color: #eee; }
+  color: #eee;
+  opacity: .8;
+  padding: 8px 8px 2px 8px;
+  position: fixed;
+  right: 30px;
+  top: -8px;
+  z-index: 1000; }
   #copy a {
     color: #ccc;
     text-decoration: none; }
     #copy a:hover {
       color: #fff; }
 
-/*
 #ribbon {
-	position: absolute;
-	top: 0;
-	right: 0;
-	border: 0;
-	opacity: .8;
-}
-*/
+  border: 0;
+  opacity: .8;
+  position: absolute;
+  right: 0;
+  top: 0; }
+
 .formats {
   background-color: #eee;
   border: 2px solid rgba(77, 91, 105, 0.5);
   border-radius: 4px;
   display: none;
-  position: absolute;
   margin-left: 45px;
+  position: absolute;
   width: 200px; }
   .formats a {
     color: #4d5b69;
@@ -167,33 +162,33 @@ h4 {
 
 #export-format {
   background-color: #4d5b69;
+  border-radius: 2px;
   height: 500px;
   margin: auto;
   overflow: hidden;
   padding: 5px;
   position: absolute;
-  width: 750px;
-  border-radius: 2px; }
+  width: 750px; }
   #export-format .actions {
     padding: 10px;
     text-align: center; }
   #export-format pre {
-    padding: 0;
-    margin: auto; }
+    margin: auto;
+    padding: 0; }
   #export-format code {
-    overflow: auto;
     display: block;
     height: 400px;
-    width: 730px;
-    margin: 2px; }
+    margin: 2px;
+    overflow: auto;
+    width: 730px; }
   #export-format h5 {
     color: #eee;
     font-size: 20px;
     text-align: center; }
   #export-format a {
-    color: #4d5b69;
-    border: 1px solid #eee;
     background-color: #eee;
+    border: 1px solid #eee;
+    color: #4d5b69;
     font-weight: bold;
     padding: 2px 4px; }
 
@@ -202,23 +197,23 @@ h4 {
   border: 2px solid rgba(77, 91, 105, 0.5);
   border-radius: 4px;
   display: none;
-  position: absolute;
   margin-left: 45px;
+  position: absolute;
+  color: #4d5b69;
   font-weight: bold;
-  width: 320px;
   padding: 5px;
-  color: #4d5b69; }
+  width: 320px; }
   .planes label {
-    width: 50px;
+    clear: both;
     float: left;
-    clear: both; }
+    width: 50px; }
   .planes input {
-    padding: 2px;
     border: 1px solid #4d5b69;
+    padding: 2px;
     width: 240px; }
 
 .autocomplete-suggestion {
   background-color: #eee;
-  color: #4d5b69;
   border-bottom: 1px solid #4d5b69;
+  color: #4d5b69;
   cursor: pointer; }
