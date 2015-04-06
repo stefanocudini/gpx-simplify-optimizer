@@ -17,13 +17,17 @@
 </head>
 
 <body>
-<h4>Tracks Optimizer online &nbsp;<a href="#" id="helpbtn"><i class="fa fa-question-circle"></i></a>&nbsp; <a href="https://github.com/stefanocudini/gpx-simplify-optimizer">Source</a></h4>
+<h4 id="appname">Tracks Optimizer online &nbsp;<a href="#" id="helpbtn"><i class="fa fa-question-circle"></i></a>&nbsp; <a href="https://github.com/stefanocudini/gpx-simplify-optimizer">Source</a></h4>
 
 <div style="clear:both">Online Simplifier and Optimizer for GPX/KML/GeoJSON tracks.</div>
 
 <div id="map"></div>
 
 <div id="slider_wrap">
+    <a id="en" href="?setLng=en"> en-US </a>
+        | &nbsp;
+    <a id="fr" href="?setLng=fr"> fr-FR </a>
+
 	<input id="slider" type="text" />
 </div>
 <!--
@@ -43,6 +47,9 @@
 	<div id="fb-root"></div>
 </div>
 -->
+
+
+
 <div id="copy"><a href="http://labs.easyblog.it/">Labs</a> &bull; <a rel="author" href="http://labs.easyblog.it/stefano-cudini/"> &copy; Stefano Cudini</a></div>
 
 <div class="modal" id="modal">
@@ -103,7 +110,24 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
 <script src="http://d3js.org/d3.v2.js?2.9.1"></script>
 <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+<script src="vendor/i18next/i18next.commonjs.withJQuery.js"></script>
 
+<script type="text/javascript">
+    $.i18n.init({
+        //lng: 'en',
+        ns: { namespaces: [ 'ns.special'], defaultNs: 'ns.special'},
+        useLocalStorage: false,
+        debug: true
+    }, function(t) {
+        $('#appname').text($.t('app.name'));
+
+        //$('.nav').i18n();
+        //$('#btn').i18n();
+        //$('#extendedAttr').i18n();
+    });
+
+
+</script>
 <script src="dist/app.min.js"></script>
 
 <!--
