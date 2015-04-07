@@ -17,9 +17,11 @@
 </head>
 
 <body>
-<h4><span id="appname">Tracks Optimizer online</span> &nbsp;<a href="#" id="helpbtn"><i class="fa fa-question-circle"></i></a>&nbsp; <a href="https://github.com/stefanocudini/gpx-simplify-optimizer" id="source">Source</a></h4>
+<h4><span data-i18n="app.name">Tracks Optimizer online</span> &nbsp;<a href="#" id="helpbtn"><i class="fa fa-question-circle"></i></a>&nbsp; <a href="https://github.com/stefanocudini/gpx-simplify-optimizer" id="source" data-i18n="app.source">Source</a></h4>
 
+<!--
 <div style="clear:both">Online Simplifier and Optimizer for GPX/KML/GeoJSON tracks.</div>
+-->
 
 <div id="map"></div>
 
@@ -58,7 +60,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3 class="modal-title"><i class="fa fa-question-circle"></i> Optimize in 3 steps</h3>
+        <h3 class="modal-title"><i class="fa fa-question-circle"></i>&nbsp;<span data-i18n="help.howto">Optimize in 3 steps</span></h3>
       </div>
       <div class="modal-body">
         <img style="opacity:0.9" src="images/gpx-optimizer.png" />
@@ -76,7 +78,7 @@
 	<h5 data-i18n="export.title">Export text</h5>
 	<pre><code id="export-content" contenteditable="true"></code></pre>
 	<div class="actions fa-times" >
-		<a class="btn" id="export-close"><i class="fa fa-times"></i><span data-i18n="export.close">Close</span></a>
+		<a class="btn" id="export-close"><i class="fa fa-times"></i><span data-i18n="export.close"></span></a>
 	</div>
 </div>
 
