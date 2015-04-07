@@ -6,10 +6,10 @@ $.i18n.init({
     getAsync: false,
     debug: true
 }, function(t) {
-    $('#appname').text($.t('app.name'));
+    $('body').i18n();
 
     //$('.nav').i18n();
-    $('#export-format').i18n();
+    //$('#export-format').i18n();
     //$('#btn').i18n();
     //$('#extendedAttr').i18n();
 });
