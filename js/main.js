@@ -1,6 +1,10 @@
 $(function() {
 
-var map = new L.Map('map',{attributionControl: false}).setView(L.latLng(36,-30),3);
+var map = new L.Map('map', {
+    zoomControl: false,
+    attributionControl: false
+}).setView(L.latLng(36,-30),3);
+
 window.map = map;
 
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
@@ -12,8 +16,16 @@ window.Layers = {};
 // The current LayerOptimizer object
 window.currentLayer = null;
 
+
+// Zoom control to customize buttons titles
+L.control.zoom({
+    zoomInTitle: $.t('actions.zoomin'),
+    zoomOutTitle: $.t('actions.zoomout')
+}).addTo(map);
+
 //CONTROL UPLOAD
 L.Control.FileLayerLoad.LABEL = '<i class="fa fa-folder-open"></i>';
+L.Control.FileLayerLoad.TITLE= $.t('actions.upload');
 var controlLoader = L.Control.fileLayerLoad({
 	addToMap: true,
 	fitBounds: false,
@@ -28,6 +40,7 @@ var controlLoader = L.Control.fileLayerLoad({
 
 // UPLOAD ACTION
 controlLoader.loader.on('data:loaded', function (layerObject) {
+    hideAll();
     if (window.currentLayer) {
         window.currentLayer.removeController();
     }
@@ -55,7 +68,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
             a = L.DomUtil.create('a','', ctrl);
         a.href = '#';
         a.target = '_blank';
-        a.title = "Download simplified file";
+        a.title = $.t('actions.download');
         a.innerHTML = '<i class="fa fa-download"></i>';
         L.DomEvent
             .on(a, 'click', L.DomEvent.stop)
@@ -73,7 +86,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
             a = L.DomUtil.create('a','', ctrl);
         a.href = '#';
         a.target = '_blank';
-        a.title = "View simplified file";
+        a.title = $.t('actions.view');
         a.innerHTML = '<i class="fa fa-eye"></i>';
         L.DomEvent
             .on(a, 'click', L.DomEvent.stop)
@@ -91,11 +104,12 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
             a = L.DomUtil.create('a','', ctrl);
         a.href = '#';
         a.target = '_blank';
-        a.title = "Clear the map";
+        a.title = $.t('actions.clear');
         a.innerHTML = '<i class="fa fa-eraser"></i>';
         L.DomEvent
             .on(a, 'click', L.DomEvent.stop)
-            .on(a, 'click', clearMap);
+            .on(a, 'click', clearMap)
+            .on(a, 'click', hideAll);
         return ctrl;
     };
 	return control;
@@ -110,10 +124,10 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 			var ctrl = L.DomUtil.create('div','leaflet-control-stats');
 			ctrl.id = 'stats';
 			ctrl.innerHTML =
-				'<span id="nodes"></span><br />'+
-				'<span id="filename"></span>';
-			filename$ = $('#filename',ctrl);
-			nodes$ = $('#nodes',ctrl);
+				'<span id="filename"></span><br />'+
+				'<span id="nodes"></span>';
+			filename$ = $('#filename', ctrl);
+			nodes$ = $('#nodes', ctrl);
 			return ctrl;
 		};
 	return control;
@@ -136,8 +150,8 @@ L.control.attribution({
         
             a = L.DomUtil.create('label','', ctrl);
         a.href = '#';
-        a.title = "Choose the active layer";
-        a.innerHTML = 'Layer switcher';
+        a.title = $.t('actions.switchlayer');
+        a.innerHTML = $.t('layers.switcher');
         var select = L.DomUtil.create('select','leaflet-control-switcher leaflet-bar', ctrl);
         L.DomEvent.on(select, 'change', function() {
             window.currentLayer.removeController();

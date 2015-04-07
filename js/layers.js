@@ -138,8 +138,8 @@ LayerOptimizer.prototype = {
      */
     createLayerGroup: function() {
         var layers = {};
-        layers[this.name+' (simplified)'] = this.simplifiedLayer;
-        layers[this.name+' (source)'] = this.sourceLayer;
+        layers[this.name+' ('+$.t('layers.simplified')+')'] = this.simplifiedLayer;
+        layers[this.name+' ('+$.t('layers.source')+')'] = this.sourceLayer;
         this.controller = L.control.layers(null, layers);
         this.controller.addTo(window.map);
     },
@@ -150,8 +150,8 @@ LayerOptimizer.prototype = {
      * @return void
      */
     displayInfos: function() {
-        var title = "Optimize : "+this.name;
-        var nodes = "From "+this.sourceLayerNodes+" nodes to "+this.simplifiedLayerNodes+" nodes";
+        var title = $.t('layers.infos.title', {'name': this.name});
+        var nodes = $.t('layers.infos.nodes', {'sourcenodes': this.sourceLayerNodes, 'simplifiednodes': this.simplifiedLayerNodes});
         $('#filename').html(title);
         $('#nodes').html(nodes);
     },
@@ -173,10 +173,14 @@ LayerOptimizer.prototype = {
      */
     removeLayers: function() {
         try {
-            window.map.removeLayer(this.simplifiedLayer);
             window.map.removeLayer(this.sourceLayer);
         } catch (e) {
-            console.log("Layers not found, probably already removed");
+            console.log($.t('layers.error.layer'));
+        }
+        try {
+            window.map.removeLayer(this.simplifiedLayer);
+        } catch (e) {
+            console.log($.t('layers.error.layer'));
         }
     },
 
@@ -191,7 +195,7 @@ LayerOptimizer.prototype = {
                 this.controller.removeFrom(window.map);
             }
         } catch (e) {
-            console.log("Controller not found, probably already removed");
+            console.log($.t('layers.error.controller'));
         }
     },
 

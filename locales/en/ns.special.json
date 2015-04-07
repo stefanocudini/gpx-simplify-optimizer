@@ -1,7 +1,9 @@
 {
   "app": {
-    "name": "Tracks Optimizer online"
+    "name": "Tracks optimizer online",
+    "source": "Source"
   },
+
   "export": {
     "title": "Simplified geometry in __format__ format",
 	"close": "Close",
@@ -9,6 +11,30 @@
     "viewtitle": "View the simplified data in __format__",
     "downloadin": "Download in __format__",
     "downloadtitle": "Download the simplified data in __format__"
+  },
+
+  "actions": {
+    "clear": "Clear the map",
+    "view": "View simplified file",
+    "download": "Download simplified file",
+    "upload": "Local file upload (GPX, KML, GeoJSON)",
+    "zoomin": "Zoom in",
+    "zoomout": "Zoom out",
+    "switchlayer": "Choose the active layer"
+  },
+
+  "layers": {
+    "switcher": "Layer switcher",
+    "source": "source",
+    "simplified": "simplified",
+    "infos": {
+      "title": "Optimizing __name__",
+      "nodes": "From __sourcenodes__ nodes to __simplifiednodes__ nodes"
+    },
+    "error": {
+      "layer": "Layers not found, probably already removed",
+      "controller": "Controller not found, probably already removed"
+    }
   },
 
   "upload": {
