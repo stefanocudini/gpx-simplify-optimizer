@@ -213,7 +213,6 @@ $('#helpbtn').on('click',function(e) {
 
 
 //HELP POPUP
-/*
 var helpCount = $.cookie('tour');
 if(!helpCount || parseInt(helpCount) < 3 )
 {
@@ -221,7 +220,6 @@ if(!helpCount || parseInt(helpCount) < 3 )
 	helpCount = (parseInt(helpCount) || 0)+1;
 	$.cookie('tour', helpCount, { expires: 120 });
 }
-*/
 
 
 // LOADING FORMATS
