@@ -1,5 +1,7 @@
 language: node_js
-before_script:
-  - sudo npm install -g grunt
-
-script: grunt test --verbose --force
+node_js:
+  - "0.8"
+before_install: npm install -g grunt-cli
+install: npm install
+#before_script: grunt 
+script: grunt --verbose --force
