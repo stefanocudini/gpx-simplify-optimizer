@@ -193,28 +193,16 @@ h4 {
   }
 }
 
-/*
-#lang {
-  position: fixed;
-  right: 300px;
-  top: 8px;
-  z-index: 1200;
-  a {
-    color: #eee;
-    font-weight: bold;
-  }
-}
-*/
-
 .leaflet-control-lang {
-    //@include popup;
-
     width: auto;
+
     a {
         display: inline-block;
         float: left;
         font-weight: bold;
 
+        // Be careful this part is very tricky with all the rounded corners ...
+        // the only-child:border-bottom-right-radius is still buggy BTW
         &:only-child {
             border-radius: 4px;
         }
@@ -245,7 +233,6 @@ h4 {
             cursor: pointer;
         }
     }
-
 }
 
 #ribbon {
