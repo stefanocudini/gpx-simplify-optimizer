@@ -22,7 +22,7 @@ grunt.initConfig({
             "-W033": true,
             "-W044": true    //ignore regexp
         },
-        files: ['js/main.js', 'js/formats.js', 'js/formats/*.js', 'js/layers.js',]
+        files: ['js/main.js', 'js/formats.js', 'js/formats/*.js', 'js/layers.js', 'js/i18n.js', 'locales/*/*.json']
     },
     uglify: {
         dist: {
@@ -37,6 +37,7 @@ grunt.initConfig({
                 'dist/leaflet.filelayer.min.js': ['vendor/Leaflet.FileLayer/leaflet.filelayer.js'],
                 'dist/FileSaver.min.js': ['vendor/FileSaver.js/FileSaver.js'],
                 // Repository files
+                'dist/i18n.min.js': ['js/i18n.js'],
                 'dist/formats.min.js': ['js/formats.js', 'js/formats/*'],
                 'dist/layers.min.js': ['js/layers.js'],
                 'dist/planes.min.js': ['js/planes.js'],
@@ -70,9 +71,10 @@ grunt.initConfig({
                 //'crumble/js/jquery.crumble.min.js',
                 
                 // Repository files
-                'js/social.js',
+                //'js/social.js',
                 'dist/formats.min.js',
                 //'dist/planes.min.js',
+                'dist/i18n.min.js',
                 'dist/layers.min.js',
                 'dist/main.min.js'
             ],
@@ -129,6 +131,11 @@ grunt.initConfig({
             options: { livereload: true },
             files: ['js/*'],
             tasks: ['clean:js', 'jshint', 'uglify', 'concat']
+        },
+        i18n: {
+            options: { livereload: true },
+            files: ['locales/*/*'],
+            tasks: ['jshint']
         }
     }
 });

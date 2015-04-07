@@ -1,6 +1,21 @@
 {
-    "app": {
-      "name": "i18n",
-      "name": "Track optimizer"
-    }
+  "app": {
+    "name": "Tracks Optimizer online"
+  },
+  "export": {
+    "title": "Simplified geometry in __format__ format",
+	"close": "Close",
+    "viewin": "View in __format__",
+    "viewtitle": "View the simplified data in __format__",
+    "downloadin": "Download in __format__",
+    "downloadtitle": "Download the simplified data in __format__"
+  },
+
+  "upload": {
+    "none": "Please upload GPX / GeoJSON / KML file first, using Chrome or Firefox: "
+  },
+
+  "help": {
+    "howto": "Optimize in 3 steps"
+  }
 }

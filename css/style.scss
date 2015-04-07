@@ -184,6 +184,17 @@ h4 {
   }
 }
 
+#lang {
+  position: fixed;
+  right: 300px;
+  top: 8px;
+  z-index: 1200;
+  a {
+    color: #eee;
+    font-weight: bold;
+  }
+}
+
 #ribbon {
   border: 0;
   opacity: .8;
