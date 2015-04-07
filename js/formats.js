@@ -160,18 +160,18 @@ Format.prototype = {
     load: function() {
         // View links
         var a = document.createElement('a');
-        var linkText = document.createTextNode("View in "+this.param.name);
+        var linkText = document.createTextNode($.t('export.viewin', {'format': this.param.name}));
         a.appendChild(linkText);
-        a.title = "View the simplified data in "+this.param.name;
+        a.title = $.t('export.viewtitle', {'format': this.param.name});
         a.className = "view";
         $(a).on('click', this.viewClick.bind(this));
         $('#view-formats').append(a);
 
         // Download links
         a = document.createElement('a');
-        linkText = document.createTextNode("Download in "+this.param.name);
+        linkText = document.createTextNode($.t('export.downloadin', {'format': this.param.name}));
         a.appendChild(linkText);
-        a.title = "Download the simplified data in "+this.param.name;
+        a.title = $.t('export.downloadtitle', {'format': this.param.name});
         a.className = "download";
         $(a).on('click', this.saveClick.bind(this));
         $('#download-formats').append(a);
@@ -206,7 +206,7 @@ Format.prototype = {
                 saveAs(blob, name);
             }
         } catch (e) {
-            alert('Please upload GPX/GeoJSON/KML file first, using Chrome or Firefox: ' + e.message);
+            alert($.t('upload.none')+' ' + e.message);
             console.log(e.message);
         }
         hideAll();
@@ -246,11 +246,11 @@ Format.prototype = {
                         hljs.highlightBlock(block);
                     });
                 }
-                $('#export-format h5').html('Simplified geometry in '+this.param.name+' format');
+                $('#export-format h5').html($.t('export.title', {'format': this.param.name}));
                 $('#export-format').show();
             }
         } catch (e) {
-            alert('Please upload GPX/GeoJSON/KML file first, using Chrome or Firefox: ' + e.message);
+            alert($.t('upload.none')+' ' + e.message);
             console.log(e.message);
         }
         hideAll();

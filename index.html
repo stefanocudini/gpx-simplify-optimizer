@@ -17,17 +17,13 @@
 </head>
 
 <body>
-<h4 id="appname">Tracks Optimizer online &nbsp;<a href="#" id="helpbtn"><i class="fa fa-question-circle"></i></a>&nbsp; <a href="https://github.com/stefanocudini/gpx-simplify-optimizer">Source</a></h4>
+<h4><span id="appname">Tracks Optimizer online</span> &nbsp;<a href="#" id="helpbtn"><i class="fa fa-question-circle"></i></a>&nbsp; <a href="https://github.com/stefanocudini/gpx-simplify-optimizer" id="source">Source</a></h4>
 
 <div style="clear:both">Online Simplifier and Optimizer for GPX/KML/GeoJSON tracks.</div>
 
 <div id="map"></div>
 
 <div id="slider_wrap">
-    <a id="en" href="?setLng=en"> en-US </a>
-        | &nbsp;
-    <a id="fr" href="?setLng=fr"> fr-FR </a>
-
 	<input id="slider" type="text" />
 </div>
 <!--
@@ -49,6 +45,11 @@
 -->
 
 
+<div id="lang">
+    <a id="en" href="?setLng=en">EN</a> &nbsp; | &nbsp;
+    <a id="it" href="?setLng=it">IT</a> &nbsp; | &nbsp;
+    <a id="fr" href="?setLng=fr">FR</a>
+</div>
 
 <div id="copy"><a href="http://labs.easyblog.it/">Labs</a> &bull; <a rel="author" href="http://labs.easyblog.it/stefano-cudini/"> &copy; Stefano Cudini</a></div>
 
@@ -65,22 +66,6 @@
     </div>
   </div>
 </div>
-<div class="planes popup">
-    <div>
-        <label>
-            From:
-        </label>
-            <input type="text" name="from" id="from" class="autocomplete"/>
-            <input type="hidden" id="fromval"/>
-    </div>
-    <div>
-        <label>
-            To:
-        </label>
-            <input type="text" name="to" id="to" class="autocomplete"/>
-            <input type="hidden" id="toval"/>
-    </div>
-</div>
 <div class="leaflet-control formats popup" id="download-formats">
 </div>
 
@@ -88,10 +73,10 @@
 </div>
 
 <div id="export-format" class="modal">
-	<h5>Export text</h5>
+	<h5 data-i18n="export.title">Export text</h5>
 	<pre><code id="export-content" contenteditable="true"></code></pre>
 	<div class="actions fa-times" >
-		<a class="btn" id="export-close"><i class="fa fa-times"></i>Close</a>
+		<a class="btn" id="export-close"><i class="fa fa-times"></i><span data-i18n="export.close">Close</span></a>
 	</div>
 </div>
 
@@ -112,22 +97,6 @@
 <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
 <script src="vendor/i18next/i18next.commonjs.withJQuery.js"></script>
 
-<script type="text/javascript">
-    $.i18n.init({
-        //lng: 'en',
-        ns: { namespaces: [ 'ns.special'], defaultNs: 'ns.special'},
-        useLocalStorage: false,
-        debug: true
-    }, function(t) {
-        $('#appname').text($.t('app.name'));
-
-        //$('.nav').i18n();
-        //$('#btn').i18n();
-        //$('#extendedAttr').i18n();
-    });
-
-
-</script>
 <script src="dist/app.min.js"></script>
 
 <!--
