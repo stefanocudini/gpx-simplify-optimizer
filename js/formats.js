@@ -78,8 +78,7 @@ function hideAll() {
     $('.popup').each(function() {
         $(this).hide();
     });
-    //$('#download-formats').hide();
-    //$('#view-formats').hide();
+    hideLanguages();
 }
 
 

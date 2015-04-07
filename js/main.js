@@ -3,7 +3,9 @@ $(function() {
 var map = new L.Map('map', {
     zoomControl: false,
     attributionControl: false
-}).setView(L.latLng(36,-30),3);
+})
+.setView(L.latLng(36,-30),3)
+.on('click', hideAll);
 
 window.map = map;
 
@@ -23,6 +25,7 @@ L.control.zoom({
     zoomOutTitle: $.t('actions.zoomout')
 }).addTo(map);
 
+
 //CONTROL UPLOAD
 L.Control.FileLayerLoad.LABEL = '<i class="fa fa-folder-open"></i>';
 L.Control.FileLayerLoad.TITLE= $.t('actions.upload');
@@ -37,6 +40,7 @@ var controlLoader = L.Control.fileLayerLoad({
 		}
 	}
 }).addTo(map);
+
 
 // UPLOAD ACTION
 controlLoader.loader.on('data:loaded', function (layerObject) {
@@ -60,6 +64,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 	console.log('ERROR',e);
 });
 
+
 //CONTROL DOWNLOAD
 (function() {
 	var control = new L.Control({position:'topleft'});
@@ -78,6 +83,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 	return control;
 }()).addTo(map);
 
+
 //CONTROL VIEW
 (function() {
 	var control = new L.Control({position:'topleft'});
@@ -95,6 +101,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
     };
 	return control;
 }()).addTo(map);
+
 
 //CONTROL ERASER
 (function() {
@@ -116,6 +123,25 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 }()).addTo(map);
 
 
+//CONTROL LANGUAGES
+(function() {
+	var control = new L.Control({position:'topleft'});
+	control.onAdd = function(map) {
+        var ctrl = L.DomUtil.create('div','leaflet-control-lang leaflet-bar'),
+            a = L.DomUtil.create('a','', ctrl);
+        a.href = '#';
+        a.target = '_blank';
+        a.title = $.t('actions.lang');
+        $(a).addClass('first');
+        a.innerHTML = '<i class="fa fa-flag"></i>';
+        L.DomEvent
+            .on(a, 'click', L.DomEvent.stop)
+            .on(a, 'click', showLanguage);
+        return ctrl;
+    };
+	return control;
+}()).addTo(map);
+
 
 //CONTROL NODES
 (function() {
@@ -132,6 +158,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 		};
 	return control;
 }()).addTo(map);
+
 
 //CONTROL SIDEBAR
 //L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
@@ -165,7 +192,6 @@ L.control.attribution({
 }()).addTo(map);
 
 
-
 // PRECISION SLIDER
 $('#slider').slider({
 	value: 0,
@@ -197,12 +223,17 @@ if(!helpCount || parseInt(helpCount) < 3 )
 }
 */
 
+
 // LOADING FORMATS
 var f = new Format();
 f.loadAll(['GeoJSONFormat', 'GPXFormat', 'KMLFormat', 'MediawikiFormat']);
 
+
 // LOADING SYNTAX HIGHLIGHTING
 hljs.initHighlightingOnLoad();
+
+// LOADING LANGUAGES
+initLanguage();
 
 });
 

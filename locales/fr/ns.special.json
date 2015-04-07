@@ -1,6 +1,7 @@
 {
   "app": {
-    "name": "Optimiseur de tracés"
+    "name": "Optimiseur de tracés",
+    "source": "Source"
   },
 
   "export": {

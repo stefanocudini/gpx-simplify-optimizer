@@ -4,6 +4,15 @@ $text-color: #eee;
 $side-color: rgba(220, 230, 240, 1);
 $map-margin: 40px;
 
+@mixin popup {
+  background-color: $text-color;
+  border: 2px solid transparentize($main-color, .5);
+  border-radius: 4px;
+  display: none;
+  margin-left: 45px;
+  position: absolute;
+}
+
 body {
   background: $main-color;
   color: $text-color;
@@ -184,6 +193,7 @@ h4 {
   }
 }
 
+/*
 #lang {
   position: fixed;
   right: 300px;
@@ -194,6 +204,49 @@ h4 {
     font-weight: bold;
   }
 }
+*/
+
+.leaflet-control-lang {
+    //@include popup;
+
+    width: auto;
+    a {
+        display: inline-block;
+        float: left;
+        font-weight: bold;
+
+        &:only-child {
+            border-radius: 4px;
+        }
+        &:not(:first-child):not(:last-child) {
+            border-left: 1px solid $main-color;
+            //width: 27px;
+            border-left-radius: 0;
+        }
+        &:last-child {
+            border-left: 1px solid $main-color;
+            //width: 27px;
+            border-radius: 0 4px 4px 0;
+        }
+        &:first-child {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        &:not(last-child) {
+            font-size: 14px;
+        }
+        &.lang {
+            display: none;
+            width: 80px;
+        }
+        &:hover:not(:first-child) {
+            color: #eee;
+            background-color: $main-color;
+            cursor: pointer;
+        }
+    }
+
+}
 
 #ribbon {
   border: 0;
@@ -203,20 +256,13 @@ h4 {
   top: 0;
 }
 
-@mixin popup {
-  background-color: $text-color;
-  border: 2px solid transparentize($main-color, .5);
-  border-radius: 4px;
-  display: none;
-  margin-left: 45px;
-  position: absolute;
-}
 
 .formats {
   @include popup;
   width: 200px;
 
   a {
+    background-color: $text-color;
     color: $main-color;
     cursor: pointer;
     display: block;
