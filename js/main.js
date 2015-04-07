@@ -120,7 +120,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 }()).addTo(map);
 
 //CONTROL SIDEBAR
-L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
+//L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
 
 L.control.attribution({
 	position: 'topright',
@@ -173,6 +173,7 @@ $('#helpbtn').on('click',function(e) {
 
 
 //HELP POPUP
+/*
 var helpCount = $.cookie('tour');
 if(!helpCount || parseInt(helpCount) < 3 )
 {
@@ -180,6 +181,7 @@ if(!helpCount || parseInt(helpCount) < 3 )
 	helpCount = (parseInt(helpCount) || 0)+1;
 	$.cookie('tour', helpCount, { expires: 120 });
 }
+*/
 
 // LOADING FORMATS
 var f = new Format();
