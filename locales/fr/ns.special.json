@@ -1,6 +1,20 @@
 {
-    "app": {
-      "name": "i18n",
-      "name": "Optimiseur de tracés"
-    }
+  "app": {
+    "name": "Optimiseur de tracés"
+  },
+  "export": {
+    "title": "Géométrie simplifiée en __format__",
+	"close": "Fermer",
+    "viewin": "Voir en __format__",
+    "viewtitle": "Voir les données simplifiées en __format__",
+    "downloadin": "Télécharger en __format__",
+    "downloadtitle": "Télécharger les données simplifiées en __format__"
+
+
+
+
+  },
+  "help": {
+    "howto": "Optimize in 3 steps"
+  }
 }

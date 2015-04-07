@@ -133,6 +133,15 @@ h4 {
     #copy a:hover {
       color: #fff; }
 
+#lang {
+  position: fixed;
+  right: 300px;
+  top: 8px;
+  z-index: 1200; }
+  #lang a {
+    color: #eee;
+    font-weight: bold; }
+
 #ribbon {
   border: 0;
   opacity: .8;
