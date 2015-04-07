@@ -133,14 +133,44 @@ h4 {
     #copy a:hover {
       color: #fff; }
 
+/*
 #lang {
   position: fixed;
   right: 300px;
   top: 8px;
-  z-index: 1200; }
-  #lang a {
+  z-index: 1200;
+  a {
     color: #eee;
+    font-weight: bold;
+  }
+}
+*/
+.leaflet-control-lang {
+  width: auto; }
+  .leaflet-control-lang a {
+    display: inline-block;
+    float: left;
     font-weight: bold; }
+    .leaflet-control-lang a:only-child {
+      border-radius: 4px; }
+    .leaflet-control-lang a:not(:first-child):not(:last-child) {
+      border-left: 1px solid #4d5b69;
+      border-left-radius: 0; }
+    .leaflet-control-lang a:last-child {
+      border-left: 1px solid #4d5b69;
+      border-radius: 0 4px 4px 0; }
+    .leaflet-control-lang a:first-child {
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px; }
+    .leaflet-control-lang a:not(last-child) {
+      font-size: 14px; }
+    .leaflet-control-lang a.lang {
+      display: none;
+      width: 80px; }
+    .leaflet-control-lang a:hover:not(:first-child) {
+      color: #eee;
+      background-color: #4d5b69;
+      cursor: pointer; }
 
 #ribbon {
   border: 0;
@@ -158,6 +188,7 @@ h4 {
   position: absolute;
   width: 200px; }
   .formats a {
+    background-color: #eee;
     color: #4d5b69;
     cursor: pointer;
     display: block;

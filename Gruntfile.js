@@ -36,6 +36,7 @@ grunt.initConfig({
                 'dist/geojson-to-path.min.js': ['vendor/geojson-to-path/geojson-to-path.js'],
                 'dist/leaflet.filelayer.min.js': ['vendor/Leaflet.FileLayer/leaflet.filelayer.js'],
                 'dist/FileSaver.min.js': ['vendor/FileSaver.js/FileSaver.js'],
+                'dist/i18next.min.js': ['vendor/i18next/i18next.commonjs.withJQuery.js'],
                 // Repository files
                 'dist/i18n.min.js': ['js/i18n.js'],
                 'dist/formats.min.js': ['js/formats.js', 'js/formats/*'],
@@ -69,6 +70,7 @@ grunt.initConfig({
                 'vendor/jquery-autocomplete/dist/jquery.autocomplete.min.js',
                 //'crumble/js/jquery.grumble.min.js',
                 //'crumble/js/jquery.crumble.min.js',
+                'dist/i18next.min.js',
                 
                 // Repository files
                 //'js/social.js',
