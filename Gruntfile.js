@@ -23,7 +23,7 @@ grunt.initConfig({
             "-W033": true,
             "-W044": true    //ignore regexp
         },
-        files: ['js/main.js', 'js/formats.js', 'js/formats/*.js', 'js/layers.js', 'js/i18n.js', 'locales/*/*.json']
+        files: ['js/main.js', 'js/formats.js', 'js/formats/*.js', 'js/layers.js', 'js/i18n.js', 'locales/*/*.json', 'package.json']
     },
     uglify: {
         dist: {
