@@ -14,6 +14,7 @@ grunt.initConfig({
     },
     jshint: {
         options: {
+            reporter: require('jshint-stylish'),
             globals: {
                 console: true,
                 module: true
@@ -153,6 +154,7 @@ grunt.registerTask('default', [
 ]);
 
 
+/*
 grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-concat');
 grunt.loadNpmTasks('grunt-contrib-clean');
@@ -160,5 +162,8 @@ grunt.loadNpmTasks('grunt-contrib-sass');
 grunt.loadNpmTasks('grunt-contrib-cssmin');
 grunt.loadNpmTasks('grunt-contrib-jshint');
 grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-contrib-jshint');
 //grunt.loadNpmTasks('grunt-contrib-copy');
+*/
+require('load-grunt-tasks')(grunt);
 };
