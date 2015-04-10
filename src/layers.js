@@ -67,6 +67,7 @@ var LayerOptimizer = function(source) {
     this.sourceLayerStyle = window.style1;
     this.sourceLayerData = this.getSourceData();
     this.sourceLayerNodes = this.sourceLayerData.geometry.coordinates.length;
+    this.tolerance = 0;
 
     this.simplifiedLayerStyle = window.style2;
     this.simplifiedLayer = L.geoJson(null, { style : this.simplifiedLayerStyle}).addTo(window.map);
@@ -94,6 +95,8 @@ LayerOptimizer.prototype = {
         this.zoom();
         this.createLayerGroup();
         this.displayInfos();
+        // Put back this layer's tolerance into the slider
+        $("#slider").slider('setValue', this.tolerance);
     },
 
     /**
@@ -109,6 +112,8 @@ LayerOptimizer.prototype = {
 		this.simplifiedLayerData.geometry.coordinates = simplifyGeometry(this.simplifiedLayerData.geometry.coordinates, tolerance);
         this.simplifiedLayer.addData(this.simplifiedLayerData);
         this.simplifiedLayerNodes = this.simplifiedLayerData.geometry.coordinates.length;
+        // Save selected tolerance for later use.
+        this.tolerance = tolerance;
     },
 
     /**
@@ -157,6 +162,16 @@ LayerOptimizer.prototype = {
     },
 
     /**
+     * Clear infos of the current layer
+     *
+     * @return void
+     */
+    clearInfos: function() {
+        $('#filename').html('');
+        $('#nodes').html('');
+    },
+
+    /**
      * Remove all the data from the layer optimizer
      *
      * @return void
@@ -164,6 +179,7 @@ LayerOptimizer.prototype = {
     remove: function() {
         this.removeLayers();
         this.removeController();
+        this.clearInfos();
     },
 
     /**
