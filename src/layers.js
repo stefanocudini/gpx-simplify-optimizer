@@ -64,13 +64,22 @@ var LayerOptimizer = function(source) {
     this.id = this.createId();
     this.name = source.filename;
     this.sourceLayer = source.layer;
+    this.size = source.layer.getLayers().length;
+
     this.sourceLayerStyle = window.style1;
+    // Array of layers
     this.sourceLayerData = this.getSourceData();
-    this.sourceLayerNodes = this.sourceLayerData.geometry.coordinates.length;
+    this.sourceLayerNodes = this.getSourceNodes();
+    //this.sourceLayerData.geometry.coordinates.length;
     this.tolerance = 0;
 
     this.simplifiedLayerStyle = window.style2;
-    this.simplifiedLayer = L.geoJson(null, { style : this.simplifiedLayerStyle}).addTo(window.map);
+
+    // Create X simplified layers
+    this.simplifiedLayer = [];
+    for (var i=0; i<this.size; i++) {
+        this.simplifiedLayer[i] = L.geoJson(null, { style : this.simplifiedLayerStyle}).addTo(window.map);
+    }
     this.simplifiedLayerNodes = 0;
     this.controller = null;
 }
@@ -83,7 +92,26 @@ LayerOptimizer.prototype = {
      * @return the GeoJson layer object
      */
     getSourceData: function() {
-        return this.sourceLayer.getLayers()[0].toGeoJSON();
+        //return this.sourceLayer.getLayers()[0].toGeoJSON();
+        var layers = [];
+        for (var i=0; i<this.size; i++) {
+            layers.push(this.sourceLayer.getLayers()[i].toGeoJSON());
+        }
+        return layers;
+    },
+
+    /**
+     * Count the number of nodes in the source layer
+     *
+     * return the number of nodes in the source layer
+     */
+    getSourceNodes: function() {
+        var nodes = 0;
+        var datas = this.getSourceData();
+        for (var i=0; i<datas.length; i++) {
+            nodes += datas[i].geometry.coordinates.length
+        }
+        return nodes;
     },
 
     /**
@@ -107,11 +135,20 @@ LayerOptimizer.prototype = {
      * @return void
      */
     optimize: function(tolerance) {
-        this.simplifiedLayer.clearLayers();
+        this.simplifiedLayerNodes = 0;
+        // Array of layers
         this.simplifiedLayerData = this.getSourceData();
-		this.simplifiedLayerData.geometry.coordinates = simplifyGeometry(this.simplifiedLayerData.geometry.coordinates, tolerance);
-        this.simplifiedLayer.addData(this.simplifiedLayerData);
-        this.simplifiedLayerNodes = this.simplifiedLayerData.geometry.coordinates.length;
+        for (var i=0; i<this.size; i++) {
+            this.simplifiedLayer[i].clearLayers();
+            this.simplifiedLayerData[i].geometry.coordinates = simplifyGeometry(this.simplifiedLayerData[i].geometry.coordinates, tolerance);
+            this.simplifiedLayer[i].addData(this.simplifiedLayerData[i]);
+            this.simplifiedLayerNodes += this.simplifiedLayerData[i].geometry.coordinates.length;
+        }
+        /*
+            this.simplifiedLayerData.geometry.coordinates = simplifyGeometry(this.simplifiedLayerData.geometry.coordinates, tolerance);
+            this.simplifiedLayer.addData(this.simplifiedLayerData);
+            this.simplifiedLayerNodes = this.simplifiedLayerData.geometry.coordinates.length;
+            */
         // Save selected tolerance for later use.
         this.tolerance = tolerance;
     },

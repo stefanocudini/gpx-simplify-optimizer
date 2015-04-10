@@ -204,7 +204,6 @@ $('#slider').slider({
 .on('slide', function(e) {
     window.currentLayer.optimize(e.value);
     window.currentLayer.displayInfos();
-	//updateGeoJSON(e.value);
 }).parent().width('100%');
 
 $('#helpbtn').on('click',function(e) {
