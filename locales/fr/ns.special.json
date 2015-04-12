@@ -27,6 +27,8 @@
     "switcher": "Sélecteur de calque",
     "source": "source",
     "simplified": "simplifié",
+    "track": "Tracé",
+    "alltracks": "Tous les tracés",
     "infos": {
       "title": "Optimisation de __name__",
       "nodes": "De __sourcenodes__ nœuds à __simplifiednodes__ nœuds"

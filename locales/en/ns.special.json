@@ -27,6 +27,8 @@
     "switcher": "Layer switcher",
     "source": "source",
     "simplified": "simplified",
+    "track": "Track",
+    "alltracks": "All tracks",
     "infos": {
       "title": "Optimizing __name__",
       "nodes": "From __sourcenodes__ nodes to __simplifiednodes__ nodes"
