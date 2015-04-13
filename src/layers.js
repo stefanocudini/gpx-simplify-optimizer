@@ -20,6 +20,17 @@ window.style2 = {
     clickable: false
 };
 
+function clone(obj) {
+    if (null === obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) {
+            copy[attr] = obj[attr];
+        }
+    }
+    return copy;
+}
+
 /**
  * Update the layer switcher with the window.layers array
  *
@@ -63,25 +74,33 @@ var LayerOptimizer = function(source) {
 
     this.id = this.createId();
     this.name = source.filename;
+
+    //
+    // Source layer part
+    // 
     this.sourceLayer = source.layer;
     this.size = source.layer.getLayers().length;
-
     this.sourceLayerStyle = window.style1;
-    // Array of layers
-    this.sourceLayerData = this.getSourceData();
-    this.sourceLayerNodes = this.getSourceNodes();
-    //this.sourceLayerData.geometry.coordinates.length;
+    // Array of source layers
+    this.sourceLayerData = [];
+    this.sourceLayerJSON = [];
+    this.sourceLayerNodes =  0;
+
+    //
+    // Simplified layer part
+    // 
+    // Create simplified Layer from source.layer and clear all data
+    //this.simplifiedLayer = $.extend(true, {}, source.layer);
+    //this.simplifiedLayer.clearLayers();
+    this.simplifiedLayerStyle = window.style2;
+    // Array of simplified layers
+    this.simplifiedLayerData = [];
+    this.simplifiedLayerNodes = 0;
+
+    this.controller = null;
     this.tolerance = 0;
 
-    this.simplifiedLayerStyle = window.style2;
-
-    // Create X simplified layers
-    this.simplifiedLayer = [];
-    for (var i=0; i<this.size; i++) {
-        this.simplifiedLayer[i] = L.geoJson(null, { style : this.simplifiedLayerStyle}).addTo(window.map);
-    }
-    this.simplifiedLayerNodes = 0;
-    this.controller = null;
+    this.init();
 }
 
 LayerOptimizer.prototype = {
@@ -91,27 +110,23 @@ LayerOptimizer.prototype = {
      *
      * @return the GeoJson layer object
      */
-    getSourceData: function() {
-        //return this.sourceLayer.getLayers()[0].toGeoJSON();
-        var layers = [];
-        for (var i=0; i<this.size; i++) {
-            layers.push(this.sourceLayer.getLayers()[i].toGeoJSON());
-        }
-        return layers;
-    },
+    init: function() {
 
-    /**
-     * Count the number of nodes in the source layer
-     *
-     * return the number of nodes in the source layer
-     */
-    getSourceNodes: function() {
-        var nodes = 0;
-        var datas = this.getSourceData();
-        for (var i=0; i<datas.length; i++) {
-            nodes += datas[i].geometry.coordinates.length
+        var layer;
+        for (var i=0; i<this.size; i++) {
+            // Retrieve each layer
+            layer = this.sourceLayer.getLayers()[i].toGeoJSON();
+            this.sourceLayerJSON[i] = layer;
+            this.sourceLayerData[i] = L.geoJson(null, { style : this.sourceLayerStyle}).addTo(window.map);
+            this.sourceLayerData[i].addData(layer);
+
+            // Count nodes
+            this.sourceLayerNodes     += layer.geometry.coordinates.length
+            this.simplifiedLayerNodes += layer.geometry.coordinates.length
+
+            // Create simplified copy
+            this.simplifiedLayerData[i] = L.geoJson(layer, { style : this.simplifiedLayerStyle}).addTo(window.map);
         }
-        return nodes;
     },
 
     /**
@@ -136,19 +151,20 @@ LayerOptimizer.prototype = {
      */
     optimize: function(tolerance) {
         this.simplifiedLayerNodes = 0;
-        // Array of layers
-        this.simplifiedLayerData = this.getSourceData();
+        var newcoords;
+        var simplifiedJSON;
         for (var i=0; i<this.size; i++) {
-            this.simplifiedLayer[i].clearLayers();
-            this.simplifiedLayerData[i].geometry.coordinates = simplifyGeometry(this.simplifiedLayerData[i].geometry.coordinates, tolerance);
-            this.simplifiedLayer[i].addData(this.simplifiedLayerData[i]);
-            this.simplifiedLayerNodes += this.simplifiedLayerData[i].geometry.coordinates.length;
+            newcoords = simplifyGeometry(this.sourceLayerJSON[i].geometry.coordinates, tolerance);
+
+            simplifiedJSON = this.simplifiedLayerData[i].getLayers()[0].toGeoJSON();
+            simplifiedJSON.geometry.coordinates = newcoords;
+            this.simplifiedLayerData[i].clearLayers();
+            this.simplifiedLayerData[i].addData(simplifiedJSON);
+
+            this.simplifiedLayerNodes += newcoords.length;
+
         }
-        /*
-            this.simplifiedLayerData.geometry.coordinates = simplifyGeometry(this.simplifiedLayerData.geometry.coordinates, tolerance);
-            this.simplifiedLayer.addData(this.simplifiedLayerData);
-            this.simplifiedLayerNodes = this.simplifiedLayerData.geometry.coordinates.length;
-            */
+
         // Save selected tolerance for later use.
         this.tolerance = tolerance;
     },
@@ -180,8 +196,24 @@ LayerOptimizer.prototype = {
      */
     createLayerGroup: function() {
         var layers = {};
-        layers[this.name+' ('+$.t('layers.simplified')+')'] = this.simplifiedLayer;
-        layers[this.name+' ('+$.t('layers.source')+')'] = this.sourceLayer;
+        var name;
+        var simplifiedExt = ' ('+$.t('layers.simplified')+')';
+        var sourceExt      = ' ('+$.t('layers.source')+')';
+        for (var i=0; i<this.size; i++) {
+            if (this.sourceLayerJSON[i].properties && this.sourceLayerJSON[i].properties.name) {
+                name = this.sourceLayerJSON[i].properties.name;
+            } else {
+                name = this.name+' - '+$.t('layers.track')+' '+i;
+            }
+            layers[name+simplifiedExt] = this.simplifiedLayerData[i];
+            layers[name+sourceExt] = this.sourceLayerData[i];
+        }
+
+        /*
+        layers[this.name+' - '+$.t('layers.alltracks')+simplifiedExt] = this.simplifiedLayer;
+        layers[this.name+' - '+$.t('layers.alltracks')+sourceExt] = this.sourceLayer;
+        */
+
         this.controller = L.control.layers(null, layers);
         this.controller.addTo(window.map);
     },

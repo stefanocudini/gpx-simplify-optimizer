@@ -21,7 +21,7 @@ window.currentLayer = null;
 
 // Zoom control to customize buttons titles
 L.control.zoom({
-    zoomInTitle: $.t('actions.zoomin'),
+    zoomInTitle:  $.t('actions.zoomin'),
     zoomOutTitle: $.t('actions.zoomout')
 }).addTo(map);
 
@@ -30,7 +30,7 @@ L.control.zoom({
 L.Control.FileLayerLoad.LABEL = '<i class="fa fa-folder-open"></i>';
 L.Control.FileLayerLoad.TITLE= $.t('actions.upload');
 var controlLoader = L.Control.fileLayerLoad({
-	addToMap: true,
+	addToMap: false,
 	fitBounds: false,
 	fileSizeLimit: 8096,
 	layerOptions: {
@@ -49,7 +49,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
         window.currentLayer.removeController();
     }
     var layer = new LayerOptimizer(layerObject);
-    layer.optimize(0);
+    //layer.optimize(0);
     layer.choose();
     window.Layers[layer.id] = layer;
     window.currentLayer = layer;
@@ -61,7 +61,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
     */
 })
 .on('data:error', function (e) {
-	console.log('ERROR',e);
+	console.log('ERROR',e.error);
 });
 
 
