@@ -49,7 +49,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
         window.currentLayer.removeController();
     }
     var layer = new LayerOptimizer(layerObject);
-    //layer.optimize(0);
+    //layer.optimize(0); // useless ?
     layer.choose();
     window.Layers[layer.id] = layer;
     window.currentLayer = layer;

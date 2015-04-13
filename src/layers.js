@@ -257,15 +257,17 @@ LayerOptimizer.prototype = {
      * @return void
      */
     removeLayers: function() {
-        try {
-            window.map.removeLayer(this.sourceLayer);
-        } catch (e) {
-            console.log($.t('layers.error.layer'));
-        }
-        try {
-            window.map.removeLayer(this.simplifiedLayer);
-        } catch (e) {
-            console.log($.t('layers.error.layer'));
+        for (var i=0; i<this.size; i++) {
+            try {
+                window.map.removeLayer(this.sourceLayerData[i]);
+            } catch (e) {
+                console.log($.t('layers.error.layer'));
+            }
+            try {
+                window.map.removeLayer(this.simplifiedLayerData[i]);
+            } catch (e) {
+                console.log($.t('layers.error.layer'));
+            }
         }
     },
 
