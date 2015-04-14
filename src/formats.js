@@ -188,6 +188,24 @@ Format.prototype = {
     },
 
     /**
+     * Group all the layers into a single geoJSON objet
+     *
+     * @param array datas the array of LayerGroup
+     *
+     * @return the data in the proper format
+     */
+    groupData: function(datas) {
+        var groupLayer = L.geoJson(null);
+        for (var i=0; i<datas.length; i++) {
+
+            if (window.map.hasLayer(datas[i].getLayers()[0])) {
+                groupLayer.addData(datas[i].getLayers()[0].toGeoJSON());
+            }
+        }
+        return this.exportData(groupLayer.toGeoJSON());
+    },
+
+    /**
      * Save the data in the current format
      *
      * @param layer a LayerOptimizer object
@@ -200,7 +218,7 @@ Format.prototype = {
         try {
             if(!!new Blob())
             {
-                var content = this.exportData(layer.simplifiedLayerData);
+                var content = this.groupData(layer.simplifiedLayerData);
                 var blob = new Blob([content], {type: this.param.contenttype+";charset=utf-8"});
                 saveAs(blob, name);
             }
@@ -233,7 +251,8 @@ Format.prototype = {
         try {
             if(!!new Blob())
             {
-                var content = this.exportData(layer.simplifiedLayerData);
+                var content = this.groupData(layer.simplifiedLayerData)
+                //var content = this.exportData(layer.simplifiedLayerData);
                 content = this.display(content);
 
                 $('code').attr('class', this.param.syntax);
