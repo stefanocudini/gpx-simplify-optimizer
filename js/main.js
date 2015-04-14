@@ -119,9 +119,6 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 	return control;
 }()).addTo(map);
 
-//CONTROL SIDEBAR
-L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
-
 L.control.attribution({
 	position: 'topright',
 	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank">OpenStreetMap contributors</a>'
@@ -168,6 +165,7 @@ $('#slider').slider({
 }).parent().width('100%');
 
 $('#helpbtn').on('click',function(e) {
+	e.preventDefault();
 	$('#modal').modal('show');
 });
 
