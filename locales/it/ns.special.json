@@ -1,16 +1,19 @@
 {
   "app": {
     "name": "Tracks optimizer online",
-    "source": "Source"
+    "source": "Source",
+    "contributors": "Collaboratori"
   },
 
   "export": {
     "title": "Simplified geometry in __format__ format",
 	"close": "Close",
+	"size": "Size by format",
     "viewin": "View in __format__",
     "viewtitle": "View the simplified data in __format__",
     "downloadin": "Download in __format__",
-    "downloadtitle": "Download the simplified data in __format__"
+    "downloadtitle": "Download the simplified data in __format__",
+    "units": "Bytes,kB,MB,GB,TB"
   },
 
   "actions": {
@@ -27,6 +30,7 @@
     "switcher": "Layer switcher",
     "source": "source",
     "simplified": "simplified",
+    "track": "Track",
     "infos": {
       "title": "Optimizing __name__",
       "nodes": "From __sourcenodes__ nodes to __simplifiednodes__ nodes"
@@ -43,5 +47,9 @@
 
   "help": {
     "howto": "Optimize in 3 steps"
+  },
+
+  "osm": {
+    "contributors": "© OpenStreetMap collaboratori"
   }
 }

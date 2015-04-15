@@ -1,37 +1,4 @@
 /**
- * Style for source Layer
- */
-window.style1 = {
-    color: 'red',
-    opacity: 0.7,
-    fillOpacity: 0.7,
-    weight: 5,
-    clickable: false
-};
-
-/**
- * Style for simplified layer
- */
-window.style2 = {
-    color: 'blue',
-    opacity: 1.0,
-    fillOpacity: 1.0,
-    weight: 2,
-    clickable: false
-};
-
-function clone(obj) {
-    if (null === obj || "object" != typeof obj) return obj;
-    var copy = obj.constructor();
-    for (var attr in obj) {
-        if (obj.hasOwnProperty(attr)) {
-            copy[attr] = obj[attr];
-        }
-    }
-    return copy;
-}
-
-/**
  * Update the layer switcher with the window.layers array
  *
  * @return void
@@ -80,7 +47,13 @@ var LayerOptimizer = function(source) {
     // 
     this.sourceLayer = source.layer;
     this.size = source.layer.getLayers().length;
-    this.sourceLayerStyle = window.style1;
+    this.sourceLayerStyle = {
+        color: 'red',
+        opacity: 0.7,
+        fillOpacity: 0.7,
+        weight: 5,
+        clickable: false
+    };
     // Array of source layers
     this.sourceLayerData = [];
     this.sourceLayerJSON = [];
@@ -89,10 +62,13 @@ var LayerOptimizer = function(source) {
     //
     // Simplified layer part
     // 
-    // Create simplified Layer from source.layer and clear all data
-    //this.simplifiedLayer = $.extend(true, {}, source.layer);
-    //this.simplifiedLayer.clearLayers();
-    this.simplifiedLayerStyle = window.style2;
+    this.simplifiedLayerStyle = {
+        color: 'blue',
+        opacity: 1.0,
+        fillOpacity: 1.0,
+        weight: 2,
+        clickable: false
+    };
     // Array of simplified layers
     this.simplifiedLayerData = [];
     this.simplifiedLayerNodes = 0;
@@ -138,6 +114,7 @@ LayerOptimizer.prototype = {
         this.zoom();
         this.createLayerGroup();
         this.displayInfos();
+        this.displaySizeFormats();
         // Put back this layer's tolerance into the slider
         $("#slider").slider('setValue', this.tolerance);
     },
@@ -164,6 +141,7 @@ LayerOptimizer.prototype = {
             this.simplifiedLayerNodes += newcoords.length;
 
         }
+        this.displaySizeFormats();
 
         // Save selected tolerance for later use.
         this.tolerance = tolerance;
@@ -209,13 +187,12 @@ LayerOptimizer.prototype = {
             layers[name+sourceExt] = this.sourceLayerData[i];
         }
 
-        /*
-        layers[this.name+' - '+$.t('layers.alltracks')+simplifiedExt] = this.simplifiedLayer;
-        layers[this.name+' - '+$.t('layers.alltracks')+sourceExt] = this.sourceLayer;
-        */
-
         this.controller = L.control.layers(null, layers);
         this.controller.addTo(window.map);
+        $('.leaflet-control-layers-selector').on('click', function() {
+            window.currentLayer.displaySizeFormats();
+        });
+
     },
 
     /**
@@ -228,6 +205,35 @@ LayerOptimizer.prototype = {
         var nodes = $.t('layers.infos.nodes', {'sourcenodes': this.sourceLayerNodes, 'simplifiednodes': this.simplifiedLayerNodes});
         $('#filename').html(title);
         $('#nodes').html(nodes);
+        $('.leaflet-control-stats').show();
+    },
+
+    /**
+     * Display the size for the differents formats
+     *
+     * @return void
+     */
+    displaySizeFormats: function() {
+        var tracks=0;
+        var nodes=0;
+        var groupLayer = L.geoJson(null);
+        for (var i=0; i<this.size; i++) {
+
+            layer = this.simplifiedLayerData[i].getLayers()[0];
+            if (window.map.hasLayer(layer)) {
+                tracks++;
+                nodes += layer.toGeoJSON().geometry.coordinates.length;
+            }
+        }
+
+        $('#size-format .sizes').html('');
+        var size = 0;
+        for (var j=0; j<window.formats.formats.length; j++) {
+            f = window.formats.formats[j];
+            size = f.getSize(tracks, nodes);
+            $('#size-format .sizes').append('<p><span class="format-name">'+f.param.name+' :</span><span class="format-size">'+size+'</span></p>');
+        }
+        $('#size-format').show();
     },
 
     /**
@@ -238,6 +244,16 @@ LayerOptimizer.prototype = {
     clearInfos: function() {
         $('#filename').html('');
         $('#nodes').html('');
+        $('.leaflet-control-stats').hide();
+    },
+
+    /**
+     * Clear infos of the current layer
+     *
+     * @return void
+     */
+    clearSizeFormats: function() {
+        $('#size-format').hide();
     },
 
     /**
@@ -249,6 +265,7 @@ LayerOptimizer.prototype = {
         this.removeLayers();
         this.removeController();
         this.clearInfos();
+        this.clearSizeFormats();
     },
 
     /**

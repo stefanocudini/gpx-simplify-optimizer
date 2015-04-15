@@ -1,28 +1,4 @@
 /**
- * Allow to select all text from the element
- * 
- * @see http://stackoverflow.com/questions/12243898/how-to-select-all-text-in-contenteditable-div
- */
-/*
-Replaced with contenteditable="true" for now
-jQuery.fn.selectText = function(){
-   var doc = document;
-   var element = this[0];
-   console.log(this, element);
-   if (doc.body.createTextRange) {
-       var range = document.body.createTextRange();
-       range.moveToElementText(element);
-       range.select();
-   } else if (window.getSelection) {
-       var selection = window.getSelection();        
-       var range = document.createRange();
-       range.selectNodeContents(element);
-       selection.removeAllRanges();
-       selection.addRange(range);
-   }
-};
-*/
-/**
  * Convert a byte number in human readable format
  * 
  * @param integer bytes   the number of bytes
@@ -33,20 +9,13 @@ jQuery.fn.selectText = function(){
 function filesizeHuman(bytes, decimal) {
 	if (bytes === 0) return bytes;		
 	decimal = decimal || 1;
-	var sizes = ['Bytes','KB','MB','GB','TB'],
+	var sizes = $.t('export.units').split(',');
 		i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    // Don't put decimal in Bytes
+    if (i === 0) {
+        decimal = 0;
+    }
 	return (bytes / Math.pow(1024, i)).toFixed(decimal) + ' ' + sizes[i];
-}
-
-/**
- * Convert the number of nodes in a path in estimated export file size
- *
- * @param integer nodes the number of nodes
- *
- * @return the human readable file size
- */
-function nodes2Bytes(nodes) {
-	return filesizeHuman(400 + (nodes * 56));
 }
 
 /**
@@ -133,6 +102,7 @@ $("#export-content").click(function() {
  */
 var Format = function() {
     this.param = {'key':'format', 'name':'RootFormat'};
+    this.formats = [];
 }
 
 Format.prototype = {
@@ -145,10 +115,11 @@ Format.prototype = {
      * @return void
      */
     loadAll: function(formats) {
-        formats.forEach(function(formatName) {
-            f = new window[formatName]();
+        for (var i=0; i<formats.length; i++) {
+            f = new window[formats[i]]();
             f.load();
-        });
+            this.formats.push(f);
+        }
     },
     
     /**
@@ -185,6 +156,17 @@ Format.prototype = {
      */
     display: function(data) {
         return data;
+    },
+
+    /**
+     * Calculate an estimated size of the file
+     * 
+     * @param integer nodes the number of nodes in the file
+     *
+     * @return the human readable file size
+     */
+    getSize: function(tracks, nodes) {
+    	return filesizeHuman(this.param.size_header + (tracks * this.param.size_track) + (nodes * this.param.size_node));
     },
 
     /**
@@ -285,5 +267,4 @@ Format.prototype = {
         this.view(window.currentLayer);
     }
 };
-
 

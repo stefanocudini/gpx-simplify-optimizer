@@ -1,5 +1,6 @@
 $(function() {
 
+// CREATE MAP
 var map = new L.Map('map', {
     zoomControl: false,
     attributionControl: false
@@ -32,13 +33,7 @@ L.Control.FileLayerLoad.TITLE= $.t('actions.upload');
 var controlLoader = L.Control.fileLayerLoad({
 	addToMap: false,
 	fitBounds: false,
-	fileSizeLimit: 8096,
-	layerOptions: {
-		style: style1,
-		pointToLayer: function (data, latlng) {
-			return L.circle(latlng, 10, {style: style1});
-		}
-	}
+	fileSizeLimit: 8096
 }).addTo(map);
 
 
@@ -49,7 +44,6 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
         window.currentLayer.removeController();
     }
     var layer = new LayerOptimizer(layerObject);
-    //layer.optimize(0); // useless ?
     layer.choose();
     window.Layers[layer.id] = layer;
     window.currentLayer = layer;
@@ -161,11 +155,15 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 
 
 //CONTROL SIDEBAR
-//L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
+L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
+
+// LOADING LANGUAGES
+initLanguage();
+
 
 L.control.attribution({
 	position: 'topright',
-	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank">OpenStreetMap contributors</a>'
+	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank" data-i18n="osm.contributors">'+$.t('osm.contributors')+'</a>'
 }).addTo(map);
 
 
@@ -212,7 +210,6 @@ $('#helpbtn').on('click',function(e) {
 
 
 //HELP POPUP
-/*
 var helpCount = $.cookie('tour');
 if(!helpCount || parseInt(helpCount) < 3 )
 {
@@ -220,21 +217,17 @@ if(!helpCount || parseInt(helpCount) < 3 )
 	helpCount = (parseInt(helpCount) || 0)+1;
 	$.cookie('tour', helpCount, { expires: 120 });
 }
+/*
 */
 
 
 // LOADING FORMATS
-var f = new Format();
-f.loadAll(['GeoJSONFormat', 'GPXFormat', 'KMLFormat', 'MediawikiFormat']);
-
+var formats = new Format();
+window.formats = formats;
+formats.loadAll(['GeoJSONFormat', 'GPXFormat', 'KMLFormat', 'MediawikiFormat']);
 
 // LOADING SYNTAX HIGHLIGHTING
 hljs.initHighlightingOnLoad();
 
-// LOADING LANGUAGES
-initLanguage();
-
 });
-
-
 

@@ -74,7 +74,7 @@ grunt.initConfig({
                 'dist/i18next.min.js',
                 
                 // Repository files
-                //'src/social.js',
+                'src/social.js',
                 'dist/formats.min.js',
                 //'dist/planes.min.js',
                 'dist/i18n.min.js',
