@@ -11,7 +11,10 @@ function MediawikiFormat() {
         'syntax': 'nohighlight',
         'name': 'Mediawiki',
         'extension': 'txt',
-        'contenttype': 'text/plain'
+        'contenttype': 'text/plain',
+        'size_header': 0,
+        'size_track': 0,
+        'size_node': 20
     }
     this.exportData = function(data) {
         return geojsonToPath(data);

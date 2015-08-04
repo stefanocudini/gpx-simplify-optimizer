@@ -14,6 +14,7 @@ grunt.initConfig({
     },
     jshint: {
         options: {
+            reporter: require('jshint-stylish'),
             globals: {
                 console: true,
                 module: true
@@ -22,7 +23,7 @@ grunt.initConfig({
             "-W033": true,
             "-W044": true    //ignore regexp
         },
-        files: ['js/main.js', 'js/formats.js', 'js/formats/*.js', 'js/layers.js', 'js/i18n.js', 'locales/*/*.json']
+        files: ['src/main.js', 'src/formats.js', 'src/formats/*.js', 'src/layers.js', 'src/i18n.js', 'locales/*/*.json', 'package.json']
     },
     uglify: {
         dist: {
@@ -38,11 +39,11 @@ grunt.initConfig({
                 'dist/FileSaver.min.js': ['vendor/FileSaver.js/FileSaver.js'],
                 'dist/i18next.min.js': ['vendor/i18next/i18next.commonjs.withJQuery.js'],
                 // Repository files
-                'dist/i18n.min.js': ['js/i18n.js'],
-                'dist/formats.min.js': ['js/formats.js', 'js/formats/*'],
-                'dist/layers.min.js': ['js/layers.js'],
-                'dist/planes.min.js': ['js/planes.js'],
-                'dist/main.min.js': ['js/main.js']
+                'dist/i18n.min.js': ['src/i18n.js'],
+                'dist/formats.min.js': ['src/formats.js', 'src/formats/*'],
+                'dist/layers.min.js': ['src/layers.js'],
+                'dist/planes.min.js': ['src/planes.js'],
+                'dist/main.min.js': ['src/main.js']
             }
         }
     },
@@ -73,7 +74,7 @@ grunt.initConfig({
                 'dist/i18next.min.js',
                 
                 // Repository files
-                //'js/social.js',
+                'src/social.js',
                 'dist/formats.min.js',
                 //'dist/planes.min.js',
                 'dist/i18n.min.js',
@@ -131,7 +132,7 @@ grunt.initConfig({
         },
         js: {
             options: { livereload: true },
-            files: ['js/*'],
+            files: ['src/*'],
             tasks: ['clean:js', 'jshint', 'uglify', 'concat']
         },
         i18n: {
@@ -153,12 +154,5 @@ grunt.registerTask('default', [
 ]);
 
 
-grunt.loadNpmTasks('grunt-contrib-uglify');
-grunt.loadNpmTasks('grunt-contrib-concat');
-grunt.loadNpmTasks('grunt-contrib-clean');
-grunt.loadNpmTasks('grunt-contrib-sass');
-grunt.loadNpmTasks('grunt-contrib-cssmin');
-grunt.loadNpmTasks('grunt-contrib-jshint');
-grunt.loadNpmTasks('grunt-contrib-watch');
-//grunt.loadNpmTasks('grunt-contrib-copy');
+require('load-grunt-tasks')(grunt);
 };

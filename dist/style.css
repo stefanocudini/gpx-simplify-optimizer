@@ -21,10 +21,10 @@ h4 {
   right: 0;
   top: 40px;
   -webkit-touch-callout: none;
-  -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  -webkit-user-select: none;
   user-select: none; }
 
 .leaflet-bar a {
@@ -37,7 +37,7 @@ h4 {
     border-bottom-right-radius: 4px; }
 
 .leaflet-control-switcher-box {
-  background-color: #eee;
+  background-color: #fff;
   color: #4d5b69;
   display: none;
   padding: 5px;
@@ -48,11 +48,18 @@ h4 {
     width: 200px; }
 
 .leaflet-control-stats {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.65);
   color: #4d5b69;
+  padding: 5px;
+  color: #4d5b69;
+  display: none;
   font-size: 20px;
   text-shadow: 1px 1px 2px #fff; }
 
-.leaflet-sidebar a.close {
+.leaflet-sidebar .close {
   background: #dce6f0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
   color: #4d5b69;
@@ -71,16 +78,16 @@ h4 {
   overflow-y: auto;
   padding: 8px; }
 
-#slider_wrap {
+#slider-wrap {
   bottom: 0;
   height: 40px;
   left: 0;
   padding: 10px 20px;
   position: absolute;
   right: 0; }
-  #slider_wrap #slider {
+  #slider-wrap #slider {
     visibility: hidden; }
-  #slider_wrap .slider-handle {
+  #slider-wrap .slider-handle {
     background: #7d8b99;
     opacity: 1; }
 
@@ -122,7 +129,7 @@ h4 {
   box-shadow: 0 0 8px #eee;
   color: #eee;
   opacity: .8;
-  padding: 8px 8px 2px 8px;
+  padding: 8px 8px 2px;
   position: fixed;
   right: 30px;
   top: -8px;
@@ -156,8 +163,8 @@ h4 {
       display: none;
       width: 80px; }
     .leaflet-control-lang a:hover:not(:first-child) {
-      color: #eee;
       background-color: #4d5b69;
+      color: #eee;
       cursor: pointer; }
 
 #ribbon {
@@ -220,28 +227,31 @@ h4 {
     font-weight: bold;
     padding: 2px 4px; }
 
-.planes {
-  background-color: #eee;
-  border: 2px solid rgba(77, 91, 105, 0.5);
-  border-radius: 4px;
-  display: none;
-  margin-left: 45px;
-  position: absolute;
+#size-format {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.65);
   color: #4d5b69;
-  font-weight: bold;
   padding: 5px;
-  width: 320px; }
-  .planes label {
-    clear: both;
-    float: left;
-    width: 50px; }
-  .planes input {
-    border: 1px solid #4d5b69;
-    padding: 2px;
-    width: 240px; }
-
-.autocomplete-suggestion {
-  background-color: #eee;
-  border-bottom: 1px solid #4d5b69;
-  color: #4d5b69;
-  cursor: pointer; }
+  bottom: 40px;
+  display: none;
+  font-size: 13px;
+  font-weight: bold;
+  height: 140px;
+  line-height: 13px;
+  margin: 10px;
+  position: absolute;
+  right: 0;
+  width: 180px; }
+  #size-format h5 {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center; }
+  #size-format .format-name {
+    display: inline-block;
+    width: 70px; }
+  #size-format .format-size {
+    display: inline-block;
+    text-align: right;
+    width: 80px; }

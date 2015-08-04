@@ -1,16 +1,19 @@
 {
   "app": {
     "name": "Optimiseur de tracés",
-    "source": "Source"
+    "source": "Source",
+    "contributors": "Contributeurs"
   },
 
   "export": {
     "title": "Géométrie simplifiée en __format__",
 	"close": "Fermer",
+	"size": "Taille par format",
     "viewin": "Voir en __format__",
     "viewtitle": "Voir les données simplifiées en __format__",
     "downloadin": "Télécharger en __format__",
-    "downloadtitle": "Télécharger les données simplifiées en __format__"
+    "downloadtitle": "Télécharger les données simplifiées en __format__",
+    "units": "octets,ko,Mo,Go,To"
   },
 
   "actions": {
@@ -27,6 +30,7 @@
     "switcher": "Sélecteur de calque",
     "source": "source",
     "simplified": "simplifié",
+    "track": "Tracé",
     "infos": {
       "title": "Optimisation de __name__",
       "nodes": "De __sourcenodes__ nœuds à __simplifiednodes__ nœuds"
@@ -38,10 +42,14 @@
   },
 
   "upload": {
-    "none": "Veuillez d'abord importer un fichier GPX / GeoJSON / KML, en utilisant Chrome ou Firefox: "
+    "none": "Veuillez d’abord importer un fichier GPX / GeoJSON / KML, en utilisant Chrome ou Firefox: "
   },
 
   "help": {
     "howto": "Améliorer en 3 étapes"
+  },
+
+  "osm": {
+    "contributors": "© les contributeurs d’OpenStreetMap"
   }
 }
