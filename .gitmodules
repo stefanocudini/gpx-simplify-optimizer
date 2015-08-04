@@ -34,6 +34,3 @@
 [submodule "i18next"]
 	path = vendor/i18next
 	url = https://github.com/i18next/i18next
-[submodule "vendor/i18next"]
-	path = vendor/i18next
-	url = https://github.com/i18next/i18next
