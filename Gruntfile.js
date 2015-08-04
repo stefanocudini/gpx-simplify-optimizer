@@ -29,7 +29,7 @@ grunt.initConfig({
         dist: {
             files: {
                 'dist/jquery.cookie.min.js': ['vendor/jquery-cookie/jquery.cookie.js'],
-                'dist/L.Control.Sidebar.min.js': ['vendor/leaflet-sidebar/src/L.Control.Sidebar.js'],
+                //'dist/L.Control.Sidebar.min.js': ['vendor/leaflet-sidebar/src/L.Control.Sidebar.js'],
                 'dist/togeojson.min.js': ['vendor/togeojson/togeojson.js'],
                 'dist/togpx.min.js': ['vendor/togpx/togpx.js'],
                 'dist/pretty-data.min.js': ['vendor/pretty-data/index.js'],
@@ -55,7 +55,7 @@ grunt.initConfig({
                 block: true
             }
         },
-        dist: {
+        libs: {
             src: [
                 'dist/jquery.cookie.min.js',
                 'dist/L.Control.Sidebar.min.js',
@@ -69,11 +69,12 @@ grunt.initConfig({
                 'vendor/simplify-geometry/simplifygeometry-0.0.1.min.js',
                 'vendor/bootstrap-slider/dist/bootstrap-slider.min.js',
                 'vendor/jquery-autocomplete/dist/jquery.autocomplete.min.js',
-                //'crumble/js/jquery.grumble.min.js',
-                //'crumble/js/jquery.crumble.min.js',
                 'dist/i18next.min.js',
-                
-                // Repository files
+            ],
+            dest: 'dist/libs.min.js'
+        },
+        main: {
+            src: [
                 'src/social.js',
                 'dist/formats.min.js',
                 //'dist/planes.min.js',
@@ -96,14 +97,11 @@ grunt.initConfig({
             }
         }
     },
-
     cssmin: {
         combine: {
             src: [
                 'vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css',
-                'vendor/leaflet-sidebar/src/L.Control.Sidebar.css',
-                //'crumble/css/grumble.min.css',
-                //'crumble/css/crumble.css',
+                //'vendor/leaflet-sidebar/src/L.Control.Sidebar.css',
                 'dist/style.css'
             ],
             dest: 'dist/style.min.css'
@@ -115,15 +113,6 @@ grunt.initConfig({
             //,dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.min.css'
         }
     },
-    // copy: {
-    //     crumble: {
-    //         expand: true,
-    //         nonull: true,
-    //         flatten: true,
-    //         src: 'crumble/images/*',
-    //         dest: 'images/'
-    //     }
-    // },
     watch: {
         css: {
             options: { livereload: true },

@@ -205,6 +205,7 @@ $('#slider').slider({
 }).parent().width('100%');
 
 $('#helpbtn').on('click',function(e) {
+	e.preventDefault();
 	$('#modal').modal('show');
 });
 
