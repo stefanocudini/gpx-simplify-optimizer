@@ -10,7 +10,10 @@ function GPXFormat() {
         'syntax': 'xml',
         'name': 'GPX',
         'extension': 'gpx',
-        'contenttype': 'application/gpx+xml'
+        'contenttype': 'application/gpx+xml',
+        'size_header': 186,
+        'size_track': 70,
+        'size_node': 41
     }
     this.exportData = function(data) {
         return togpx(data);

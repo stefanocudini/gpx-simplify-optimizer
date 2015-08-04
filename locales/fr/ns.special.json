@@ -1,0 +1,55 @@
+{
+  "app": {
+    "name": "Optimiseur de tracés",
+    "source": "Source",
+    "contributors": "Contributeurs"
+  },
+
+  "export": {
+    "title": "Géométrie simplifiée en __format__",
+	"close": "Fermer",
+	"size": "Taille par format",
+    "viewin": "Voir en __format__",
+    "viewtitle": "Voir les données simplifiées en __format__",
+    "downloadin": "Télécharger en __format__",
+    "downloadtitle": "Télécharger les données simplifiées en __format__",
+    "units": "octets,ko,Mo,Go,To"
+  },
+
+  "actions": {
+    "clear": "Vider la carte",
+    "view": "Voir le tracé simplifié",
+    "download": "Télécharger le tracé simplifié",
+    "upload": "Importer un fichier local (GPX, KML, GeoJSON)",
+    "zoomin": "Zoomer",
+    "zoomout": "Dézoomer",
+    "switchlayer": "Choisir le calque actif"
+  },
+
+  "layers": {
+    "switcher": "Sélecteur de calque",
+    "source": "source",
+    "simplified": "simplifié",
+    "track": "Tracé",
+    "infos": {
+      "title": "Optimisation de __name__",
+      "nodes": "De __sourcenodes__ nœuds à __simplifiednodes__ nœuds"
+    },
+    "error": {
+      "layer": "Calque introuvable, probablement déjà supprimé",
+      "controller": "Controlleur introuvable, probablement déjà supprimé"
+    }
+  },
+
+  "upload": {
+    "none": "Veuillez d’abord importer un fichier GPX / GeoJSON / KML, en utilisant Chrome ou Firefox: "
+  },
+
+  "help": {
+    "howto": "Améliorer en 3 étapes"
+  },
+
+  "osm": {
+    "contributors": "© les contributeurs d’OpenStreetMap"
+  }
+}

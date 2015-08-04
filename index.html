@@ -17,13 +17,15 @@
 </head>
 
 <body>
-<h4>Tracks Optimizer online &nbsp;<a href="#" id="helpbtn"><i class="fa fa-question-circle"></i></a>&nbsp; <a href="https://github.com/stefanocudini/gpx-simplify-optimizer">Source</a></h4>
+<h4><span data-i18n="app.name">Tracks Optimizer online</span> &nbsp;<a href="#" id="helpbtn"><i class="fa fa-question-circle"></i></a>&nbsp; <a href="https://github.com/stefanocudini/gpx-simplify-optimizer" id="source" data-i18n="app.source">Source</a></h4>
 
+<!--
 <div style="clear:both">Online Simplifier and Optimizer for GPX/KML/GeoJSON tracks.</div>
+-->
 
 <div id="map"></div>
 
-<div id="slider_wrap">
+<div id="slider-wrap">
 	<input id="slider" type="text" />
 </div>
 
@@ -35,6 +37,11 @@
 	<div class="fb-like" data-href="http://labs.easyblog.it/maps/gpx-simplify-optimizer/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 	<div id="fb-root"></div>
 </div>
+<!--
+-->
+
+
+
 <div id="copy"><a href="http://labs.easyblog.it/">Labs</a> &bull; <a rel="author" href="http://labs.easyblog.it/stefano-cudini/"> &copy; Stefano Cudini</a></div>
 
 <div class="modal" id="modal">
@@ -42,13 +49,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3 class="modal-title"><i class="fa fa-question-circle"></i> Optimize in 3 steps</h3>
+        <h3 class="modal-title"><i class="fa fa-question-circle"></i>&nbsp;<span data-i18n="help.howto">Optimize in 3 steps</span></h3>
       </div>
       <div class="modal-body">
         <img style="opacity:0.9" src="images/gpx-optimizer.png" />
 		<div class="text-center">
 			<br />
-			<b style="color:#888" class="text-uppercase">Contributors</b>
+			<b style="color:#888" class="text-uppercase" data-i18n="app.contributors">Contributors</b>
 			<br />
 			<a href="https://github.com/stefanocudini">Stefano Cudini</a>
 			<br />
@@ -58,22 +65,6 @@
     </div>
   </div>
 </div>
-<div class="planes popup">
-    <div>
-        <label>
-            From:
-        </label>
-            <input type="text" name="from" id="from" class="autocomplete"/>
-            <input type="hidden" id="fromval"/>
-    </div>
-    <div>
-        <label>
-            To:
-        </label>
-            <input type="text" name="to" id="to" class="autocomplete"/>
-            <input type="hidden" id="toval"/>
-    </div>
-</div>
 <div class="leaflet-control formats popup" id="download-formats">
 </div>
 
@@ -81,11 +72,19 @@
 </div>
 
 <div id="export-format" class="modal">
-	<h5>Export text</h5>
+	<h5 data-i18n="export.title">Export text</h5>
 	<pre><code id="export-content" contenteditable="true"></code></pre>
 	<div class="actions fa-times" >
-		<a class="btn" id="export-close"><i class="fa fa-times"></i>Close</a>
+		<a class="btn" id="export-close"><i class="fa fa-times"></i><span data-i18n="export.close"></span></a>
 	</div>
+</div>
+
+<div id="size-format">
+	<h5 data-i18n="export.size">Export size</h5>
+    <div class="sizes">
+    </div>
+
+
 </div>
 
 <!-- 	<div id="credits">

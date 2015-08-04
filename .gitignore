@@ -14,5 +14,6 @@ vendor/tokml/*
 vendor/geojson-to-path/*
 vendor/pretty-data/*
 vendor/jquery-autocomplete/*
+vendor/i18next/*
 css/.sass-cache
 *.swp

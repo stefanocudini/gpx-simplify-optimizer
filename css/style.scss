@@ -4,6 +4,24 @@ $text-color: #eee;
 $side-color: rgba(220, 230, 240, 1);
 $map-margin: 40px;
 
+@mixin popup {
+  background-color: $text-color;
+  border: 2px solid transparentize($main-color, .5);
+  border-radius: 4px;
+  display: none;
+  margin-left: 45px;
+  position: absolute;
+}
+
+@mixin map-box {
+  background-color: rgba(255, 255, 255, .4);
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .65);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, .65);
+  color: $main-color;
+  padding: 5px;
+}
+
 body {
   background: $main-color;
   color: $text-color;
@@ -33,10 +51,10 @@ h4 {
   right: 0;
   top: $map-margin;
   -webkit-touch-callout: none;
-  -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -57,7 +75,7 @@ h4 {
 }
 
 .leaflet-control-switcher-box {
-  background-color: $text-color;
+  background-color: #fff;
   color: $main-color;
   display: none;
   padding: 5px;
@@ -71,24 +89,28 @@ h4 {
 }
 
 .leaflet-control-stats {
+  @include map-box;
   color: $main-color;
+  display: none;
   font-size: 20px;
   text-shadow: 1px 1px 2px #fff;
 }
 
 
-.leaflet-sidebar a.close {
-  background: $side-color;
-  // border: 1px solid #ccc;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .65);
-  color: $main-color;
-  font-size: 20pt;
-  height: 23px;
-  left: -10px;
-  opacity: 1;
-  right: auto;
-  top: 1px;
-  width: 23px;
+.leaflet-sidebar {
+  .close {
+    background: $side-color;
+    // border: 1px solid #ccc;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .65);
+    color: $main-color;
+    font-size: 20pt;
+    height: 23px;
+    left: -10px;
+    opacity: 1;
+    right: auto;
+    top: 1px;
+    width: 23px;
+  }
 }
 
 #sidebar {
@@ -99,7 +121,7 @@ h4 {
   padding: 8px;
 }
 
-#slider_wrap {
+#slider-wrap {
   bottom: 0;
   height: $map-margin;
   left: 0;
@@ -168,7 +190,7 @@ h4 {
   box-shadow: 0 0 8px $text-color;
   color: $text-color;
   opacity: .8;
-  padding: 8px 8px 2px 8px;
+  padding: 8px 8px 2px;
   position: fixed;
   right: 30px;
   top: -8px;
@@ -184,6 +206,52 @@ h4 {
   }
 }
 
+.leaflet-control-lang {
+  width: auto;
+
+  a {
+    display: inline-block;
+    float: left;
+    font-weight: bold;
+
+    // Be careful this part is very tricky with all the rounded corners ...
+    // the only-child:border-bottom-right-radius is still buggy BTW
+    &:only-child {
+      border-radius: 4px;
+    }
+
+    &:not(:first-child):not(:last-child) {
+      border-left: 1px solid $main-color;
+      border-left-radius: 0;
+    }
+
+    &:last-child {
+      border-left: 1px solid $main-color;
+      border-radius: 0 4px 4px 0;
+    }
+
+    &:first-child {
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    &:not(last-child) {
+      font-size: 14px;
+    }
+
+    &.lang {
+      display: none;
+      width: 80px;
+    }
+
+    &:hover:not(:first-child) {
+      background-color: $main-color;
+      color: #eee;
+      cursor: pointer;
+    }
+  }
+}
+
 #ribbon {
   border: 0;
   opacity: .8;
@@ -192,20 +260,13 @@ h4 {
   top: 0;
 }
 
-@mixin popup {
-  background-color: $text-color;
-  border: 2px solid transparentize($main-color, .5);
-  border-radius: 4px;
-  display: none;
-  margin-left: 45px;
-  position: absolute;
-}
 
 .formats {
   @include popup;
   width: 200px;
 
   a {
+    background-color: $text-color;
     color: $main-color;
     cursor: pointer;
     display: block;
@@ -264,32 +325,38 @@ h4 {
   }
 }
 
-.planes {
-  @include popup;
-  color: $main-color;
+#size-format {
+  @include map-box;
+  bottom: $map-margin;
+  //color: white;
+  display: none;
+  font-size: 13px;
   font-weight: bold;
-  padding: 5px;
-  width: 320px;
+  height: 140px;
+  line-height: 13px;
+  margin: 10px;
+  position: absolute;
+  right: 0;
+  width: 180px;
 
-  label {
-    clear: both;
-    float: left;
-    width: 50px;
+  h5 {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
   }
 
-  input {
-    border: 1px solid $main-color;
-    padding: 2px;
-    width: 240px;
+  .format-name {
+    display: inline-block;
+    width: 70px;
+  }
+
+  .format-size {
+    display: inline-block;
+    text-align: right;
+    width: 80px;
   }
 }
 
-.autocomplete-suggestion {
-  background-color: $text-color;
-  border-bottom: 1px solid $main-color;
-  color: $main-color;
-  cursor: pointer;
-}
 
 
 

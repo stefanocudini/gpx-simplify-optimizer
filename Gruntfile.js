@@ -14,6 +14,7 @@ grunt.initConfig({
     },
     jshint: {
         options: {
+            reporter: require('jshint-stylish'),
             globals: {
                 console: true,
                 module: true
@@ -22,7 +23,7 @@ grunt.initConfig({
             "-W033": true,
             "-W044": true    //ignore regexp
         },
-        files: ['js/main.js', 'js/formats.js', 'js/formats/*.js', 'js/layers.js',]
+        files: ['src/main.js', 'src/formats.js', 'src/formats/*.js', 'src/layers.js', 'src/i18n.js', 'locales/*/*.json', 'package.json']
     },
     uglify: {
         dist: {
@@ -36,11 +37,13 @@ grunt.initConfig({
                 'dist/geojson-to-path.min.js': ['vendor/geojson-to-path/geojson-to-path.js'],
                 'dist/leaflet.filelayer.min.js': ['vendor/Leaflet.FileLayer/leaflet.filelayer.js'],
                 'dist/FileSaver.min.js': ['vendor/FileSaver.js/FileSaver.js'],
+                'dist/i18next.min.js': ['vendor/i18next/i18next.commonjs.withJQuery.js'],
                 // Repository files
-                'dist/formats.min.js': ['js/formats.js', 'js/formats/*'],
-                'dist/layers.min.js': ['js/layers.js'],
-                'dist/planes.min.js': ['js/planes.js'],
-                'dist/main.min.js': ['js/main.js']
+                'dist/i18n.min.js': ['src/i18n.js'],
+                'dist/formats.min.js': ['src/formats.js', 'src/formats/*'],
+                'dist/layers.min.js': ['src/layers.js'],
+                'dist/planes.min.js': ['src/planes.js'],
+                'dist/main.min.js': ['src/main.js']
             }
         }
     },
@@ -65,15 +68,17 @@ grunt.initConfig({
                 'dist/FileSaver.min.js',
                 'vendor/simplify-geometry/simplifygeometry-0.0.1.min.js',
                 'vendor/bootstrap-slider/dist/bootstrap-slider.min.js',
-                'vendor/jquery-autocomplete/dist/jquery.autocomplete.min.js'
+                'vendor/jquery-autocomplete/dist/jquery.autocomplete.min.js',
+                'dist/i18next.min.js',
             ],
             dest: 'dist/libs.min.js'
         },
         main: {
             src: [
-                'js/social.js',
+                'src/social.js',
                 'dist/formats.min.js',
                 //'dist/planes.min.js',
+                'dist/i18n.min.js',
                 'dist/layers.min.js',
                 'dist/main.min.js'
             ],
@@ -116,8 +121,13 @@ grunt.initConfig({
         },
         js: {
             options: { livereload: true },
-            files: ['js/*'],
+            files: ['src/*'],
             tasks: ['clean:js', 'jshint', 'uglify', 'concat']
+        },
+        i18n: {
+            options: { livereload: true },
+            files: ['locales/*/*'],
+            tasks: ['jshint']
         }
     }
 });
@@ -133,12 +143,5 @@ grunt.registerTask('default', [
 ]);
 
 
-grunt.loadNpmTasks('grunt-contrib-uglify');
-grunt.loadNpmTasks('grunt-contrib-concat');
-grunt.loadNpmTasks('grunt-contrib-clean');
-grunt.loadNpmTasks('grunt-contrib-sass');
-grunt.loadNpmTasks('grunt-contrib-cssmin');
-grunt.loadNpmTasks('grunt-contrib-jshint');
-grunt.loadNpmTasks('grunt-contrib-watch');
-//grunt.loadNpmTasks('grunt-contrib-copy');
+require('load-grunt-tasks')(grunt);
 };

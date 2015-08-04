@@ -31,6 +31,6 @@
 [submodule "pretty-data"]
 	path = vendor/pretty-data
 	url = https://github.com/Wilkins/pretty-data.git
-[submodule "vendor/jquery-autocomplete"]
-	path = vendor/jquery-autocomplete
-	url = https://github.com/devbridge/jQuery-Autocomplete
+[submodule "i18next"]
+	path = vendor/i18next
+	url = https://github.com/i18next/i18next
