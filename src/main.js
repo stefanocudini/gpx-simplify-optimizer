@@ -155,7 +155,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 
 
 //CONTROL SIDEBAR
-L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
+//L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
 
 // LOADING LANGUAGES
 initLanguage();
