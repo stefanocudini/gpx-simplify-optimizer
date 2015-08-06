@@ -15,5 +15,6 @@ vendor/geojson-to-path/*
 vendor/pretty-data/*
 vendor/jquery-autocomplete/*
 vendor/i18next/*
+vendor/leaflet-gpx/*
 css/.sass-cache
 *.swp
