@@ -172,16 +172,31 @@ Format.prototype = {
     /**
      * Group all the layers into a single geoJSON objet
      *
-     * @param array datas the array of LayerGroup
+     * @param object layer the LayerOptimizer object
      *
      * @return the data in the proper format
      */
-    groupData: function(datas) {
+    groupData: function(layer) {
+        var datas = layer.simplifiedLayerData;
         var groupLayer = L.geoJson(null);
+        var data;
         for (var i=0; i<datas.length; i++) {
 
             if (window.map.hasLayer(datas[i].getLayers()[0])) {
-                groupLayer.addData(datas[i].getLayers()[0].toGeoJSON());
+                data = datas[i].getLayers()[0].toGeoJSON();
+                // Hack to handle issue #12
+                // If geometry was not a LineString, we converted it to LineString to be able to simplify it.
+                // Now have to put it back to its original geometry
+                // But if we do, we get an Error: Invalid LatLng object: (NaN, NaN)
+                // when calling L.geoJson.addData()
+                // From http://cdn.leafletjs.com/leaflet-0.7/leaflet-src.js:1163
+                /*
+                if (layer.sourceLayerOptions[i].type) {
+                    data.geometry.type = layer.sourceLayerOptions[i].type;
+                }
+                */
+
+                groupLayer.addData(data);
             }
         }
         return this.exportData(groupLayer.toGeoJSON());
@@ -200,7 +215,7 @@ Format.prototype = {
         try {
             if(!!new Blob())
             {
-                var content = this.groupData(layer.simplifiedLayerData);
+                var content = this.groupData(layer);
                 var blob = new Blob([content], {type: this.param.contenttype+";charset=utf-8"});
                 saveAs(blob, name);
             }
@@ -233,8 +248,7 @@ Format.prototype = {
         try {
             if(!!new Blob())
             {
-                var content = this.groupData(layer.simplifiedLayerData)
-                //var content = this.exportData(layer.simplifiedLayerData);
+                var content = this.groupData(layer)
                 content = this.display(content);
 
                 $('code').attr('class', this.param.syntax);
@@ -267,4 +281,3 @@ Format.prototype = {
         this.view(window.currentLayer);
     }
 };
-
