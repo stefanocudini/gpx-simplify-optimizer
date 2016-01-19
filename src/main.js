@@ -200,7 +200,7 @@ $('#slider').slider({
 	tooltip: 'hide'
 })
 .on('slide', function(e) {
-    window.currentLayer.optimize(e.value);
+    window.currentLayer.optimize(Math.pow(e.value,2));
     window.currentLayer.displayInfos();
 }).parent().width('100%');
 
