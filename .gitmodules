@@ -37,3 +37,12 @@
 [submodule "leaflet-gpx"]
 	path = vendor/leaflet-gpx
 	url = https://github.com/mpetazzoni/leaflet-gpx
+[submodule "vendor/Leaflet.FileLayer"]
+	path = vendor/Leaflet.FileLayer
+	url = https://github.com/nrenner/Leaflet.FileLayer/
+[submodule "vendor/gpx-parse"]
+	path = vendor/gpx-parse
+	url = https://github.com/Wilkins/gpx-parse
+[submodule "vendor/gpx"]
+	path = vendor/gpx
+	url = https://github.com/Wilkins/gpx
