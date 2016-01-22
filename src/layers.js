@@ -57,7 +57,8 @@ var LayerOptimizer = function(source) {
     // Array of source layers
     this.sourceLayerData = [];
     this.sourceLayerJSON = [];
-    this.sourceLayerNodes =  0;
+    this.sourceLayerOptions = [];
+    this.sourceLayerNodes = 0;
 
     //
     // Simplified layer part
@@ -88,21 +89,55 @@ LayerOptimizer.prototype = {
      */
     init: function() {
 
+        var allLayers = [];
         var layer;
         for (var i=0; i<this.size; i++) {
             // Retrieve each layer
             layer = this.sourceLayer.getLayers()[i].toGeoJSON();
-            this.sourceLayerJSON[i] = layer;
-            this.sourceLayerData[i] = L.geoJson(null, { style : this.sourceLayerStyle}).addTo(window.map);
-            this.sourceLayerData[i].addData(layer);
-
-            // Count nodes
-            this.sourceLayerNodes     += layer.geometry.coordinates.length
-            this.simplifiedLayerNodes += layer.geometry.coordinates.length
-
-            // Create simplified copy
-            this.simplifiedLayerData[i] = L.geoJson(layer, { style : this.simplifiedLayerStyle}).addTo(window.map);
+            if (layer.geometry.type === 'GeometryCollection') {
+                // This part was added to handle issue #12
+                // We extract the GeometryCollection into several classic layers
+                for (var subi=0; subi<layer.geometry.geometries.length; subi++) {
+                    var fakeLayer = JSON.parse(JSON.stringify(layer));
+                    // Retrieve the geometry
+                    fakeLayer.geometry = layer.geometry.geometries[subi];
+                    // Split the « name » into « name #x » to identify each
+                    fakeLayer.properties.name = layer.properties.name + " #"+subi; //layerName;
+                    // Retrieve the coordinates
+                    fakeLayer.geometry.coordinates = fakeLayer.geometry.coordinates[0];
+                    allLayers.push(fakeLayer);
+                }
+            } else {
+                allLayers.push(layer);
+            }
         }
+
+        this.size = allLayers.length;
+        for (var j=0; j<this.size; j++) {
+            this.initLayer(allLayers[j], j);
+        }
+    },
+
+    initLayer: function(layer, i) {
+
+        this.sourceLayerOptions[i] = {};
+        // Force the use of LineString because Leaflet doesn't simplify Polygon
+        // We save it in sourceLayerOptions for later use, but for now it's not used at all
+        if (layer.geometry.type !== "LineString") {
+            this.sourceLayerOptions[i].type = layer.geometry.type;
+            layer.geometry.type = "LineString";
+        }
+        this.sourceLayerJSON[i] = layer;
+        this.sourceLayerData[i] = L.geoJson(null, { style : this.sourceLayerStyle}).addTo(window.map);
+        this.sourceLayerData[i].addData(layer);
+
+        // Count nodes
+        this.sourceLayerNodes     += layer.geometry.coordinates.length
+        this.simplifiedLayerNodes += layer.geometry.coordinates.length
+
+        // Create simplified copy
+        this.simplifiedLayerData[i] = L.geoJson(layer, { style : this.simplifiedLayerStyle}).addTo(window.map);
+
     },
 
     /**

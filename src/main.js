@@ -33,7 +33,8 @@ L.Control.FileLayerLoad.TITLE= $.t('actions.upload');
 var controlLoader = L.Control.fileLayerLoad({
 	addToMap: false,
 	fitBounds: false,
-	fileSizeLimit: 8096
+	fileSizeLimit: 8096,
+	binaryFormats: []
 }).addTo(map);
 
 
