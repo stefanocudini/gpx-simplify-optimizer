@@ -113,6 +113,39 @@ grunt.initConfig({
             //,dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.min.css'
         }
     },
+    jasmine: {
+        components: {
+          src: [
+              /*
+          'http://code.jquery.com/jquery-1.8.3.min.js',
+          'src/formats.js',
+          'src/formats/*js'
+          */
+          'src/formats.js',
+          'src/foo.js'
+          ],
+          options: {
+            vendor: [
+                'http://code.jquery.com/jquery-1.8.3.min.js',
+                'http://cdn.leafletjs.com/leaflet-0.7/leaflet.js',
+                'dist/jquery.cookie.min.js',
+                'dist/togeojson.min.js',
+                'dist/togpx.min.js',
+                'dist/pretty-data.min.js',
+                'dist/tokml.min.js',
+                'dist/geojson-to-path.min.js',
+                'dist/leaflet.filelayer.min.js',
+                'dist/FileSaver.min.js',
+                'dist/i18next.min.js',
+                'dist/i18n.min.js',
+                'node_modules/jasmine-jquery/lib/jasmine-jquery.js'
+            ],
+            specs: 'tests/*.js',
+            keepRunner : true,
+            //helpers: 'test/spec/*.js'
+          }
+        }
+    },
     watch: {
         css: {
             options: { livereload: true },
@@ -141,6 +174,10 @@ grunt.registerTask('default', [
     'cssmin',
     //'copy'
 ]);
+grunt.registerTask('travis', [
+    'jshint', 'jasmine',
+]);
+
 
 
 require('load-grunt-tasks')(grunt);

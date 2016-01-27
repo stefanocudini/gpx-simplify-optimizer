@@ -5,7 +5,7 @@ $.i18n.init({
     // We load in synchronous mode to be able to build the page with i18n text
     getAsync: false,
     fallbackLng: 'en',
-    debug: true
+    debug: false
 }, function(t) {
     $('body').i18n();
 });
