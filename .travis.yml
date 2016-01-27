@@ -7,4 +7,6 @@ before_install:
  - npm install -g grunt-cli
  - gem install sass
 install: npm install
-script: grunt --verbose --force
+script:
+ - grunt --verbose --force
+ - grunt travis --verbose

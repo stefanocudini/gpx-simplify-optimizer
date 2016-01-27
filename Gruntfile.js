@@ -122,6 +122,7 @@ grunt.initConfig({
           'src/formats/*js'
           */
           'src/formats.js',
+          'src/formats/*.js',
           'src/foo.js'
           ],
           options: {
