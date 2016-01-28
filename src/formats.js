@@ -159,14 +159,27 @@ Format.prototype = {
     },
 
     /**
-     * Calculate an estimated size of the file
+     * Calculate an estimated size of the file in a readable format
      * 
+     * @param integer tracks the number of tracks in the file
      * @param integer nodes the number of nodes in the file
      *
      * @return the human readable file size
      */
     getSize: function(tracks, nodes) {
-    	return filesizeHuman(this.param.size_header + (tracks * this.param.size_track) + (nodes * this.param.size_node));
+    	return filesizeHuman(this.getEstimatedSize(tracks, nodes));
+    },
+
+    /**
+     * Calculate an estimated size of the file
+     * 
+     * @param integer tracks the number of tracks in the file
+     * @param integer nodes the number of nodes in the file
+     *
+     * @return the numeric file size
+     */
+    getEstimatedSize: function(tracks, nodes) {
+    	return this.param.size_header + (tracks * this.param.size_track) + (nodes * this.param.size_node);
     },
 
     /**
