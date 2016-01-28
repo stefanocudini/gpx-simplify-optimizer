@@ -172,6 +172,7 @@ LayerOptimizer.prototype = {
             simplifiedJSON = this.simplifiedLayerData[i].getLayers()[0].toGeoJSON();
             simplifiedJSON.geometry.coordinates = newcoords;
             this.simplifiedLayerData[i].clearLayers();
+            //console.log(JSON.stringify(simplifiedJSON));
             this.simplifiedLayerData[i].addData(simplifiedJSON);
 
             this.simplifiedLayerNodes += newcoords.length;
@@ -253,6 +254,8 @@ LayerOptimizer.prototype = {
         for (var i=0; i<this.size; i++) {
 
             layer = this.simplifiedLayerData[i].getLayers()[0];
+            //console.log(jsonify(layer));
+            //console.log(jsonify(window.map.layers));
             if (window.map.hasLayer(layer)) {
                 tracks++;
                 nodes += layer.toGeoJSON().geometry.coordinates.length;
