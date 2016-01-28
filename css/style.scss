@@ -14,12 +14,10 @@ $map-margin: 40px;
 }
 
 @mixin map-box {
-  background-color: rgba(255, 255, 255, .4);
-  border-radius: 5px;
+  background-color: rgba(255, 255, 255, .6);
   box-shadow: 0 1px 3px rgba(0, 0, 0, .65);
-  text-shadow: 0 1px 3px rgba(255, 255, 255, .65);
-  color: $main-color;
-  padding: 5px;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, .6);
+  color: $main-color;  
 }
 
 body {
@@ -74,8 +72,11 @@ h4 {
   }
 }
 
+.leaflet-control {
+  @include map-box;
+}
+
 .leaflet-control-switcher-box {
-  background-color: #fff;
   color: $main-color;
   display: none;
   padding: 5px;
@@ -90,6 +91,8 @@ h4 {
 
 .leaflet-control-stats {
   @include map-box;
+  padding: 5px;
+  border-radius: 5px;    
   color: $main-color;
   display: none;
   font-size: 20px;
@@ -327,16 +330,14 @@ h4 {
 
 #size-format {
   @include map-box;
-  bottom: $map-margin;
+  border-radius: 4px;
+  padding: 4px;
   //color: white;
   display: none;
   font-size: 13px;
   font-weight: bold;
   height: 140px;
   line-height: 13px;
-  margin: 10px;
-  position: absolute;
-  right: 0;
   width: 180px;
 
   h5 {
@@ -347,6 +348,7 @@ h4 {
 
   .format-name {
     display: inline-block;
+    white-space: nowrap;
     width: 70px;
   }
 

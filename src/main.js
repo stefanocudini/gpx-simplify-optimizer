@@ -155,23 +155,10 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 }()).addTo(map);
 
 
-//CONTROL SIDEBAR
-//L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
-
-// LOADING LANGUAGES
-initLanguage();
-
-
-L.control.attribution({
-	position: 'topright',
-	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank" data-i18n="osm.contributors">'+$.t('osm.contributors')+'</a>'
-}).addTo(map);
-
-
 //CONTROL LAYER SWITCHER
 (function() {
-	var control = new L.Control({position:'topright'});
-	control.onAdd = function(map) {
+    var control = new L.Control({position:'bottomright'});
+    control.onAdd = function(map) {
         var ctrl = L.DomUtil.create('div','leaflet-control-switcher-box leaflet-bar'),
         
             a = L.DomUtil.create('label','', ctrl);
@@ -187,9 +174,32 @@ L.control.attribution({
         });
         return ctrl;
     };
-	return control;
+    return control;
 }()).addTo(map);
 
+
+//CONTROL SIZES
+(function() {
+    var control = new L.Control({position:'bottomright'});
+    control.onAdd = function(map) {
+        return L.DomUtil.get('size-format');
+    };
+    return control;
+}()).addTo(map);
+
+
+
+//CONTROL SIDEBAR
+//L.control.sidebar('sidebar',{position:'right', autoPan:false}).addTo(map).show();
+
+// LOADING LANGUAGES
+initLanguage();
+
+
+L.control.attribution({
+	position: 'topright',
+	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank" data-i18n="osm.contributors">'+$.t('osm.contributors')+'</a>'
+}).addTo(map);
 
 // PRECISION SLIDER
 $('#slider').slider({
