@@ -23,7 +23,9 @@ grunt.initConfig({
             "-W033": true,
             "-W044": true    //ignore regexp
         },
-        files: ['src/main.js', 'src/formats.js', 'src/formats/*.js', 'src/layers.js', 'src/i18n.js', 'locales/*/*.json', 'package.json']
+        sources: ['src/main.js', 'src/formats.js', 'src/formats/*.js', 'src/layers.js', 'src/i18n.js', 'locales/*/*.json', 'package.json'],
+        tests: ['tests/*.js']
+
     },
     uglify: {
         dist: {
@@ -116,19 +118,15 @@ grunt.initConfig({
     jasmine: {
         components: {
           src: [
-              /*
-          'http://code.jquery.com/jquery-1.8.3.min.js',
-          'src/formats.js',
-          'src/formats/*js'
-          */
+          'src/layers.js',
           'src/formats.js',
           'src/formats/*.js',
-          'src/foo.js'
           ],
           options: {
             vendor: [
                 'http://code.jquery.com/jquery-1.8.3.min.js',
-                'http://cdn.leafletjs.com/leaflet-0.7/leaflet.js',
+                'http://cdn.leafletjs.com/leaflet-0.7/leaflet-src.js',
+                'vendor/simplify-geometry/simplifygeometry-0.0.1.min.js',
                 'dist/jquery.cookie.min.js',
                 'dist/togeojson.min.js',
                 'dist/togpx.min.js',
@@ -142,8 +140,7 @@ grunt.initConfig({
                 'node_modules/jasmine-jquery/lib/jasmine-jquery.js'
             ],
             specs: 'tests/*.js',
-            keepRunner : true,
-            //helpers: 'test/spec/*.js'
+            keepRunner : false,
           }
         }
     },
@@ -168,7 +165,7 @@ grunt.initConfig({
 
 grunt.registerTask('default', [
     'clean',
-    'jshint',
+    'jshint:sources',
     'uglify',
     'concat',
     'sass',
@@ -176,7 +173,8 @@ grunt.registerTask('default', [
     //'copy'
 ]);
 grunt.registerTask('travis', [
-    'jshint', 'jasmine',
+    'jshint:tests',
+    'jasmine',
 ]);
 
 
