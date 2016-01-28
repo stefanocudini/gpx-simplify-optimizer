@@ -210,19 +210,17 @@ LayerOptimizer.prototype = {
     createLayerGroup: function() {
         var layers = {};
         var name;
-        var simplifiedExt = ' ('+$.t('layers.simplified')+')';
-        var sourceExt      = ' ('+$.t('layers.source')+')';
         for (var i=0; i<this.size; i++) {
             if (this.sourceLayerJSON[i].properties && this.sourceLayerJSON[i].properties.name) {
                 name = this.sourceLayerJSON[i].properties.name;
             } else {
                 name = this.name+' - '+$.t('layers.track')+' '+i;
             }
-            layers[name+simplifiedExt] = this.simplifiedLayerData[i];
-            layers[name+sourceExt] = this.sourceLayerData[i];
+            layers[ $.t('layers.simplified') ] = this.simplifiedLayerData[i];
+            layers[ $.t('layers.source') ] = this.sourceLayerData[i];
         }
 
-        this.controller = L.control.layers(null, layers);
+        this.controller = L.control.layers(null, layers, {collapsed : false});
         this.controller.addTo(window.map);
         $('.leaflet-control-layers-selector').on('click', function() {
             window.currentLayer.displaySizeFormats();

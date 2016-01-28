@@ -75,6 +75,10 @@ h4 {
 .leaflet-control {
   @include map-box;
 }
+.leaflet-control-attribution.leaflet-control {
+  background:none;
+  box-shadow:none
+}
 
 .leaflet-control-switcher-box {
   color: $main-color;
@@ -95,7 +99,7 @@ h4 {
   border-radius: 5px;    
   color: $main-color;
   display: none;
-  font-size: 20px;
+  font-size: 16px;
   text-shadow: 1px 1px 2px #fff;
 }
 

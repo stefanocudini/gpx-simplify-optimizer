@@ -118,6 +118,14 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 }()).addTo(map);
 
 
+
+//CONTROL ATTRIBUTION
+L.control.attribution({
+    position: 'topright',
+    prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank" data-i18n="osm.contributors">'+$.t('osm.contributors')+'</a>'
+}).addTo(map);
+
+
 //CONTROL LANGUAGES
 (function() {
 	var control = new L.Control({position:'topleft'});
@@ -157,7 +165,7 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 
 //CONTROL LAYER SWITCHER
 (function() {
-    var control = new L.Control({position:'bottomright'});
+    var control = new L.Control({position:'topright'});
     control.onAdd = function(map) {
         var ctrl = L.DomUtil.create('div','leaflet-control-switcher-box leaflet-bar'),
         
@@ -194,12 +202,6 @@ controlLoader.loader.on('data:loaded', function (layerObject) {
 
 // LOADING LANGUAGES
 initLanguage();
-
-
-L.control.attribution({
-	position: 'topright',
-	prefix: '<a href="http://leafletjs.com/">Leaflet</a> &bull; <a href="http://osm.org/" target="_blank" data-i18n="osm.contributors">'+$.t('osm.contributors')+'</a>'
-}).addTo(map);
 
 // PRECISION SLIDER
 $('#slider').slider({

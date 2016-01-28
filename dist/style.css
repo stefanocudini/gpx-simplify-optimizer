@@ -42,6 +42,10 @@ h4 {
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.6);
   color: #4d5b69; }
 
+.leaflet-control-attribution.leaflet-control {
+  background: none;
+  box-shadow: none; }
+
 .leaflet-control-switcher-box {
   color: #4d5b69;
   display: none;
@@ -61,7 +65,7 @@ h4 {
   border-radius: 5px;
   color: #4d5b69;
   display: none;
-  font-size: 20px;
+  font-size: 16px;
   text-shadow: 1px 1px 2px #fff; }
 
 .leaflet-sidebar .close {
