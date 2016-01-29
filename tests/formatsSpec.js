@@ -72,9 +72,6 @@ describe("Testing fixtures conversion", function() {
     describe('Checking fixture 3 (optimization 0)', function() {
         checkFormatFixture('testcase3-multitracks-kml-novascotia-optimization0.json');
     });
-    describe('Checking fixture 3', function() {
-        checkFormatFixture('testcase3-multitracks-kml-novascotia.json');
-    });
 });
 
 function checkFormatFixture(file) {
