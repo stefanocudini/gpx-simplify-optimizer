@@ -12,8 +12,8 @@ function GeoJSONFormat() {
         'extension': 'geojson',
         'contenttype': 'appplication/json',
         'size_header': 90,
-        'size_track': 35,
-        'size_node': 22
+        'size_track': 36,
+        'size_node': 20
     }
     this.exportData = function(data) {
         return JSON.stringify(data);
