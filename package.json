@@ -21,7 +21,8 @@
     "track"
   ],
   "dependencies": {
-    "leaflet": "*"
+    "leaflet": "*",
+    "gpx-parse": "~0.8.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
