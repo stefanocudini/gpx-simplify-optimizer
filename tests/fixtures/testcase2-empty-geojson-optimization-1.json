@@ -1,5 +1,6 @@
 {
     "name" : "Empty track",
+    "optimization": -1,
 
     "source": {"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"LineString","coordinates":[]}}]},
 

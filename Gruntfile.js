@@ -125,6 +125,7 @@ grunt.initConfig({
           options: {
             vendor: [
                 'http://code.jquery.com/jquery-1.8.3.min.js',
+                // Here we use the non minified source
                 'http://cdn.leafletjs.com/leaflet-0.7/leaflet-src.js',
                 'vendor/simplify-geometry/simplifygeometry-0.0.1.min.js',
                 'dist/jquery.cookie.min.js',
