@@ -72,6 +72,9 @@ describe("Testing fixtures conversion", function() {
     describe('Checking fixture 3 (optimization 0)', function() {
         checkFormatFixture('testcase3-multitracks-kml-novascotia-optimization0.json');
     });
+    describe('Checking fixture 3', function() {
+        checkFormatFixture('testcase3.json');
+    });
 });
 
 function checkFormatFixture(file) {
@@ -99,7 +102,6 @@ function checkFormatFixture(file) {
   it('Converts GeoJSON to GPX with correct estimated size', function() {
     checkSizePrecision(gpx, fixture.gpx, counters);
   });
-
   it('Converts GeoJSON to Mediawiki properly', function() {
     checkExportFormat(mediawiki, Layer, fixture.mediawiki);
   });
@@ -107,7 +109,6 @@ function checkFormatFixture(file) {
   it('Converts GeoJSON to Mediawiki with correct estimated size', function() {
     checkSizePrecision(mediawiki, fixture.mediawiki, counters);
   });
-
   it('Converts GeoJSON to KML properly', function() {
     checkExportFormat(kml, Layer, fixture.kml);
   });
@@ -115,7 +116,6 @@ function checkFormatFixture(file) {
   it('Converts GeoJSON to KML with correct estimated size', function() {
     checkSizePrecision(kml, fixture.kml, counters);
   });
-
   it('Converts GeoJSON to GeoJSON properly', function() {
     checkExportFormat(geojson, Layer, fixture.geojson);
   });
