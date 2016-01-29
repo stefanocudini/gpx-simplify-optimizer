@@ -14,7 +14,7 @@ function MediawikiFormat() {
         'contenttype': 'text/plain',
         'size_header': 0,
         'size_track': 0,
-        'size_node': 20
+        'size_node': 17
     }
     this.exportData = function(data) {
         return geojsonToPath(data);

@@ -58,6 +58,9 @@ describe("Testing fixtures conversion", function() {
     describe('Checking fixture 2', function() {
         checkFormatFixture('testcase2.json');
     });
+    describe('Checking fixture 3', function() {
+        checkFormatFixture('testcase3.json');
+    });
 });
 
 function checkFormatFixture(file) {
@@ -71,35 +74,33 @@ function checkFormatFixture(file) {
 
   //window.formats = { "formats": {'length': 0} };
   //Layer.optimize(0);
-  var Layer = new LayerOptimizer({layer: L.geoJson(fixture.source)});
+  var Layer = new LayerOptimizer({layer: convertToGeoJSON(fixture.source)});
   var counters = Layer.countTracksNodes();
 
+
   it('Converts GeoJSON to GPX properly', function() {
-    checkExportFormat(gpx, fixture.source, fixture.gpx);
+    checkExportFormat(gpx, Layer, fixture.gpx);
   });
 
   it('Converts GeoJSON to GPX with correct estimated size', function() {
     checkSizePrecision(gpx, fixture.gpx, counters);
   });
-
   it('Converts GeoJSON to Mediawiki properly', function() {
-    checkExportFormat(mediawiki, fixture.source, fixture.mediawiki);
+    checkExportFormat(mediawiki, Layer, fixture.mediawiki);
   });
 
   it('Converts GeoJSON to Mediawiki with correct estimated size', function() {
     checkSizePrecision(mediawiki, fixture.mediawiki, counters);
   });
-
   it('Converts GeoJSON to KML properly', function() {
-    checkExportFormat(kml, fixture.source, fixture.kml);
+    checkExportFormat(kml, Layer, fixture.kml);
   });
 
   it('Converts GeoJSON to KML with correct estimated size', function() {
     checkSizePrecision(kml, fixture.kml, counters);
   });
-
   it('Converts GeoJSON to GeoJSON properly', function() {
-    checkExportFormat(geojson, fixture.source, fixture.geojson);
+    checkExportFormat(geojson, Layer, fixture.geojson);
   });
 
   it('Converts GeoJSON to GeoJSON with correct estimated size', function() {
@@ -115,7 +116,9 @@ function checkFormatFixture(file) {
  */
 function checkSizePrecision(format, data, counters) {
   var estimatedSize = format.getEstimatedSize(counters.tracks, counters.nodes);
-  var precision = 10/100; // 10 percent
+  var precision = 15/100; // 15 percent
+  // Debug in case size is not precise enough
+  //console.log((data.length*(1-precision)-1) + " < " + estimatedSize + " < " + (data.length*(1+precision)+1) + " ----------- REAL : "+ data.length+"-----  percent : "+Math.abs(estimatedSize/data.length));
   expect(data.length*(1+precision)+1).toBeGreaterThan(estimatedSize);
   expect(data.length*(1-precision)-1).toBeLessThan(estimatedSize);
 }
@@ -126,7 +129,28 @@ function checkSizePrecision(format, data, counters) {
  * @param format the export format
  * @param data the generated data
  */
-function checkExportFormat(format, source, data) {
-  expect(format.exportData(source)).toEqual(data);
+function checkExportFormat(format, Layer, data) {
+  expect(format.groupData(Layer)).toEqual(data);
 }
 
+
+// Got it from https://github.com/makinacorpus/Leaflet.FileLayer/blob/gh-pages/leaflet.filelayer.js
+function loadGeoJSON(content) {
+    if (typeof content == 'string') {
+        content = JSON.parse(content);
+    }
+    var layer = L.geoJson(content);
+    if (layer.getLayers().length === 0) {
+        throw new Error('GeoJSON has no valid layers.');
+    }
+    return layer;
+}
+function convertToGeoJSON(content) {
+    // Format is either 'gpx' or 'kml'
+    if (typeof content == 'string') {
+        var format = content.match(/<gpx/i) ? 'gpx' : content.match(/kml/i) ? 'kml' : 'geojson';
+        content = ( new window.DOMParser() ).parseFromString(content, "text/xml");
+        content = toGeoJSON[format](content);
+    }
+    return this.loadGeoJSON(content);
+}
