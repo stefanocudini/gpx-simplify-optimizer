@@ -53,13 +53,13 @@ describe("Testing fixtures conversion", function() {
     window.map.hasLayer = function() { return true; }
 
     describe('Checking fixture 1', function() {
-        checkFormatFixture('testcase1.json');
+        checkFormatFixture('testcase1-classic-geojson.json');
     });
     describe('Checking fixture 2', function() {
-        checkFormatFixture('testcase2.json');
+        checkFormatFixture('testcase2-empty-geojson.json');
     });
     describe('Checking fixture 3', function() {
-        checkFormatFixture('testcase3.json');
+        checkFormatFixture('testcase3-multitracks-kml-novascotia.json');
     });
 });
 
