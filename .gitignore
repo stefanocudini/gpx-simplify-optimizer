@@ -17,3 +17,5 @@ vendor/jquery-autocomplete/*
 vendor/i18next/*
 css/.sass-cache
 *.swp
+.grunt
+_SpecRunner.html

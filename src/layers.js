@@ -46,6 +46,7 @@ var LayerOptimizer = function(source) {
     // Source layer part
     // 
     this.sourceLayer = source.layer;
+
     this.size = source.layer.getLayers().length;
     this.sourceLayerStyle = {
         color: 'red',
@@ -242,14 +243,13 @@ LayerOptimizer.prototype = {
     },
 
     /**
-     * Display the size for the differents formats
-     *
-     * @return void
+     * Count the number of tracks and nodes
+     * 
+     * @return object an object with tracks & nodes properties
      */
-    displaySizeFormats: function() {
+    countTracksNodes: function() {
         var tracks=0;
         var nodes=0;
-        var groupLayer = L.geoJson(null);
         for (var i=0; i<this.size; i++) {
 
             layer = this.simplifiedLayerData[i].getLayers()[0];
@@ -258,12 +258,22 @@ LayerOptimizer.prototype = {
                 nodes += layer.toGeoJSON().geometry.coordinates.length;
             }
         }
+        return {"tracks": tracks, "nodes": nodes};
+    },
+
+    /**
+     * Display the size for the differents formats
+     *
+     * @return void
+     */
+    displaySizeFormats: function() {
+        var counters = this.countTracksNodes();
 
         $('#size-format .sizes').html('');
         var size = 0;
         for (var j=0; j<window.formats.formats.length; j++) {
             f = window.formats.formats[j];
-            size = f.getSize(tracks, nodes);
+            size = f.getSize(counters.tracks, counters.nodes);
             $('#size-format .sizes').append('<p><span class="format-name">'+f.param.name+' :</span><span class="format-size">'+size+'</span></p>');
         }
         $('#size-format').show();

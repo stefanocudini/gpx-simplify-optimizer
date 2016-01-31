@@ -1,6 +1,12 @@
 language: node_js
 node_js:
-  - "0.8"
-before_install: npm install -g grunt-cli
+  - "0.12"
+  - "0.11"
+  - "0.10"
+before_install:
+ - npm install -g grunt-cli
+ - gem install sass
 install: npm install
-script: grunt --verbose --force
+script:
+ - grunt --verbose --force
+ - grunt travis --verbose

@@ -23,7 +23,9 @@ grunt.initConfig({
             "-W033": true,
             "-W044": true    //ignore regexp
         },
-        files: ['src/main.js', 'src/formats.js', 'src/formats/*.js', 'src/layers.js', 'src/i18n.js', 'locales/*/*.json', 'package.json']
+        sources: ['src/main.js', 'src/formats.js', 'src/formats/*.js', 'src/layers.js', 'src/i18n.js', 'locales/*/*.json', 'package.json'],
+        tests: ['tests/*.js']
+
     },
     uglify: {
         dist: {
@@ -113,6 +115,36 @@ grunt.initConfig({
             //,dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.min.css'
         }
     },
+    jasmine: {
+        components: {
+          src: [
+          'src/layers.js',
+          'src/formats.js',
+          'src/formats/*.js',
+          ],
+          options: {
+            vendor: [
+                'http://code.jquery.com/jquery-1.8.3.min.js',
+                // Here we use the non minified source
+                'http://cdn.leafletjs.com/leaflet-0.7/leaflet-src.js',
+                'vendor/simplify-geometry/simplifygeometry-0.0.1.min.js',
+                'dist/jquery.cookie.min.js',
+                'dist/togeojson.min.js',
+                'dist/togpx.min.js',
+                'dist/pretty-data.min.js',
+                'dist/tokml.min.js',
+                'dist/geojson-to-path.min.js',
+                'dist/leaflet.filelayer.min.js',
+                'dist/FileSaver.min.js',
+                'dist/i18next.min.js',
+                'dist/i18n.min.js',
+                'node_modules/jasmine-jquery/lib/jasmine-jquery.js'
+            ],
+            specs: 'tests/*.js',
+            keepRunner : false,
+          }
+        }
+    },
     watch: {
         css: {
             options: { livereload: true },
@@ -134,13 +166,18 @@ grunt.initConfig({
 
 grunt.registerTask('default', [
     'clean',
-    'jshint',
+    'jshint:sources',
     'uglify',
     'concat',
     'sass',
     'cssmin',
     //'copy'
 ]);
+grunt.registerTask('travis', [
+    'jshint:tests',
+    'jasmine',
+]);
+
 
 
 require('load-grunt-tasks')(grunt);

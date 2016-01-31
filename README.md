@@ -1,4 +1,4 @@
-Track Simplifier / Optimizer online
+Track Simplifier / Optimizer online [![Build Status](https://travis-ci.org/stefanocudini/gpx-simplify-optimizer.svg?branch=master)](https://travis-ci.org/stefanocudini/gpx-simplify-optimizer)
 ============
 
 Online Simplifier and Optimizer for GPX / GeoJSON / KML tracks.
