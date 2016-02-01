@@ -13,7 +13,7 @@ function GPXFormat() {
         'contenttype': 'application/gpx+xml',
         'size_header': 186,
         'size_track': 75,
-        'size_node': 37
+        'size_node': 48
     }
     this.exportData = function(data) {
 
