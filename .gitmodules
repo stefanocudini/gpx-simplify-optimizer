@@ -21,7 +21,7 @@
 	url = https://github.com/seabre/simplify-geometry.git
 [submodule "togpx"]
 	path = vendor/togpx
-	url = https://github.com/tyrasd/togpx.git
+	url = https://github.com/jwenzler/togpx.git
 [submodule "geojson-to-path"]
 	path = vendor/geojson-to-path
 	url = https://github.com/Wilkins/geojson-to-path.git
@@ -34,15 +34,15 @@
 [submodule "i18next"]
 	path = vendor/i18next
 	url = https://github.com/i18next/i18next
-[submodule "leaflet-gpx"]
-	path = vendor/leaflet-gpx
-	url = https://github.com/mpetazzoni/leaflet-gpx
+#[submodule "leaflet-gpx"]
+#	path = vendor/leaflet-gpx
+#	url = https://github.com/mpetazzoni/leaflet-gpx
 [submodule "Leaflet.FileLayer"]
 	path = vendor/Leaflet.FileLayer
 	url = https://github.com/nrenner/Leaflet.FileLayer/
-[submodule "vendor/gpx"]
-	path = vendor/gpx
-	url = https://github.com/Wilkins/gpx
+#[submodule "vendor/gpx"]
+#	path = vendor/gpx
+#	url = https://github.com/Wilkins/gpx
 [submodule "vendor/gpx-parse"]
 	path = vendor/gpx-parse
-	url = https://github.com/Wilkins/gpx-parse
+	url = https://github.com/elliotstokes/gpx-parse
