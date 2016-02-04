@@ -31,17 +31,6 @@ describe('filesizeHuman function', function() {
   });
 });
 
-var jsonify=function(o){
-    var seen=[];
-    var jso=JSON.stringify(o, function(k,v){
-        if (typeof v =='object') {
-            if ( !seen.indexOf(v) ) { return '__cycle__'; }
-            seen.push(v);
-        } return v;
-    });
-    return jso;
-};
-
 describe("Testing fixtures conversion", function() {
     jasmine.getFixtures().fixturesPath = 'tests/fixtures';
     jasmine.getJSONFixtures().fixturesPath = 'tests/fixtures';
@@ -77,7 +66,7 @@ describe("Testing fixtures conversion", function() {
 });
 
 function checkFormatFixture(file, parser) {
-  parser = parser || convertToGeoJSON;
+  parser = parser || defaultParser;
   var fixture = getJSONFixture(file);
   var kml = new KMLFormat();
   var gpx = new GPXFormat();
@@ -152,23 +141,3 @@ function checkExportFormat(format, Layer, data) {
 }
 
 
-// Got it from https://github.com/makinacorpus/Leaflet.FileLayer/blob/gh-pages/leaflet.filelayer.js
-function loadGeoJSON(content) {
-    if (typeof content == 'string') {
-        content = JSON.parse(content);
-    }
-    var layer = L.geoJson(content);
-    if (layer.getLayers().length === 0) {
-        throw new Error('GeoJSON has no valid layers.');
-    }
-    return layer;
-}
-function convertToGeoJSON(content) {
-    // Format is either 'gpx' or 'kml'
-    if (typeof content == 'string') {
-        var format = content.match(/<gpx/i) ? 'gpx' : content.match(/kml/i) ? 'kml' : 'geojson';
-        content = ( new window.DOMParser() ).parseFromString(content, "text/xml");
-        content = toGeoJSON[format](content);
-    }
-    return this.loadGeoJSON(content);
-}

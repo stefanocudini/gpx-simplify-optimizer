@@ -56,7 +56,7 @@ function gpxParser(content, format) {
             // This case happens when the GPX file has no tracks, but may contains a route.
             // In this case, when read it like the Leaflet.Filelayer plugin
             console.log("This GPX file has no tracks. It may be a route... Can not load as true GPX file.");
-            parsedGPX = convertGPXToGeoJSON(content);
+            parsedGPX = convertToGeoJSON(content);
         } else {
             //console.log('Lecture data GPX ok : '+data.tracks.length);
             for (trackNum = 0; trackNum<data.tracks.length; trackNum++) {
@@ -70,33 +70,9 @@ function gpxParser(content, format) {
                 }
 
             }
-            parsedGPX = convertGPXToGeoJSON(content);
+            parsedGPX = convertToGeoJSON(content);
         }
     });
 
     return L.geoJson(parsedGPX);
 }
-
-// Got it from https://github.com/makinacorpus/Leaflet.FileLayer/blob/gh-pages/leaflet.filelayer.js
-/*
-function loadGeoJSON(content) {
-    if (typeof content == 'string') {
-        content = JSON.parse(content);
-    }
-    var layer = L.geoJson(content);
-    if (layer.getLayers().length === 0) {
-        throw new Error('GeoJSON has no valid layers.');
-    }
-    return layer;
-}
-*/
-function convertGPXToGeoJSON(content) {
-    // Format is either 'gpx' or 'kml'
-    if (typeof content == 'string') {
-        var format = content.match(/<gpx/i) ? 'gpx' : content.match(/kml/i) ? 'kml' : 'geojson';
-        content = ( new window.DOMParser() ).parseFromString(content, "text/xml");
-        content = toGeoJSON[format](content);
-    }
-    return content;
-}
-
