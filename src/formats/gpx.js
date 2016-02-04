@@ -13,9 +13,11 @@ function GPXFormat() {
         'contenttype': 'application/gpx+xml',
         'size_header': 186,
         'size_track': 75,
-        'size_node': 48
+        'size_node': 48,
+        'size_node_options': 54
     }
-    this.exportData = function(data) {
+
+    this.exportData = function(data, layer) {
 
         // Here we find the right time for the right coordinates to put it in a "times" array.
         // This will be read by the jwenzler/togpx fork
@@ -23,8 +25,8 @@ function GPXFormat() {
             data.features[0].geometry.times = [];
             for (var coord in data.features[0].geometry.coordinates) {
                 var coordString = data.features[0].geometry.coordinates[coord][1] + "," + data.features[0].geometry.coordinates[coord][0];
-                if (RAW_DATA[coordString] && RAW_DATA[coordString].time) {
-                    data.features[0].geometry.times.push(RAW_DATA[coordString].time.toISOString());
+                if (layer.rawData[coordString] && layer.rawData[coordString].time) {
+                    data.features[0].geometry.times.push(layer.rawData[coordString].time); //.toISOString());
 
                 } else {
                     data.features[0].geometry.times.push(undefined);
@@ -54,7 +56,7 @@ function gpxParser(content, format) {
             // This case happens when the GPX file has no tracks, but may contains a route.
             // In this case, when read it like the Leaflet.Filelayer plugin
             console.log("This GPX file has no tracks. It may be a route... Can not load as true GPX file.");
-            parsedGPX = convertToGeoJSON(content);
+            parsedGPX = convertGPXToGeoJSON(content);
         } else {
             //console.log('Lecture data GPX ok : '+data.tracks.length);
             for (trackNum = 0; trackNum<data.tracks.length; trackNum++) {
@@ -68,9 +70,10 @@ function gpxParser(content, format) {
                 }
 
             }
-            parsedGPX = convertToGeoJSON(content);
+            parsedGPX = convertGPXToGeoJSON(content);
         }
     });
+
     return L.geoJson(parsedGPX);
 }
 
@@ -87,7 +90,7 @@ function loadGeoJSON(content) {
     return layer;
 }
 */
-function convertToGeoJSON(content) {
+function convertGPXToGeoJSON(content) {
     // Format is either 'gpx' or 'kml'
     if (typeof content == 'string') {
         var format = content.match(/<gpx/i) ? 'gpx' : content.match(/kml/i) ? 'kml' : 'geojson';

@@ -77,6 +77,10 @@ var LayerOptimizer = function(source) {
 
     this.controller = null;
     this.tolerance = 0;
+    // Here we copy the RAW_DATA global variable into a Layer property, and we empty the RAW_DATA global variable.
+    // Otherwise that global data is shared between layers and that's dirty and risky if several layers have common coordinates.
+    this.rawData = JSON.parse(JSON.stringify(RAW_DATA));
+    RAW_DATA = {};
 
     this.init();
 }
@@ -273,7 +277,7 @@ LayerOptimizer.prototype = {
         var size = 0;
         for (var j=0; j<window.formats.formats.length; j++) {
             f = window.formats.formats[j];
-            size = f.getSize(counters.tracks, counters.nodes);
+            size = f.getSize(counters.tracks, counters.nodes, this.rawData);
             $('#size-format .sizes').append('<p><span class="format-name">'+f.param.name+' :</span><span class="format-size">'+size+'</span></p>');
         }
         $('#size-format').show();

@@ -31,7 +31,6 @@ describe('filesizeHuman function', function() {
   });
 });
 
-/*
 var jsonify=function(o){
     var seen=[];
     var jso=JSON.stringify(o, function(k,v){
@@ -42,7 +41,6 @@ var jsonify=function(o){
     });
     return jso;
 };
-*/
 
 describe("Testing fixtures conversion", function() {
     jasmine.getFixtures().fixturesPath = 'tests/fixtures';
@@ -72,19 +70,23 @@ describe("Testing fixtures conversion", function() {
     describe('Checking fixture 3 (optimization 0)', function() {
         checkFormatFixture('testcase3-multitracks-kml-novascotia-optimization0.json');
     });
+
+    describe('Checking fixture 4 (optimization -1)', function() {
+        checkFormatFixture('testcase4-gpx-with-time-data-optimization-1.json', gpxParser);
+    });
 });
 
-function checkFormatFixture(file) {
+function checkFormatFixture(file, parser) {
+  parser = parser || convertToGeoJSON;
   var fixture = getJSONFixture(file);
   var kml = new KMLFormat();
   var gpx = new GPXFormat();
   var geojson = new GeoJSONFormat();
   var mediawiki = new MediawikiFormat();
 
-
-
   window.formats = { "formats": {'length': 0} };
-  var Layer = new LayerOptimizer({layer: convertToGeoJSON(fixture.source)});
+  var Layer = new LayerOptimizer({layer: parser(fixture.source)});
+
   //console.log(fixture.optimization);
   if (fixture.optimization !== -1) {
     Layer.optimize(fixture.optimization);
@@ -97,29 +99,31 @@ function checkFormatFixture(file) {
   });
 
   it('Converts GeoJSON to GPX with correct estimated size', function() {
-    checkSizePrecision(gpx, fixture.gpx, counters);
+    checkSizePrecision(gpx, fixture.gpx, counters, Layer);
   });
   it('Converts GeoJSON to Mediawiki properly', function() {
     checkExportFormat(mediawiki, Layer, fixture.mediawiki);
   });
 
   it('Converts GeoJSON to Mediawiki with correct estimated size', function() {
-    checkSizePrecision(mediawiki, fixture.mediawiki, counters);
+    checkSizePrecision(mediawiki, fixture.mediawiki, counters, Layer);
   });
   it('Converts GeoJSON to KML properly', function() {
     checkExportFormat(kml, Layer, fixture.kml);
   });
 
   it('Converts GeoJSON to KML with correct estimated size', function() {
-    checkSizePrecision(kml, fixture.kml, counters);
+    checkSizePrecision(kml, fixture.kml, counters, Layer);
   });
   it('Converts GeoJSON to GeoJSON properly', function() {
     checkExportFormat(geojson, Layer, fixture.geojson);
   });
 
   it('Converts GeoJSON to GeoJSON with correct estimated size', function() {
-    checkSizePrecision(geojson, fixture.geojson, counters);
+    checkSizePrecision(geojson, fixture.geojson, counters, Layer);
   });
+  /*
+  */
 }
 
 /**
@@ -128,11 +132,11 @@ function checkFormatFixture(file) {
  * @param format the export format
  * @param data the generated data
  */
-function checkSizePrecision(format, data, counters) {
-  var estimatedSize = format.getEstimatedSize(counters.tracks, counters.nodes);
+function checkSizePrecision(format, data, counters, layer) {
+  var estimatedSize = format.getEstimatedSize(counters.tracks, counters.nodes, layer.rawData);
   var precision = 15/100; // 15 percent
   // Debug in case size is not precise enough
-  //console.log((data.length*(1-precision)-1) + " < " + estimatedSize + " < " + (data.length*(1+precision)+1) + " ----------- REAL : "+ data.length+"-----  percent : "+Math.abs(estimatedSize/data.length));
+  //console.log((data.length*(1-precision)-1) + " < " + data.length + " < " + (data.length*(1+precision)+1) + " ----------- Estimated : "+ estimatedSize +"-----  percent : "+Math.abs(estimatedSize/data.length));
   expect(data.length*(1+precision)+1).toBeGreaterThan(estimatedSize);
   expect(data.length*(1-precision)-1).toBeLessThan(estimatedSize);
 }

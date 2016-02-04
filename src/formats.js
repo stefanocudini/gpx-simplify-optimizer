@@ -166,8 +166,8 @@ Format.prototype = {
      *
      * @return the human readable file size
      */
-    getSize: function(tracks, nodes) {
-    	return filesizeHuman(this.getEstimatedSize(tracks, nodes));
+    getSize: function(tracks, nodes, rawData) {
+    	return filesizeHuman(this.getEstimatedSize(tracks, nodes, rawData));
     },
 
     /**
@@ -178,8 +178,12 @@ Format.prototype = {
      *
      * @return the numeric file size
      */
-    getEstimatedSize: function(tracks, nodes) {
-    	return this.param.size_header + (tracks * this.param.size_track) + (nodes * this.param.size_node);
+    getEstimatedSize: function(tracks, nodes, rawData) {
+        var rawSize = 0;
+        if (Object.keys(rawData).length) {
+            rawSize = Object.keys(rawData).length * this.param.size_node_options;
+        }
+    	return this.param.size_header + (tracks * this.param.size_track) + (nodes * this.param.size_node) + rawSize;
     },
 
     /**
@@ -212,7 +216,7 @@ Format.prototype = {
                 groupLayer.addData(data);
             }
         }
-        return this.exportData(groupLayer.toGeoJSON());
+        return this.exportData(groupLayer.toGeoJSON(), layer);
     },
 
     /**

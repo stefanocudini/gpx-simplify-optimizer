@@ -140,6 +140,7 @@ grunt.initConfig({
                 'dist/FileSaver.min.js',
                 'dist/i18next.min.js',
                 'dist/i18n.min.js',
+                'dist/gpx-parse.min.js',
                 'node_modules/jasmine-jquery/lib/jasmine-jquery.js'
             ],
             specs: 'tests/*.js',

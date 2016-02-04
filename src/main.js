@@ -218,6 +218,7 @@ $('#slider').slider({
 	tooltip: 'hide'
 })
 .on('slide', function(e) {
+    //console.log("opti "+Math.pow(e.value,2));
     window.currentLayer.optimize(Math.pow(e.value,2));
     window.currentLayer.displayInfos();
 }).parent().width('100%');

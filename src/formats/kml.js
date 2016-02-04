@@ -13,9 +13,10 @@ function KMLFormat() {
         'contenttype': 'application/vnd.google-earth.kml+xml',
         'size_header': 150,
         'size_track': 81,
-        'size_node': 19
+        'size_node': 19,
+        'size_node_options': 6
     }
-    this.exportData = function(data) {
+    this.exportData = function(data, layer) {
         return tokml(data);
     }
     this.display = function(data) {
