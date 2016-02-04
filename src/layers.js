@@ -174,10 +174,12 @@ LayerOptimizer.prototype = {
             newcoords = simplifyGeometry(this.sourceLayerJSON[i].geometry.coordinates, tolerance);
 
             simplifiedJSON = this.simplifiedLayerData[i].getLayers()[0].toGeoJSON();
+            if (newcoords.length === 1 && newcoords[0] === undefined) {
+                newcoords = [];
+            }
             simplifiedJSON.geometry.coordinates = newcoords;
             this.simplifiedLayerData[i].clearLayers();
             this.simplifiedLayerData[i].addData(simplifiedJSON);
-
             this.simplifiedLayerNodes += newcoords.length;
 
         }

@@ -48,11 +48,9 @@ describe("Testing fixtures conversion", function() {
     describe('Checking fixture 2 (optimization -1)', function() {
         checkFormatFixture('testcase2-empty-geojson-optimization-1.json');
     });
-    /*
     describe('Checking fixture 2 (optimization 0)', function() {
         checkFormatFixture('testcase2-empty-geojson-optimization0.json');
     });
-    */
     describe('Checking fixture 3 (optimization -1)', function() {
         checkFormatFixture('testcase3-multitracks-kml-novascotia-optimization-1.json');
     });
