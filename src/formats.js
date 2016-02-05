@@ -224,7 +224,9 @@ Format.prototype = {
     getEstimatedSize: function(tracks, nodes, rawData) {
         var rawSize = 0;
         if (Object.keys(rawData).length) {
-            rawSize = Object.keys(rawData).length * this.param.size_node_options;
+            rawSize = nodes * this.param.size_node_options;
+            rawSize += this.param.size_header_options;
+            rawSize += tracks * this.param.size_track_options;
         }
     	return this.param.size_header + (tracks * this.param.size_track) + (nodes * this.param.size_node) + rawSize;
     },

@@ -12,7 +12,9 @@ function GPXFormat() {
         'extension': 'gpx',
         'contenttype': 'application/gpx+xml',
         'size_header': 186,
-        'size_track': 75,
+        'size_header_options': 30,
+        'size_track': 105,
+        'size_track_options': 0,
         'size_node': 48,
         'size_node_options': 54
     }
