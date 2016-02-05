@@ -1,9 +1,9 @@
 $.i18n.init({
-    //lng: 'en',
     ns: { namespaces: [ 'ns.special'], defaultNs: 'ns.special'},
     useLocalStorage: false,
     // We load in synchronous mode to be able to build the page with i18n text
     getAsync: false,
+    lng: 'en',
     fallbackLng: 'en',
     debug: false
 }, function(t) {
