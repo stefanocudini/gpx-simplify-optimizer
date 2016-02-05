@@ -19,7 +19,7 @@ grunt.initConfig({
                 console: true,
                 module: true
             },
-            "-W099": true,    //ignora tabs e space warning
+            "-W099": true,    //ignora tabs and spaces warning
             "-W033": true,
             "-W044": true    //ignore regexp
         },
@@ -31,7 +31,6 @@ grunt.initConfig({
         dist: {
             files: {
                 'dist/jquery.cookie.min.js': ['vendor/jquery-cookie/jquery.cookie.js'],
-                //'dist/L.Control.Sidebar.min.js': ['vendor/leaflet-sidebar/src/L.Control.Sidebar.js'],
                 'dist/togeojson.min.js': ['vendor/togeojson/togeojson.js'],
                 'dist/togpx.min.js': ['vendor/togpx/togpx.js'],
                 'dist/pretty-data.min.js': ['vendor/pretty-data/index.js'],
@@ -73,7 +72,7 @@ grunt.initConfig({
                 'vendor/bootstrap-slider/dist/bootstrap-slider.min.js',
                 'vendor/jquery-autocomplete/dist/jquery.autocomplete.min.js',
                 'dist/i18next.min.js',
-                'dist/gpx-parse.min.js',
+                'dist/gpx-parse.min.js'
             ],
             dest: 'dist/libs.min.js'
         },
@@ -127,21 +126,11 @@ grunt.initConfig({
           options: {
             vendor: [
                 'http://code.jquery.com/jquery-1.8.3.min.js',
-                // Here we use the non minified source
+                // Here we use the non minified source to help debugging
                 'http://cdn.leafletjs.com/leaflet-0.7/leaflet-src.js',
-                'vendor/simplify-geometry/simplifygeometry-0.0.1.min.js',
-                'dist/jquery.cookie.min.js',
-                'dist/togeojson.min.js',
-                'dist/togpx.min.js',
-                'dist/pretty-data.min.js',
-                'dist/tokml.min.js',
-                'dist/geojson-to-path.min.js',
-                'dist/leaflet.filelayer.min.js',
-                'dist/FileSaver.min.js',
-                'dist/i18next.min.js',
+                'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
+                'dist/libs.min.js',
                 'dist/i18n.min.js',
-                'dist/gpx-parse.min.js',
-                'node_modules/jasmine-jquery/lib/jasmine-jquery.js'
             ],
             specs: 'tests/*.js',
             keepRunner : false,
