@@ -88,6 +88,49 @@ $('#export-close').on('click', function () {
 });
 
 
+
+// Got it from https://github.com/makinacorpus/Leaflet.FileLayer/blob/gh-pages/leaflet.filelayer.js
+function loadGeoJSON(content) {
+    if (typeof content == 'string') {
+        content = JSON.parse(content);
+    }
+    var layer = L.geoJson(content);
+    if (layer.getLayers().length === 0) {
+        throw new Error('GeoJSON has no valid layers.');
+    }
+    return layer;
+}
+
+// Got it from https://github.com/makinacorpus/Leaflet.FileLayer/blob/gh-pages/leaflet.filelayer.js
+function convertToGeoJSON(content) {
+    // Format is either 'gpx' or 'kml'
+    if (typeof content == 'string') {
+        var format = content.match(/<gpx/i) ? 'gpx' : content.match(/kml/i) ? 'kml' : 'geojson';
+        content = ( new window.DOMParser() ).parseFromString(content, "text/xml");
+        content = toGeoJSON[format](content);
+    }
+    return content;
+}
+
+function defaultParser(content) {
+    return loadGeoJSON(convertToGeoJSON(content));
+}
+
+
+// Source stackoverflow
+function jsonify(o) {
+    var seen=[];
+    var jso=JSON.stringify(o, function(k,v){
+        if (typeof v =='object') {
+            if ( !seen.indexOf(v) ) { return '__cycle__'; }
+            seen.push(v);
+        } return v;
+    });
+    return jso;
+}
+
+
+
 /*
 // When clicking the view div, select all text to be able to copy it
 $("#export-content").click(function() {
@@ -166,8 +209,8 @@ Format.prototype = {
      *
      * @return the human readable file size
      */
-    getSize: function(tracks, nodes) {
-    	return filesizeHuman(this.getEstimatedSize(tracks, nodes));
+    getSize: function(tracks, nodes, rawData) {
+    	return filesizeHuman(this.getEstimatedSize(tracks, nodes, rawData));
     },
 
     /**
@@ -178,8 +221,14 @@ Format.prototype = {
      *
      * @return the numeric file size
      */
-    getEstimatedSize: function(tracks, nodes) {
-    	return this.param.size_header + (tracks * this.param.size_track) + (nodes * this.param.size_node);
+    getEstimatedSize: function(tracks, nodes, rawData) {
+        var rawSize = 0;
+        if (Object.keys(rawData).length) {
+            rawSize = nodes * this.param.size_node_options;
+            rawSize += this.param.size_header_options;
+            rawSize += tracks * this.param.size_track_options;
+        }
+    	return this.param.size_header + (tracks * this.param.size_track) + (nodes * this.param.size_node) + rawSize;
     },
 
     /**
@@ -212,7 +261,7 @@ Format.prototype = {
                 groupLayer.addData(data);
             }
         }
-        return this.exportData(groupLayer.toGeoJSON());
+        return this.exportData(groupLayer.toGeoJSON(), layer);
     },
 
     /**

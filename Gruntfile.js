@@ -40,6 +40,7 @@ grunt.initConfig({
                 'dist/leaflet.filelayer.min.js': ['vendor/Leaflet.FileLayer/leaflet.filelayer.js'],
                 'dist/FileSaver.min.js': ['vendor/FileSaver.js/FileSaver.js'],
                 'dist/i18next.min.js': ['vendor/i18next/i18next.commonjs.withJQuery.js'],
+                'dist/gpx-parse.min.js': ['vendor/gpx-parse/dist/gpx-parse-browser.js'],
                 // Repository files
                 'dist/i18n.min.js': ['src/i18n.js'],
                 'dist/formats.min.js': ['src/formats.js', 'src/formats/*'],
@@ -72,6 +73,7 @@ grunt.initConfig({
                 'vendor/bootstrap-slider/dist/bootstrap-slider.min.js',
                 'vendor/jquery-autocomplete/dist/jquery.autocomplete.min.js',
                 'dist/i18next.min.js',
+                'dist/gpx-parse.min.js',
             ],
             dest: 'dist/libs.min.js'
         },
@@ -138,6 +140,7 @@ grunt.initConfig({
                 'dist/FileSaver.min.js',
                 'dist/i18next.min.js',
                 'dist/i18n.min.js',
+                'dist/gpx-parse.min.js',
                 'node_modules/jasmine-jquery/lib/jasmine-jquery.js'
             ],
             specs: 'tests/*.js',
@@ -153,7 +156,7 @@ grunt.initConfig({
         },
         js: {
             options: { livereload: true },
-            files: ['src/*'],
+            files: ['src/*', 'src/formats/*'],
             tasks: ['clean:js', 'jshint', 'uglify', 'concat']
         },
         i18n: {

@@ -5,7 +5,7 @@ var map = new L.Map('map', {
     zoomControl: false,
     attributionControl: false
 })
-.setView(L.latLng(36,-30),3)
+.setView(L.latLng(36,-30),20)
 .on('click', hideAll);
 
 window.map = map;
@@ -34,7 +34,12 @@ var controlLoader = L.Control.fileLayerLoad({
 	addToMap: false,
 	fitBounds: false,
 	fileSizeLimit: 8096,
-	binaryFormats: []
+    // Override the gpx parser
+    parsers: {
+        'gpx' : gpxParser
+    },
+    binaryFormats: []
+
 }).addTo(map);
 
 

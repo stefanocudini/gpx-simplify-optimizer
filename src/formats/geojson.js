@@ -12,10 +12,13 @@ function GeoJSONFormat() {
         'extension': 'geojson',
         'contenttype': 'appplication/json',
         'size_header': 90,
-        'size_track': 36,
-        'size_node': 20
+        'size_header_options': 80,
+        'size_track': 50,
+        'size_track_options': 0,
+        'size_node': 20,
+        'size_node_options': 6
     }
-    this.exportData = function(data) {
+    this.exportData = function(data, layer) {
         return JSON.stringify(data);
     }
     this.display = function(data) {

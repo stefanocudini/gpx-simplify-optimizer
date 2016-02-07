@@ -1,9 +1,6 @@
 [submodule "FileSaver.js"]
 	path = vendor/FileSaver.js
 	url = https://github.com/eligrey/FileSaver.js.git
-[submodule "Leaflet.FileLayer"]
-	path = vendor/Leaflet.FileLayer
-	url = https://github.com/makinacorpus/Leaflet.FileLayer.git
 [submodule "togeojson"]
 	path = vendor/togeojson
 	url = https://github.com/mapbox/togeojson.git
@@ -21,7 +18,7 @@
 	url = https://github.com/seabre/simplify-geometry.git
 [submodule "togpx"]
 	path = vendor/togpx
-	url = https://github.com/tyrasd/togpx.git
+	url = https://github.com/jwenzler/togpx.git
 [submodule "geojson-to-path"]
 	path = vendor/geojson-to-path
 	url = https://github.com/Wilkins/geojson-to-path.git
@@ -34,3 +31,9 @@
 [submodule "i18next"]
 	path = vendor/i18next
 	url = https://github.com/i18next/i18next
+[submodule "gpx-parse"]
+	path = vendor/gpx-parse
+	url = https://github.com/elliotstokes/gpx-parse
+[submodule "vendor/Leaflet.FileLayer"]
+	path = vendor/Leaflet.FileLayer
+	url = https://github.com/nrenner/Leaflet.FileLayer/
