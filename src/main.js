@@ -5,9 +5,10 @@ var map = new L.Map('map', {
     zoomControl: false,
     attributionControl: false
 })
-.setView(L.latLng(36,-30),20)
+.setView(L.latLng(40,0), 2)
 .on('click', hideAll);
 
+// For Debugging
 window.map = map;
 
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
