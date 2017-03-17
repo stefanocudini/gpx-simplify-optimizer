@@ -60,7 +60,6 @@ function gpxParser(content, format) {
             console.log("This GPX file has no tracks. It may be a route... Can not load as true GPX file.");
             parsedGPX = convertToGeoJSON(content);
         } else {
-            //console.log('Lecture data GPX ok : '+data.tracks.length);
             for (trackNum = 0; trackNum<data.tracks.length; trackNum++) {
                 var track = data.tracks[trackNum];
                 for (segmentNum = 0; segmentNum<track.segments.length; segmentNum++) {
@@ -68,6 +67,7 @@ function gpxParser(content, format) {
                     for (pointNum = 0; pointNum<segment.length; pointNum++) {
                         var point = segment[pointNum];
                         RAW_DATA[point.lat+','+point.lon] = point;
+                        //console.log("RAW_DATA["+point.lat+','+point.lon+"] = "+pointNum);
                     }
                 }
 

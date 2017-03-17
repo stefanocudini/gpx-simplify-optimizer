@@ -8,6 +8,7 @@ var map = new L.Map('map', {
 .setView(L.latLng(41.9,12.5),3)
 .on('click', hideAll);
 
+// For Debugging
 window.map = map;
 
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);

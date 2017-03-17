@@ -39,6 +39,7 @@ describe("Testing fixtures conversion", function() {
     window.map = L.map('map');
     window.map.hasLayer = function() { return true; }
 
+    /*
     describe('Checking fixture 1 (optimization -1)', function() {
         checkFormatFixture('testcase1-classic-geojson-optimization-1.json');
     });
@@ -78,6 +79,28 @@ describe("Testing fixtures conversion", function() {
     describe('Checking fixture 4 (optimization 0.5)', function() {
         checkFormatFixture('testcase4-gpx-with-time-data-optimization0.5.json', gpxParser);
     });
+    */
+
+    /*
+    */
+    describe('Checking fixture 5 (optimization -1)', function() {
+        checkFormatFixture('testcase5-gpx-with-time-data2-optimization-1.json', gpxParser);
+    });
+    describe('Checking fixture 5 (optimization 0)', function() {
+        checkFormatFixture('testcase5-gpx-with-time-data2-optimization0.json', gpxParser);
+    });
+    describe('Checking fixture 5 (optimization 0.0005)', function() {
+        checkFormatFixture('testcase5-gpx-with-time-data2-optimization0.0005.json', gpxParser);
+    });
+    describe('Checking fixture 5 (optimization 0.001)', function() {
+        checkFormatFixture('testcase5-gpx-with-time-data2-optimization0.001.json', gpxParser);
+    });
+    describe('Checking fixture 5 (optimization 0.005)', function() {
+        checkFormatFixture('testcase5-gpx-with-time-data2-optimization0.005.json', gpxParser);
+    });
+    describe('Checking fixture 5 (optimization 0.1)', function() {
+        checkFormatFixture('testcase5-gpx-with-time-data2-optimization0.1.json', gpxParser);
+    });
 });
 
 function checkFormatFixture(file, parser) {
@@ -102,7 +125,6 @@ function checkFormatFixture(file, parser) {
   it('Converts GeoJSON to GPX with correct estimated size', function() {
     checkSizePrecision(gpx, fixture.gpx, counters, Layer);
   });
-
   it('Converts GeoJSON to Mediawiki properly', function() {
     checkExportFormat(mediawiki, Layer, fixture.mediawiki);
   });
@@ -116,13 +138,14 @@ function checkFormatFixture(file, parser) {
   it('Converts GeoJSON to KML with correct estimated size', function() {
     checkSizePrecision(kml, fixture.kml, counters, Layer);
   });
-
   it('Converts GeoJSON to GeoJSON properly', function() {
     checkExportFormat(geojson, Layer, fixture.geojson);
   });
   it('Converts GeoJSON to GeoJSON with correct estimated size', function() {
     checkSizePrecision(geojson, fixture.geojson, counters, Layer);
   });
+/*
+*/
 }
 
 /**
