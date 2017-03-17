@@ -5,7 +5,7 @@ var map = new L.Map('map', {
     zoomControl: false,
     attributionControl: false
 })
-.setView(L.latLng(40,0), 2)
+.setView(L.latLng(41.9,12.5),3)
 .on('click', hideAll);
 
 // For Debugging
