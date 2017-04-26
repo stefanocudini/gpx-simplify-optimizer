@@ -210,7 +210,7 @@ Format.prototype = {
      * @return the human readable file size
      */
     getSize: function(tracks, nodes, rawData) {
-    	return filesizeHuman(this.getEstimatedSize(tracks, nodes, rawData));
+    	return filesizeHuman(this.getEstimatedSize(tracks, nodes, rawData), 0);
     },
 
     /**
