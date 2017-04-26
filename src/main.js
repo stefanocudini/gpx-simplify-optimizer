@@ -244,7 +244,7 @@ if(!helpCount || parseInt(helpCount) < 3 )
 // LOADING FORMATS
 var formats = new Format();
 window.formats = formats;
-formats.loadAll(['GPXFormat', 'GeoJSONFormat', 'KMLFormat', 'MediawikiFormat']);
+formats.loadAll(['GeoJSONFormat', 'GPXFormat', 'KMLFormat', 'MediawikiFormat']);
 
 // LOADING SYNTAX HIGHLIGHTING
 hljs.initHighlightingOnLoad();

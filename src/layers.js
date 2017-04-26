@@ -283,7 +283,7 @@ LayerOptimizer.prototype = {
 
         $('#size-format .sizes').html('');
 
-        size = formats[0].getSize(countersOri.tracks, countersOri.nodes, this.rawData);
+        size = formats[1].getSize(countersOri.tracks, countersOri.nodes, this.rawData);
         name = 'Original';
         $('#size-format .sizes').append('<p><span class="format-name">'+name+' :</span><span class="format-size">'+size+'</span></p>');
         
