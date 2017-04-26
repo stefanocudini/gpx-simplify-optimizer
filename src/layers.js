@@ -253,12 +253,14 @@ LayerOptimizer.prototype = {
      * 
      * @return object an object with tracks & nodes properties
      */
-    countTracksNodes: function() {
+    countTracksNodes: function(data) {
+        data = data || this.simplifiedLayerData;
+
         var tracks=0;
         var nodes=0;
         for (var i=0; i<this.size; i++) {
 
-            layer = this.simplifiedLayerData[i].getLayers()[0];
+            layer = data[i].getLayers()[0];
             if (window.map.hasLayer(layer)) {
                 tracks++;
                 nodes += layer.toGeoJSON().geometry.coordinates.length;
@@ -273,14 +275,21 @@ LayerOptimizer.prototype = {
      * @return void
      */
     displaySizeFormats: function() {
-        var counters = this.countTracksNodes();
+        
+        var counters = this.countTracksNodes(),
+            countersOri = this.countTracksNodes(this.sourceLayerData),
+            formats = window.formats.formats,
+            name='', size=0;
 
         $('#size-format .sizes').html('');
-        var size = 0;
-        for (var j=0; j<window.formats.formats.length; j++) {
-            f = window.formats.formats[j];
-            size = f.getSize(counters.tracks, counters.nodes, this.rawData);
-            $('#size-format .sizes').append('<p><span class="format-name">'+f.param.name+' :</span><span class="format-size">'+size+'</span></p>');
+
+        size = formats[1].getSize(countersOri.tracks, countersOri.nodes, this.rawData);
+        name = 'Original';
+        $('#size-format .sizes').append('<p><span class="format-name">'+name+' :</span><span class="format-size">'+size+'</span></p>');
+        
+        for (var j=0; j<formats.length; j++) {
+            size = formats[j].getSize(counters.tracks, counters.nodes, this.rawData);
+            $('#size-format .sizes').append('<p><span class="format-name">'+formats[j].param.name+' :</span><span class="format-size">'+size+'</span></p>');
         }
         $('#size-format').show();
     },
