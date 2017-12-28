@@ -34,8 +34,9 @@ h4 {
 
   a {
     color: $text-color;
-
+    margin-left:10px;
     &:hover {
+      text-decoration:none;
       color: #fff;
     }
   }
@@ -146,7 +147,7 @@ h4 {
   }
 }
 
-#modal {
+.modal {
   z-index: 2000;
 
   .modal-content {
@@ -169,6 +170,7 @@ h4 {
   }
 
   .modal-body {
+    color: $main-color;
     padding: 12px;
     text-align: center;
   }

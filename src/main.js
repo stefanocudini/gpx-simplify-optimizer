@@ -228,6 +228,11 @@ $('#helpbtn').on('click',function(e) {
 	$('#modal').modal('show');
 });
 
+$('#donate').on('click',function(e) {
+    e.preventDefault();
+    $('#modalDonate').modal('show');
+});
+
 
 //HELP POPUP
 var helpCount = $.cookie('tour');

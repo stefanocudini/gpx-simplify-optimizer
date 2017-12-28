@@ -2,6 +2,8 @@
   "app": {
     "name": "Optimiseur de tracés",
     "source": "Source",
+    "donate": "faire un don",
+    "help": "Help",
     "contributors": "Contributeurs"
   },
 

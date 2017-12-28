@@ -9,8 +9,10 @@ h4 {
   padding: 5px;
   text-shadow: 1px 1px 3px #333; }
   h4 a {
-    color: #eee; }
+    color: #eee;
+    margin-left: 10px; }
     h4 a:hover {
+      text-decoration: none;
       color: #fff; }
 
 #map {
@@ -100,22 +102,23 @@ h4 {
     background: #7d8b99;
     opacity: 1; }
 
-#modal {
+.modal {
   z-index: 2000; }
-  #modal .modal-content {
+  .modal .modal-content {
     border: 2px solid #eee;
     border-radius: 0; }
-  #modal .modal-header {
+  .modal .modal-header {
     background: #4d5b69;
     color: #fff;
     font-weight: bold; }
-    #modal .modal-header .close {
+    .modal .modal-header .close {
       color: #fff;
       font-size: 2.5em;
       line-height: 1.2em;
       opacity: 1;
       text-shadow: none; }
-  #modal .modal-body {
+  .modal .modal-body {
+    color: #4d5b69;
     padding: 12px;
     text-align: center; }
 

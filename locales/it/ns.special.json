@@ -2,6 +2,8 @@
   "app": {
     "name": "Tracks optimizer online",
     "source": "Source",
+    "donate": "Donazioni",
+    "help": "Aide",
     "contributors": "Collaboratori"
   },
 
