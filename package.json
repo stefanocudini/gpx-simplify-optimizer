@@ -6,11 +6,11 @@
     "type": "git",
     "url": "git@github.com:stefanocudini/gpx-simplify-optimizer.git"
   },
-  "homepage": "http://labs.easyblog.it/maps/gpx-simplify-optimizer/",
+  "homepage": "https://opengeo.tech/maps/gpx-simplify-optimizer/",
   "author": {
     "name": "Stefano Cudini",
     "email": "stefano.cudini@gmail.com",
-    "url": "http://labs.easyblog.it/"
+    "url": "https://opengeo.tech/"
   },
   "license": "MIT",
   "keywords": [
