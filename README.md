@@ -4,6 +4,10 @@ Track Simplifier / Optimizer online [![Build Status](https://travis-ci.org/stefa
 Online Simplifier and Optimizer for GPX / GeoJSON / KML tracks.
 
 Copyright 2014 [Stefano Cudini](https://opengeo.tech/stefano-cudini/)
+=======
+Maintainers
+----
+[Thibault Taillandier (Wilkins)](https://github.com/Wilkins)
 
 Demo
 ----
@@ -32,4 +36,9 @@ Build
 npm install
 grunt
 ```
+
+Author
+-----
+Copyright 2019 [Stefano Cudini](https://opengeo.tech/stefano-cudini/)
+
 
