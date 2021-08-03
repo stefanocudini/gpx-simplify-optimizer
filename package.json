@@ -1,6 +1,6 @@
 {
   "name": "gpx-simplify-optimizer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Online Simplifier and Optimizer for GPX tracks.",
   "repository": {
     "type": "git",
