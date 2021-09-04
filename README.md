@@ -9,7 +9,7 @@ Maintainers
 ----
 [Thibault Taillandier (Wilkins)](https://github.com/Wilkins)
 
-Demo
+Online
 ----
 [opengeo.tech/maps/gpx-simplify-optimizer](https://opengeo.tech/maps/gpx-simplify-optimizer/)
 
