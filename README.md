@@ -3,13 +3,13 @@ Track Simplifier / Optimizer online [![Build Status](https://travis-ci.org/stefa
 
 Online Simplifier and Optimizer for GPX / GeoJSON / KML tracks.
 
-Copyright 2014 [Stefano Cudini](https://opengeo.tech/stefano-cudini/)
-=======
+Copyright 2014-2021 [Stefano Cudini](https://opengeo.tech/stefano-cudini/)
+
 Maintainers
 ----
 [Thibault Taillandier (Wilkins)](https://github.com/Wilkins)
 
-Demo
+Online
 ----
 [opengeo.tech/maps/gpx-simplify-optimizer](https://opengeo.tech/maps/gpx-simplify-optimizer/)
 
