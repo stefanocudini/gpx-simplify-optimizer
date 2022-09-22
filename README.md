@@ -3,11 +3,12 @@ Track Simplifier / Optimizer online
 
 Online Simplifier and Optimizer for GPX / GeoJSON / KML tracks.
 
-Copyright 2014-2021 [Stefano Cudini](https://opengeo.tech/stefano-cudini/)
+Copyright 2014-2022 [Stefano Cudini](https://opengeo.tech/stefano-cudini/)
 
 Maintainers
 ----
 [Thibault Taillandier (Wilkins)](https://github.com/Wilkins)
+[Stefano Cudini](https://opengeo.tech/stefano-cudini/)
 
 Online
 ----
@@ -39,6 +40,6 @@ grunt
 
 Author
 -----
-Copyright 2019 [Stefano Cudini](https://opengeo.tech/stefano-cudini/)
+Copyright 2022 [Stefano Cudini](https://opengeo.tech/stefano-cudini/)
 
 
