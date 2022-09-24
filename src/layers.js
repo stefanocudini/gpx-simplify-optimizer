@@ -77,6 +77,7 @@ var LayerOptimizer = function(source) {
 
     this.controller = null;
     this.tolerance = 0;
+    this.precision = 8;
     // Here we copy the RAW_DATA global variable into a Layer property, and we empty the RAW_DATA global variable.
     // Otherwise that global data is shared between layers and that's dirty and risky if several layers have common coordinates.
     this.rawData = JSON.parse(JSON.stringify(RAW_DATA));
@@ -157,6 +158,7 @@ LayerOptimizer.prototype = {
         this.displaySizeFormats();
         // Put back this layer's tolerance into the slider
         $("#slider").slider('setValue', this.tolerance);
+        $("#slider2").slider('setValue', this.precision);
     },
 
     /**
@@ -172,6 +174,9 @@ LayerOptimizer.prototype = {
         var simplifiedJSON;
         for (var i=0; i<this.size; i++) {
             newcoords = simplifyGeometry(this.sourceLayerJSON[i].geometry.coordinates, tolerance);
+            for (var j in newcoords) {
+                newcoords[j] = [newcoords[j][0].toFixed(this.precision), newcoords[j][1].toFixed(this.precision)];
+            }
 
             simplifiedJSON = this.simplifiedLayerData[i].getLayers()[0].toGeoJSON();
             if (newcoords.length === 1 && newcoords[0] === undefined) {
