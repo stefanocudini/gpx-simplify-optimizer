@@ -12,7 +12,7 @@ Maintainers
 
 Online
 ----
-[opengeo.tech/maps/gpx-simplify-optimizer](https://opengeo.tech/maps/gpx-simplify-optimizer/)
+[opengeo.tech/gpx-simplify-optimizer](https://opengeo.tech/gpx-simplify-optimizer/)
 
 ![Image](https://raw.githubusercontent.com/stefanocudini/gpx-simplify-optimizer/master/images/gpx-optimizer.png)
 
