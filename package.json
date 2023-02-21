@@ -28,7 +28,7 @@
     "gpx-parse": "~0.8.0"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
+    "grunt": "^1.6.1",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-contrib-uglify": "~0.8.0",
