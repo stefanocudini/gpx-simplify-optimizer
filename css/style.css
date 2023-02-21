@@ -347,3 +347,11 @@ h4 a:hover {
     text-align: right;
     width: 80px;
 }
+
+.leaflet-control-layers-overlays label:nth-child(1) {
+    color: red;
+}
+
+.leaflet-control-layers-overlays label:nth-child(2) {
+    color: blue;
+}
