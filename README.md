@@ -3,7 +3,9 @@ Track Simplifier / Optimizer online
 
 Online Simplifier and Optimizer for GPX / GeoJSON / KML tracks.
 
-Copyright 2014-2022 [Stefano Cudini](https://opengeo.tech/stefano-cudini/)
+Copyright 2014-2023 [Stefano Cudini](https://opengeo.tech/stefano-cudini/)
+
+If this project helped your work help me to keep this alive by [Paypal **DONATION &#10084;**](https://www.paypal.me/stefanocudini)
 
 Maintainers
 ----
