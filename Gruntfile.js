@@ -88,7 +88,7 @@ grunt.initConfig({
             dest: 'dist/app.min.js'
         }
     },
-    sass: {
+/*    sass: {
         dist: {
             options: {
                 style: 'nested',
@@ -99,13 +99,14 @@ grunt.initConfig({
                 'dist/style.css': 'css/style.scss'
             }
         }
-    },
+    },*/
     cssmin: {
         combine: {
             src: [
                 'vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css',
                 //'vendor/leaflet-sidebar/src/L.Control.Sidebar.css',
-                'dist/style.css'
+                //'dist/style.css'
+                'css/style.css'
             ],
             dest: 'dist/style.min.css'
         },
@@ -141,7 +142,7 @@ grunt.initConfig({
         css: {
             options: { livereload: true },
             files: ['css/style.scss'],
-            tasks: ['clean:css', 'sass', 'cssmin']
+            tasks: ['clean:css', /*'sass',*/ 'cssmin']
         },
         js: {
             options: { livereload: true },
@@ -161,7 +162,7 @@ grunt.registerTask('default', [
     'jshint:sources',
     'uglify',
     'concat',
-    'sass',
+    //'sass',
     'cssmin',
     //'copy'
 ]);

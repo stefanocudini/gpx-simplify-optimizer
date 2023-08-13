@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git@github.com:stefanocudini/gpx-simplify-optimizer.git"
   },
-  "homepage": "https://opengeo.tech/maps/gpx-simplify-optimizer/",
+  "homepage": "https://opengeo.tech/gpx-simplify-optimizer/",
   "author": {
     "name": "Stefano Cudini",
     "email": "stefano.cudini@gmail.com",
