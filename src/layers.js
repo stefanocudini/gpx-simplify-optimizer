@@ -77,6 +77,7 @@ var LayerOptimizer = function(source) {
 
     this.controller = null;
     this.tolerance = 0;
+    this.precision = 8;
     // Here we copy the RAW_DATA global variable into a Layer property, and we empty the RAW_DATA global variable.
     // Otherwise that global data is shared between layers and that's dirty and risky if several layers have common coordinates.
     this.rawData = JSON.parse(JSON.stringify(RAW_DATA));
@@ -157,6 +158,7 @@ LayerOptimizer.prototype = {
         this.displaySizeFormats();
         // Put back this layer's tolerance into the slider
         $("#slider").slider('setValue', this.tolerance);
+        $("#slider2").slider('setValue', this.precision);
     },
 
     /**
@@ -168,10 +170,15 @@ LayerOptimizer.prototype = {
      */
     optimize: function(tolerance) {
         this.simplifiedLayerNodes = 0;
-        var newcoords;
+        var coords;
+        var newcoords = [];
         var simplifiedJSON;
         for (var i=0; i<this.size; i++) {
-            newcoords = simplifyGeometry(this.sourceLayerJSON[i].geometry.coordinates, tolerance);
+            coords = this.sourceLayerJSON[i].geometry.coordinates;
+            for (var j in coords) {
+                newcoords.push([parseFloat(coords[j][0]).toFixed(this.precision), parseFloat(coords[j][1]).toFixed(this.precision)]);
+            }
+            newcoords = simplifyGeometry(newcoords, tolerance);
 
             simplifiedJSON = this.simplifiedLayerData[i].getLayers()[0].toGeoJSON();
             if (newcoords.length === 1 && newcoords[0] === undefined) {
@@ -283,12 +290,12 @@ LayerOptimizer.prototype = {
 
         $('#size-format .sizes').html('');
 
-        size = formats[0].getSize(countersOri.tracks, countersOri.nodes, this.rawData);
+        size = formats[0].getSize(countersOri.tracks, countersOri.nodes, this.rawData, 8);
         name = 'Original';
         $('#size-format .sizes').append('<p><span class="format-name">'+name+' :</span><span class="format-size">'+size+'</span></p>');
         
         for (var j=0; j<formats.length; j++) {
-            size = formats[j].getSize(counters.tracks, counters.nodes, this.rawData);
+            size = formats[j].getSize(counters.tracks, counters.nodes, this.rawData, this.precision);
             $('#size-format .sizes').append('<p><span class="format-name">'+formats[j].param.name+' :</span><span class="format-size">'+size+'</span></p>');
         }
         $('#size-format').show();

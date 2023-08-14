@@ -209,7 +209,7 @@ L.control.attribution({
 // LOADING LANGUAGES
 initLanguage();
 
-// PRECISION SLIDER
+// TOLERANCE SLIDER
 $('#slider').slider({
 	value: 0,
 	min: 0,
@@ -218,8 +218,23 @@ $('#slider').slider({
 	precision: 8,
 	tooltip: 'hide'
 })
-.on('slide', function(e) {
-    window.currentLayer.optimize(Math.pow(e.value,2));
+.on('change', function(e) {
+    window.currentLayer.optimize(Math.pow(e.value.newValue,2));
+    window.currentLayer.displayInfos();
+}).parent().width('100%');
+
+// PRECISION SLIDER
+$('#slider2').slider({
+	value: 8,
+	min: 0,
+	max: 8,
+	step: 1,
+	precision: 0,
+	tooltip: 'hide'
+})
+.on('change', function(e) {
+    window.currentLayer.precision = e.value.newValue;
+    window.currentLayer.optimize($('#slider').val());
     window.currentLayer.displayInfos();
 }).parent().width('100%');
 
