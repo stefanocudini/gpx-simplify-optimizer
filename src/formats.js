@@ -209,8 +209,8 @@ Format.prototype = {
      *
      * @return the human readable file size
      */
-    getSize: function(tracks, nodes, rawData) {
-    	return filesizeHuman(this.getEstimatedSize(tracks, nodes, rawData), 0);
+    getSize: function(tracks, nodes, rawData, precision) {
+    	return filesizeHuman(this.getEstimatedSize(tracks, nodes, rawData, precision), 0);
     },
 
     /**
@@ -221,14 +221,14 @@ Format.prototype = {
      *
      * @return the numeric file size
      */
-    getEstimatedSize: function(tracks, nodes, rawData) {
+    getEstimatedSize: function(tracks, nodes, rawData, precision) {
         var rawSize = 0;
         if (Object.keys(rawData).length) {
             rawSize = nodes * this.param.size_node_options;
             rawSize += this.param.size_header_options;
             rawSize += tracks * this.param.size_track_options;
         }
-    	return this.param.size_header + (tracks * this.param.size_track) + (nodes * this.param.size_node) + rawSize;
+    	return this.param.size_header + (tracks * this.param.size_track) + (nodes * (this.param.size_node + 2 * (precision - 8))) + rawSize;
     },
 
     /**
